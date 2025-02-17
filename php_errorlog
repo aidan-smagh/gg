@@ -1,0 +1,244 @@
+[11-Jul-2023 08:46:07 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 08:46:07 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 08:46:07 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 08:46:07 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[11-Jul-2023 04:46:07 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 04:46:07 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 04:46:07 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[11-Jul-2023 04:46:07 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[11-Jul-2023 04:46:07 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[11-Jul-2023 08:46:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 08:46:26 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 08:46:26 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 08:46:26 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[11-Jul-2023 04:46:26 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 04:46:26 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 04:46:26 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[11-Jul-2023 04:46:26 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[11-Jul-2023 04:46:26 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[11-Jul-2023 08:46:50 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 08:46:50 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 08:46:50 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 08:46:50 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[11-Jul-2023 04:46:50 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 04:46:50 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 04:46:50 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[11-Jul-2023 04:46:50 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[11-Jul-2023 04:46:50 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[11-Jul-2023 04:49:41 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 04:49:41 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 04:49:41 America/New_York] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 04:49:41 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[11-Jul-2023 17:25:58 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 17:25:58 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 17:25:58 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 17:25:58 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[11-Jul-2023 13:25:58 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 13:25:58 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 13:25:58 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[11-Jul-2023 13:25:58 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[11-Jul-2023 13:25:58 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[11-Jul-2023 13:30:20 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[11-Jul-2023 13:30:20 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[11-Jul-2023 13:30:20 America/New_York] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[11-Jul-2023 13:30:20 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[26-Jul-2023 20:27:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[26-Jul-2023 20:27:24 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[26-Jul-2023 20:27:24 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[26-Jul-2023 20:27:24 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[26-Jul-2023 16:27:24 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[26-Jul-2023 16:27:24 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[26-Jul-2023 16:27:24 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[26-Jul-2023 16:27:24 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[26-Jul-2023 16:27:24 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[27-Jul-2023 18:55:46 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 18:55:46 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 18:55:46 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[27-Jul-2023 18:55:46 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[27-Jul-2023 14:55:46 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 14:55:46 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 14:55:46 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[27-Jul-2023 14:55:46 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[27-Jul-2023 14:55:46 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[27-Jul-2023 18:56:13 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 18:56:13 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 18:56:13 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[27-Jul-2023 18:56:13 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[27-Jul-2023 14:56:13 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 14:56:13 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 14:56:13 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[27-Jul-2023 14:56:13 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[27-Jul-2023 14:56:13 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[27-Jul-2023 18:57:27 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 18:57:27 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 18:57:27 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[27-Jul-2023 18:57:27 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[27-Jul-2023 14:57:27 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[27-Jul-2023 14:57:27 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[27-Jul-2023 14:57:27 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[27-Jul-2023 14:57:27 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[27-Jul-2023 14:57:27 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[29-Jul-2023 17:00:00 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[29-Jul-2023 17:00:00 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[29-Jul-2023 17:00:00 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[29-Jul-2023 17:00:00 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[29-Jul-2023 13:00:00 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[29-Jul-2023 13:00:00 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[29-Jul-2023 13:00:00 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[29-Jul-2023 13:00:00 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[29-Jul-2023 13:00:00 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[29-Jul-2023 17:01:04 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[29-Jul-2023 17:01:04 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[29-Jul-2023 17:01:04 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[29-Jul-2023 17:01:04 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[29-Jul-2023 13:01:04 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[29-Jul-2023 13:01:04 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[29-Jul-2023 13:01:04 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[29-Jul-2023 13:01:04 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[29-Jul-2023 13:01:04 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[03-Aug-2023 20:28:21 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[03-Aug-2023 20:28:21 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[03-Aug-2023 20:28:21 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[03-Aug-2023 20:28:21 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[03-Aug-2023 16:28:21 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[03-Aug-2023 16:28:21 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[03-Aug-2023 16:28:21 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[03-Aug-2023 16:28:21 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[03-Aug-2023 16:28:21 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[14-Aug-2023 09:18:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[14-Aug-2023 09:18:24 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[14-Aug-2023 09:18:24 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[14-Aug-2023 09:18:24 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[14-Aug-2023 05:18:24 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[14-Aug-2023 05:18:24 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[14-Aug-2023 05:18:24 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[14-Aug-2023 05:18:24 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[14-Aug-2023 05:18:24 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[30-Jan-2024 23:59:21 America/New_York] PHP Notice:  Undefined index: phone-type in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 93
+[30-Jan-2024 23:59:21 America/New_York] PHP Notice:  Undefined index: contact-method in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 99
+[31-Jan-2024 05:02:58 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 98
+[31-Jan-2024 05:04:09 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 98
+[31-Jan-2024 05:04:11 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 98
+[31-Jan-2024 05:34:09 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 96
+[31-Jan-2024 00:44:45 America/New_York] PHP Notice:  Undefined index: phone-type in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 94
+[31-Jan-2024 00:44:45 America/New_York] PHP Notice:  Undefined index: contact-method in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 100
+[31-Jan-2024 00:46:25 America/New_York] PHP Notice:  Undefined index: phone-type in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 94
+[31-Jan-2024 00:46:25 America/New_York] PHP Notice:  Undefined index: contact-method in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 100
+[31-Jan-2024 00:48:41 America/New_York] PHP Notice:  Undefined variable: phoneType in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 97
+[31-Jan-2024 00:48:41 America/New_York] PHP Notice:  Undefined index: contact-method in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 102
+[31-Jan-2024 00:50:49 America/New_York] PHP Notice:  Undefined index: contact-method in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 104
+[12-Mar-2024 23:19:13 America/New_York] PHP Notice:  Undefined index: manager in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[12-Mar-2024 23:19:13 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php:123) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php on line 62
+[24-Mar-2024 14:25:18 America/New_York] PHP Warning:  session_cache_expire(): Cannot change cache expire when headers already sent in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/volunteerReport.php on line 64
+[24-Mar-2024 14:25:18 America/New_York] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/volunteerReport.php on line 65
+[24-Mar-2024 14:25:18 America/New_York] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/volunteerReport.php:30) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/volunteerReport.php on line 78
+[24-Apr-2024 10:27:24 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:28:13 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:34:03 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:42:51 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:42:58 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:43:44 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[24-Apr-2024 10:46:46 America/New_York] PHP Notice:  Undefined index:  in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/domain/Person.php on line 123
+[12-Jul-2024 14:15:31 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[12-Jul-2024 14:15:31 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[12-Jul-2024 14:15:31 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 14
+[12-Jul-2024 14:15:31 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 48
+[12-Jul-2024 10:15:31 America/New_York] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[12-Jul-2024 10:15:31 America/New_York] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, bool given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 32
+[12-Jul-2024 10:15:31 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 123
+[12-Jul-2024 10:15:31 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 124
+[12-Jul-2024 10:15:31 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbPersons.php on line 125
+[14-Sep-2024 10:35:37 CST6CDT] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[14-Sep-2024 10:35:40 CST6CDT] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[14-Sep-2024 10:35:43 CST6CDT] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[14-Sep-2024 10:35:51 CST6CDT] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "first-name" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 60
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "last-name" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 61
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "birthdate" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 62
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  DateTime::createFromFormat(): Passing null to parameter #2 ($datetime) of type string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 90
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "address" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 68
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "city" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 69
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "state" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 70
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "zip" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 78
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 157
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "email" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 83
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  strtolower(): Passing null to parameter #1 ($string) of type string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 83
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "phone" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 89
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 136
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "contact-when" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 103
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "econtact-name" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 114
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "econtact-phone" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 115
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "econtact-relation" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 117
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "start-date" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 119
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  DateTime::createFromFormat(): Passing null to parameter #2 ($datetime) of type string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php on line 90
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "gender" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 124
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "shirt-size" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 136
+[08-Nov-2024 07:41:22 America/New_York] PHP Warning:  Undefined array key "password" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 140
+[08-Nov-2024 07:41:22 America/New_York] PHP Deprecated:  password_hash(): Passing null to parameter #1 ($password) of type string is deprecated in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/register.php on line 140
+[14-Nov-2024 11:14:51 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[14-Nov-2024 11:14:57 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[14-Nov-2024 11:15:02 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[14-Nov-2024 11:15:14 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[14-Nov-2024 14:06:54 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[14-Nov-2024 14:07:14 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[27-Nov-2024 15:18:36 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[27-Nov-2024 15:18:51 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[27-Nov-2024 15:18:56 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[27-Nov-2024 15:19:05 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[01-Jan-2025 17:07:35 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[01-Jan-2025 17:07:51 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[01-Jan-2025 17:08:00 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'homebasedb'@'localhost' (using password: YES) in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php:31
+Stack trace:
+#0 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php(31): mysqli_connect('localhost', 'homebasedb', Object(SensitiveParameterValue), 'homebasedb')
+#1 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/include/input-validation.php(34): connect()
+#2 /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/login.php(21): sanitize(Array, Array)
+#3 {main}
+  thrown in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/database/dbinfo.php on line 31
+[10-Jan-2025 11:12:26 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[10-Jan-2025 11:12:43 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[10-Jan-2025 11:12:52 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[10-Jan-2025 11:12:56 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[12-Jan-2025 13:03:16 America/New_York] PHP Warning:  Undefined array key "s_role" in /home/customer/www/gwynethsgiftvms.org/public_html/gwyneth/modifyUserRole.php on line 35
+[16-Jan-2025 08:20:19 America/New_York] PHP Warning:  Undefined array key "ndex.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:20:31 America/New_York] PHP Warning:  Undefined array key "ndex.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:20:33 America/New_York] PHP Warning:  Undefined array key "ogout.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:20:49 America/New_York] PHP Warning:  Undefined array key "ndex.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:21:43 America/New_York] PHP Warning:  Undefined array key "ndex.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:28:49 America/New_York] PHP Warning:  Undefined array key "nbox.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
+[16-Jan-2025 08:30:04 America/New_York] PHP Warning:  Undefined array key "/inbox.php" in /home/customer/www/jenniferp132.sg-host.com/public_html/header.php on line 81
