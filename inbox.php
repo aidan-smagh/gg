@@ -33,6 +33,7 @@
                 require_once('database/dbMessages.php');
                 $messages = get_user_messages($userID);
                 if (count($messages) > 0): ?>
+                <a class="button delete" href="index.php">Delete selected</a>
                 <div class="table-wrapper">
                     <table class="general">
                         <thead>
@@ -81,6 +82,7 @@
                         </tbody>
                     </table>
                 </div>
+                <a class="button delete" href="index.php">Delete selected</a>
             <?php else: ?>
                 <p class="no-messages standout">You currently have no unread messages.</p>
             <?php endif ?>
