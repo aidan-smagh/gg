@@ -37,6 +37,7 @@
                     <table class="general">
                         <thead>
                             <tr>
+                                <th>Select</th>
                                 <th style="width:1px">From</th>
                                 <th>Title</th>
                                 <th style="width:1px">Received</th>
@@ -70,8 +71,9 @@
                                     }
                                     echo "
                                         <tr class='$class' data-message-id='$messageID'>
+                                            <td class='checkbox'><input type='checkbox'></td>
                                             <td>$sender</td>
-                                            <td>$title</td>
+                                            <td><a href='viewNotification.php?id=".$messageID."'>$title</a></td>
                                             <td>$month/$day/$year $time</td>
                                         </tr>";
                                 }
