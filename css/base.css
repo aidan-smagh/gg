@@ -66,8 +66,8 @@ table, td, tr, th, form, fieldset, em, button, a {
 
     --calendar-event-color: #808080;
     --calendar-event-color-hover: #404040;
-    --calendar-event-color-signup: hsl(214, 31%, 50%);
-    --calendar-event-color-signup-hover: var(--main-color);
+    --calendar-event-color-signup: var(--main-color);
+    --calendar-event-color-signup-hover: hsl(214, 31%, 13.5%);
     --calendar-today-border: 2px solid var(--secondary-accent-color);
 
     --button-font-color: white;
