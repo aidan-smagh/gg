@@ -9,13 +9,6 @@
         header('Location: login.php');
         die();
     }
-    if (isset($_SESSION['_id'])) {
-        $loggedIn = true;
-        // 0 = not logged in, 1 = standard user, 2 = manager (Admin), 3 super admin (TBI)
-        $accessLevel = $_SESSION['access_level'];
-        $isAdmin = $accessLevel >= 2;
-        $userID = $_SESSION['_id'];
-    }
 
     // Redirect to current month
     if (!isset($_GET['month'])) {
@@ -125,9 +118,7 @@
                         $start = date('Y-m-d', $calendarStart);
                         $end = date('Y-m-d', $calendarEndEpoch);
                         require_once('database/dbEvents.php');
-                        require_once('database/dbPersons.php');
                         $events = fetch_events_in_date_range($start, $end);
-                        $eventsGoing = array_column(get_events_attended_by_and_date($userID,$start,$end), 'id', 'id');
                         for ($week = 0; $week < $weeks; $week++) {
                             echo '
                                 <tr class="calendar-week">
@@ -147,11 +138,7 @@
                                 if (isset($events[$e])) {
                                     $dayEvents = $events[$e];
                                     foreach ($dayEvents as $info) {
-                                        $eventClasses = 'calendar-event';
-                                        if (isset($eventsGoing[$info['id']])) {
-                                            $eventClasses .= ' signed-up';
-                                        }
-                                        $eventsStr .= '<a class="' . $eventClasses . '" href="event.php?id=' . $info['id'] . '">' . $info['abbrevName'] .  '</a>';
+                                        $eventsStr .= '<a class="calendar-event" href="event.php?id=' . $info['id'] . '">' . $info['abbrevName'] .  '</a>';
                                     }
                                 }
                                 echo '<td class="calendar-day' . $extraClasses . '" ' . $extraAttributes . ' data-date="' . date('Y-m-d', $date) . '">
