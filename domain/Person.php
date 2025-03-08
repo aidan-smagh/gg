@@ -17,7 +17,8 @@
 $accessLevelsByRole = [
 	'volunteer' => 1,
 	'admin' => 2,
-	'superadmin' => 3
+	'superadmin' => 3,
+	'boardmember' => 2
 ];
 
 class Person {
