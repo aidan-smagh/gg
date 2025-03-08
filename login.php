@@ -81,7 +81,12 @@
             <h1>Volunteer Management System</h1>
             <?php if (isset($_GET['registerSuccess'])): ?>
                 <div class="happy-toast">
-                    Your registration was successful! Please log in below.
+                    <?php if ($_GET['registerSuccess'] === 'board'): ?>
+                        Your registration was successful, but must first be approved by the administrator.
+                        For now, you may log in and will have the same access as a regular volunteer.
+                    <?php else: ?>
+                        Your registration was successful! Please log in below.
+                    <?php endif ?>
                 </div>
             <?php else: ?>
             <p>Welcome! Please log in below.</p>
@@ -98,6 +103,7 @@
                 <input type="password" name="password" placeholder="Enter your password" required>
                 <input type="submit" name="login" value="Log in">
                 <p>Or <a href="register.php">register as a new volunteer</a>!</p>
+                <p>Or <a href="registerBoardMember.php">register as a new Board Member</a>!</p>
             </form>
         </main>
     </body>
