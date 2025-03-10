@@ -65,3 +65,7 @@ p.no-messages {
     text-align: center;
     padding: 2rem;
 }
+
+.delete_all {
+    margin-bottom: 0.5rem;
+}
