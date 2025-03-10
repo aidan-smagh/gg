@@ -111,8 +111,16 @@
                 echo 'bad contact method';
             }
 
+
+
             $econtactName = $args['econtact-name'];
-            $econtactPhone = $args['econtact-phone'];
+            $econtactPhone = validateAndFilterPhoneNumber($args['econtact-phone']);
+            if (!$econtactPhone) {
+                $errors = true;
+                echo 'bad econtact phone';
+            }
+
+            //$econtactPhone = $args['econtact-phone'];
     
             $econtactRelation = $args['econtact-relation'];
 
