@@ -125,7 +125,7 @@ if (date('m', strtotime($calendarEnd . ' +1 day')) == date('m', $first)) {
             <table id="calendar">
                 <thead>
                     <tr>
-                        <th>Soonday</th>
+                        <th>Sunday</th>
                         <th>Monday</th>
                         <th>Tuesday</th>
                         <th>Wednesday</th>
