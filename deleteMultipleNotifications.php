@@ -3,7 +3,7 @@ session_start();
 require_once('database/dbMessages.php');
 
 if (!isset($_SESSION['_id'])) {
-    die("Unauthorized access.");
+    die("Unauthorized access");
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message_ids'])) {

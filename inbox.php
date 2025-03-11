@@ -33,6 +33,7 @@
                 require_once('database/dbMessages.php');
                 $messages = get_user_messages($userID);
                 if (count($messages) > 0): ?>
+                
                 <form id="delete-form" action="deleteMultipleNotifications.php" method="post">
                     <button type="submit" class="delete_all">Delete Selected</button>
                     <div class="table-wrapper">
