@@ -21,7 +21,7 @@ class Event {
         $this->id = $id;
         $this->name = $name;
         $this->abbrevName = $abbrevName;
-        $this->eventType = $eventType
+        $this->eventType = $eventType;
         $this->date = $date;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
