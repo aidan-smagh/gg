@@ -218,6 +218,7 @@ function create_event($event) {
     $connection = connect();
     $name = $event["name"];
     $abbrevName = $event["abbrev-name"];
+    $eventType = $event["event-type"];
     $date = $event["date"];
     $startTime = $event["start-time"];
     $endTime = $event["end-time"];
@@ -225,8 +226,8 @@ function create_event($event) {
     $location = $event["location"];
     $capacity = $event["capacity"];
     $query = "
-        insert into dbEvents (name, abbrevName, date, startTime, endTime, description, location, capacity)
-        values ('$name', '$abbrevName', '$date', '$startTime', '$endTime', '$description', '$location', '$capacity')
+        insert into dbEvents (name, abbrevName, eventType, date, startTime, endTime, description, location, capacity)
+        values ('$name', '$abbrevName', '$eventType', '$date', '$startTime', '$endTime', '$description', '$location', '$capacity')
     ";
     $result = mysqli_query($connection, $query);
     if (!$result) {
@@ -242,6 +243,7 @@ function update_event($eventID, $eventDetails) {
     $connection = connect();
     $name = $eventDetails["name"];
     $abbrevName = $eventDetails["abbrev-name"];
+    $eventType = $eventDetails["event-type"];
     $date = $eventDetails["date"];
     $startTime = $eventDetails["start-time"];
     $endTime = $eventDetails["end-time"];
@@ -249,7 +251,7 @@ function update_event($eventID, $eventDetails) {
     $location = $eventDetails["location"];
     $capacity = $eventDetails["capacity"];
     $query = "
-        update dbEvents set name='$name', abbrevName='$abbrevName', date='$date', startTime='$startTime', endTime='$endTime', description='$description', location='$location', capacity='$capacity'
+        update dbEvents set name='$name', abbrevName='$abbrevName', eventType='$eventType', date='$date', startTime='$startTime', endTime='$endTime', description='$description', location='$location', capacity='$capacity'
         where id='$eventID'
     ";
     $result = mysqli_query($connection, $query);
