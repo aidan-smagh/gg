@@ -44,17 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
             header("Location: externalDocuments.php?documentAdded=success");
             exit;
         }
-        /* Give positive message if new document was added successfully 
-        if ($addedProperly) {
-            header("Location: externalDocuments.php?documentAdded=true");
-            exit;
-        }
-         //Otherwise, give error message 
-        else {
-            header("Location: externalDocuments.php?documentAdded=false");
-            exit;
-        }
-        */
     }
 }
 
@@ -99,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
                 </thead>
                 <tbody class="standout">
                     <?php foreach ($documents as $document): ?>
-                        <tr>
+                        <tr class="message">
                             <td><?php echo htmlspecialchars($document['title']); ?></td>
                             <td><a href="<?php echo htmlspecialchars($document['url']); ?>" target="_blank">
                                 <?php 
@@ -147,8 +136,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
             <label for="url">Document URL:</label>
             <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
 
-            <button type="submit">Add Document</button>
+            <button type="submit" style="margin-bottom: 5rem;"> Add Document</button>
         </form>
     <?php endif; ?>
+
+    <!-- Delete document form. For superadmin only -->
+     <?php if ($isSuperAdmin): ?>
+        <h2 style="
+                font-size: 1.5rem;
+                font-weight: 500;
+                margin-bottom: 2rem;
+                background-color: var(--main-color);
+                color: var(--page-background-color);
+                width: 100%;
+                text-align: center;
+                padding: 1rem;">
+                Delete Existing Document
+        </h2>
+        <form method="POST" action ="externalDocuments.php">
+            <input type="hidden" name="form_type" value="delete_document">
+
+            <label for="title_to_delete">Select Document to Delete:</label>
+            <select id="title_to_delete" name="title_to_delete" required>
+                <option value="">Select a document</option>
+                <?php foreach ($documents as $document): ?>
+                    <option value="<?php echo htmlspecialchars($document['title']); ?>">
+                        <?php echo htmlspecialchars($document['title']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
+            <button type="submit">Delete Document</button>
+        </form>
+    <?php endif;?>
 </body>
 </html>
