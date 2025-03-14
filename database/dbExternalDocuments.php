@@ -26,15 +26,46 @@ function get_all_external_documents() {
 
 /**
  * Insert a new external document
+ * Retun values:
+ * - "duplicateTitle" if a document with the same title already exists
+ * - "success" if the document was added successfully
+ * - "error" if there was a different unknown error that caused failure
  */
 function add_document($title, $url) {
     $con = connect();
+    /*First check if there is a document already stored with the new title */
+    //base query 
+    $query = $con->prepare("SELECT COUNT(*) FROM dbexternaldocuments WHERE title = ?");
+    // bind the title parameter to the query. s because is is a string type
+    $query->bind_param("s", $title);
+    $query->execute();
+    /* store the result of the query in $count
+       $count will store the number of entries in the db with the same title */
+    $query->store_result();
+    $query->bind_result($count);
+    $query->fetch();
+    $query->close();
+
+    if ($count > 0) {
+        /*There is already a document with the same title */
+        mysqli_close($con);
+        return "duplicateTitle";
+    }
+
     // Prepare the sql statement, preventing SQL injection
     $stmt = $con->prepare("INSERT INTO dbexternaldocuments (title, url) VALUES (?, ?)");
     //bind the parameters to the statement. ss because both parameters are string types
     $stmt->bind_param("ss", $title, $url);
-    $stmt->execute();
+    /* Attempt to execute the insertion, catching any errors */
+    $success = $stmt->execute();
     $stmt->close();
     mysqli_close($con);
+
+    /* return the result of the insertion */
+    if ($success) {
+        return "success";
+    } else {
+        return "error";
+    }
 }
 ?>
