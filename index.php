@@ -108,7 +108,7 @@
                     <span>Log out</span>
                 </div>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
-                    <div class="dashboard-item" data-link="externalDocs.php">
+                    <div class="dashboard-item" data-link="externalDocuments.php">
                     <span>External Documents</span>
                 </div>
                 <?php endif ?>

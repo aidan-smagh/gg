@@ -2,6 +2,7 @@
 
 session_cache_expire(30);
 session_start();
+require_once('database/dbExternalDocuments.php');
 
 // Ensure user is logged in. If not, redirect to login page
 if (!isset($_SESSION['access_level'])) {
