@@ -22,31 +22,51 @@ $isSuperAdmin = $accessLevel >= 3;
 /* Get all external docs stored in the database (function call to dbExternalDocuments.php) */
 $documents = get_all_external_documents();
 
-/* Process add document form */
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST["form_type"] == "add_document") {
-    // clear leading/tailing whitespace from the title and url
-    $title = trim($_POST["title"]);
-    $url = trim($_POST["url"]);
+/* Process add/delete document form */
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_POST["form_type"] == "add_document") {
+    /* Processing the add document form */
+    if ($_POST["form_type"] == "add_document") {
+        // clear leading/tailing whitespace from the title and url
+        $title = trim($_POST["title"]);
+        $url = trim($_POST["url"]);
 
-    /* add the new document to the database (function call to dbExternalDocuments.php)
-    First ensuring the fields were filled out properly */
-    if (!empty($title) && !empty($url)) {
-        $insertResult = add_document($title, $url);
-        if ($insertResult === "duplicateTitle") {
-            header("location: externalDocuments.php?documentAdded=duplicate");
-            exit;
+        /* add the new document to the database (function call to dbExternalDocuments.php)
+        First ensuring the fields were filled out properly */
+        if (!empty($title) && !empty($url)) {
+            $insertResult = add_document($title, $url);
+            if ($insertResult === "duplicateTitle") {
+                header("location: externalDocuments.php?documentAdded=duplicate");
+                exit;
+            }
+            else if ($insertResult === "error") {
+                header("Location: externalDocuments.php?documentAdded=error");
+                exit;
+            }
+            else {
+                header("Location: externalDocuments.php?documentAdded=success");
+                exit;
+            }
         }
-        else if ($insertResult === "error") {
-            header("Location: externalDocuments.php?documentAdded=error");
-            exit;
-        }
-        else {
-            header("Location: externalDocuments.php?documentAdded=success");
-            exit;
+    }
+    /* Processing the delete document form */
+    else if ($_POST["form_type"] == "delete_document") {
+        /* Collect the title to be deleted from the form */
+        $titleToDelete = $_POST["title_to_delete"];
+
+        if (!empty($titleToDelete)) {
+            /* function call to dbExternalDocuments.php to delete the document */
+            $deletionResult = delete_document($titleToDelete);
+            if ($deletionResult === "success") {
+                header("Location: externalDocuments.php?documentDeleted=success");
+                exit;
+            }
+            else {
+                header("Location: externalDocuments.php?documentDeleted=error");
+                exit;
+            }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
 
     <main class="general">
     <h1 style="margin-bottom: 0.1rem;">Organizational Documents</h1>
-    <!-- success/error messages -->
+
+    <!-- success/error messages for adding documents -->
     <?php if (isset($_GET['documentAdded'])): ?>
         <?php $insertionStatus = $_GET['documentAdded']; ?>
         <div class="happy-toast">
@@ -71,6 +92,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
                 Error adding document. Please try again.
             <?php elseif ($insertionStatus === 'duplicate'): ?>
                 A document with that title already exists. Please choose a different title.
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- success/error messages for deleting documents -->
+    <?php if (isset($_GET['documentDeleted'])): ?>
+        <?php $deletionStatus = $_GET['documentDeleted']; ?>
+        <div class="happy-toast">
+            <?php if ($deletionStatus === "success"): ?>
+                Document deleted successfully!
+            <?php elseif ($deletionStatus === "error"): ?>
+                Error deleting document. Please try again.
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -130,13 +163,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
         <form method="POST" action="externalDocuments.php">
             <input type="hidden" name="form_type" value="add_document">
 
-            <label for="title">Document Title:</label>
+            <label for="title">New Document Title:</label>
             <input type="text" id="title" name="title" required>
 
-            <label for="url">Document URL:</label>
+            <label for="url">New Document URL:</label>
             <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
 
-            <button type="submit" style="margin-bottom: 5rem;"> Add Document</button>
+            <button type="submit" style="margin-bottom: 5rem;">Submit New Document</button>
         </form>
     <?php endif; ?>
 
@@ -166,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"]) && $_POST
                 <?php endforeach; ?>
             </select>
 
-            <button type="submit">Delete Document</button>
+            <button type="submit" style="background-color: var(--secondary-accent-color) !important; color: var(--page-background-color) !important;">Submit Document Deletion</button>
         </form>
     <?php endif;?>
 </body>

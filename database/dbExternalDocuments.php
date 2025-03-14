@@ -68,4 +68,24 @@ function add_document($title, $url) {
         return "error";
     }
 }
+
+function delete_document($title) {
+    $con = connect();
+    /* prepare the deletion statement */
+    $stmt = $con->prepare("DELETE FROM dbexternaldocuments WHERE title = ?");
+    $stmt->bind_param("s", $title);
+
+    /* Attempt to execute the deletion, storing the bool result in $success */
+    $success = $stmt->execute();
+    $stmt->close();
+    mysqli_close($con);
+
+    /* For error handling, return the success status */
+    if ($success) {
+        return "success";
+    }
+    else {
+        return "error";
+    }
+}
 ?>
