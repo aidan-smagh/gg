@@ -142,6 +142,8 @@
             $type = $person->get_type()[0];
             if ($type == 'volunteer') {
               $type = 'Volunteer';
+            } else if ($type == 'boardmember') {
+              $type = 'Board Member';
             } else {
               $type = 'Admin';
             }
