@@ -77,13 +77,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
     <title>Organizational Documents</title>
 </head>
 <body>
-    <?php require('header.php'); ?>
-
     <main class="general">
-    <h1 style="margin-bottom: 0.1rem;">Organizational Documents</h1>
-
-    <!-- success/error messages for adding documents -->
-    <?php if (isset($_GET['documentAdded'])): ?>
+    <?php require('header.php'); ?>
+    <h1 style="margin-bottom: 2rem;">Organizational Documents</h1>
+        <!-- success/error messages for adding documents -->
+        <?php if (isset($_GET['documentAdded'])): ?>
         <?php $insertionStatus = $_GET['documentAdded']; ?>
         <div class="happy-toast">
             <?php if ($insertionStatus === 'success'): ?>
@@ -109,73 +107,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
     <?php endif; ?>
 
     <!-- Display all external documents -->
-
-    <?php if (count($documents) > 0): ?>
-        <div class="table-wrapper" style="margin-bottom: 5rem;">
-            <table class="general">
-                <thead>
-                    <tr>
-                        <th style="background-color: var(--accent-color) !important; color: var(--page-background-color) !important;">Title</th>
-                        <th style="background-color: var(--accent-color) !important; color: var(--page-background-color) !important;">URL</th>
-                    </tr>
-                </thead>
-                <tbody class="standout">
-                    <?php foreach ($documents as $document): ?>
-                        <tr class="message">
-                            <td><?php echo htmlspecialchars($document['title']); ?></td>
-                            <td><a href="<?php echo htmlspecialchars($document['url']); ?>" target="_blank">
-                                <?php 
-                                    /* Need to ensure that the url isn't too long to display.
-                                    If it is, display the first 50 characters, followed by "..." */
-                                    $fullURL = htmlspecialchars($document['url']);
-                                    if (strlen($fullURL) > 50) {
-                                        $shortURL = substr($fullURL, 0, 50) . '...';
-                                        echo $shortURL;
-                                    }
-                                    else {
-                                        echo $fullURL;
-                                    }
-                                ?>
-                                </a>
-                            </td>
+    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
+        <?php if (count($documents) > 0): ?>
+            <div class="table-wrapper" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <table class="general">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>URL</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    <?php else: ?>
-        <p class="no-messages standout">No external documents are available.</p>
-    <?php endif; ?>
-
+                    </thead>
+                    <tbody class="standout">
+                        <?php foreach ($documents as $document): ?>
+                            <tr class="message">
+                                <td><?php echo htmlspecialchars($document['title']); ?></td>
+                                <td><a href="<?php echo htmlspecialchars($document['url']); ?>" target="_blank">
+                                    <?php 
+                                        /* Need to ensure that the url isn't too long to display.
+                                        If it is, display the first 50 characters, followed by "..." */
+                                        $fullURL = htmlspecialchars($document['url']);
+                                        if (strlen($fullURL) > 50) {
+                                            $shortURL = substr($fullURL, 0, 50) . '...';
+                                            echo $shortURL;
+                                        }
+                                        else {
+                                            echo $fullURL;
+                                        }
+                                    ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <p class="no-messages standout">No external documents are available.</p>
+        <?php endif; ?>
+    </div>
+    
     <!-- Add document form, for superadmin only -->
-     <?php if ($isSuperAdmin): ?>
-        <h2 style="
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            background-color: var(--main-color);
-            color: var(--page-background-color);
-            width: 100%;
-            text-align: center;
-            padding: 1rem;">
-            Add New Document
-        </h2>
-        <form method="POST" action="externalDocuments.php">
-            <input type="hidden" name="form_type" value="add_document">
-
-            <label for="title">New Document Title:</label>
-            <input type="text" id="title" name="title" required>
-
-            <label for="url">New Document URL:</label>
-            <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
-
-            <button type="submit" style="margin-bottom: 5rem;">Submit New Document</button>
-        </form>
-    <?php endif; ?>
-
-    <!-- Delete document form. For superadmin only -->
-     <?php if ($isSuperAdmin): ?>
-        <h2 style="
+    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
+        <?php if ($isSuperAdmin): ?>
+            <h2 style="
                 font-size: 1.5rem;
                 font-weight: 500;
                 margin-bottom: 2rem;
@@ -184,23 +158,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
                 width: 100%;
                 text-align: center;
                 padding: 1rem;">
-                Delete Existing Document
-        </h2>
-        <form method="POST" action ="externalDocuments.php">
-            <input type="hidden" name="form_type" value="delete_document">
+                Add New Document
+            </h2>
 
-            <label for="title_to_delete">Select Document to Delete:</label>
-            <select id="title_to_delete" name="title_to_delete" required>
-                <option value="">Select a document</option>
-                <?php foreach ($documents as $document): ?>
-                    <option value="<?php echo htmlspecialchars($document['title']); ?>">
-                        <?php echo htmlspecialchars($document['title']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+            <form method="POST" action="externalDocuments.php">
+                <input type="hidden" name="form_type" value="add_document">
 
-            <button type="submit" style="background-color: var(--secondary-accent-color) !important; color: var(--page-background-color) !important;">Submit Document Deletion</button>
-        </form>
-    <?php endif;?>
+                <label for="title">New Document Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="url">New Document URL:</label>
+                <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
+
+                <button type="submit">Submit New Document</button>
+            </form>
+        <?php endif; ?>
+    </div>
+
+    <!-- Delete document form. For superadmin only -->
+    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
+        <?php if ($isSuperAdmin): ?>
+            <h2 style="
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    margin-bottom: 2rem;
+                    background-color: var(--main-color);
+                    color: var(--page-background-color);
+                    width: 100%;
+                    text-align: center;
+                    padding: 1rem;">
+                    Delete Existing Document
+            </h2>
+            <form method="POST" action ="externalDocuments.php">
+                <input type="hidden" name="form_type" value="delete_document">
+
+                <label for="title_to_delete">Select Document to Delete:</label>
+                <select id="title_to_delete" name="title_to_delete" required>
+                    <option value="">Select a document</option>
+                    <?php foreach ($documents as $document): ?>
+                        <option value="<?php echo htmlspecialchars($document['title']); ?>">
+                            <?php echo htmlspecialchars($document['title']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <button type="submit">Submit Document Deletion</button>
+            </form>
+        <?php endif;?>
+    </div>
 </body>
 </html>
