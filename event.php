@@ -130,7 +130,7 @@
                     echo 'forbidden';
                     die();
                 }
-                $volunteerID = $args['selected_id'];
+                $volunteerID = $_SESSION['_id'];
                 $person = retrieve_person($volunteerID);
                 $name = $person->get_first_name() . ' ' . $person->get_last_name();
                 $name = htmlspecialchars_decode($name);
@@ -446,7 +446,6 @@
                         <form method="GET">
                             <input type="hidden" name="request_type" value="add self">
                             <input type="hidden" name="id" value="'.$id.'">
-                            <input type="hidden" name="selected_id" value="' . $_SESSION['_id'] . '">
                             <input type="submit" value="Sign Up">
                         </form>
                         ';
