@@ -262,8 +262,8 @@
                     <tr>
                         <td class="label">Training Materials </td><td></td>
                     </tr>
-                        <!-- <td colspan="2" class="inactive">None at this time</td> -->
-						<?php
+                    <!-- <td colspan="2" class="inactive">None at this time</td> -->
+                    <?php
                         $medias = get_event_training_media($id);
                         foreach ($medias as $media) {
                             echo '<tr class="media"><td colspan="2">';
