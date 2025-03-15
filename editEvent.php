@@ -59,6 +59,15 @@
                     echo "Oopsy!";
                     die();
                 }
+                if ($args['event-type'] == 'board_meeting') {
+                    $volunteers = getvolunteers_byevent($id);
+                    foreach ($volunteers as $volunteer) {
+                        require_once('domain/Person.php');
+                        if ($volunteer->get_type()[0] != 'boardmember') {
+                            remove_volunteer_from_event($id, $volunteer->get_id());
+                        }
+                    }
+                }
                 header('Location: event.php?id=' . $id . '&editSuccess');
             }
         }
