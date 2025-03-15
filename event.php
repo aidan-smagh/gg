@@ -22,7 +22,7 @@
     // We need to check for a bad ID here before we query the db
     // otherwise we may be vulnerable to SQL injection(!)
   	$event_info = fetch_event_by_id($id);
-    if ($event_info == NULL) {
+    if ($event_info == NULL || ($event_info["eventType"] == "board_meeting" && $_SESSION['access_level'] < 2)) {
         // TODO: Need to create error page for no event found
         // header('Location: calendar.php');
 
@@ -178,8 +178,9 @@
 <head>
     <?php
         require_once('universal.inc');
+        $eventDescriptor = $event_info["eventType"] == "board_meeting" ? 'Board Meeting' : 'Event';
     ?>
-    <title>Gwyneth's Gift VMS | View Event: <?php echo $event_info['name'] ?></title>
+    <title>Gwyneth's Gift VMS | View <?php echo $eventDescriptor ?>: <?php echo $event_info['name'] ?></title>
     <link rel="stylesheet" href="css/event.css" type="text/css" />
     <?php if ($access_level >= 2) : ?>
         <script src="js/event.js"></script>
@@ -202,7 +203,7 @@
         </div>
     <?php endif ?>
     <?php require_once('header.php') ?>
-    <h1>View Event</h1>
+    <h1>View <?php echo $eventDescriptor ?></h1>
     <main class="event-info">
         <?php if (isset($_GET['createSuccess'])): ?>
             <div class="happy-toast">Event created successfully!</div>
