@@ -728,6 +728,10 @@ fieldset.event {
     padding: 1rem;
 }
 
+td.eventType {
+    font-weight: 500;
+}
+
 main.date {
     gap: 1rem;
     margin-bottom: 4rem;
