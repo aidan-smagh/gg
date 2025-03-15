@@ -107,6 +107,11 @@
                     <img src="images/logout.svg">
                     <span>Log out</span>
                 </div>
+                <?php if ($_SESSION['access_level'] >= 2): ?>
+                    <div class="dashboard-item" data-link="externalDocuments.php">
+                    <span>External Documents</span>
+                </div>
+                <?php endif ?>
             </div>
         </main>
     </body>

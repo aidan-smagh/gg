@@ -41,6 +41,8 @@
                     $_SESSION['access_level'] = 3;
                 } else if (in_array('admin', $types)) {
                     $_SESSION['access_level'] = 2;
+                } else if (in_array('boardmember', $types)) {
+                    $_SESSION['access_level'] = 2;
                 } else {
                     $_SESSION['access_level'] = 1;
                 }
