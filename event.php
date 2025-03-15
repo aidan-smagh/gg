@@ -27,7 +27,8 @@
         // header('Location: calendar.php');
 
         // Lauren: changing this to a more specific error message for testing
-        echo 'bad event ID';
+        //echo 'bad event ID';
+        header('Location: index.php?eventError=1');
         die();
     }
 
