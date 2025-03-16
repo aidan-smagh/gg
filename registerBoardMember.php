@@ -242,7 +242,7 @@
                 //insert logic to forward registration verification to administrator
             }
         } else {
-            require_once('registrationForm.php'); 
+            require_once('boardMemberRegistrationForm.php'); 
         }
     ?>
 </body>
