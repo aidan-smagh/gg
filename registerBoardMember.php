@@ -26,6 +26,7 @@
         require_once('header.php');
         require_once('domain/Person.php');
         require_once('database/dbPersons.php');
+        require_once('database/dbMessages.php');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // make every submitted field SQL-safe except for password
             $ignoreList = array('password');
@@ -241,6 +242,18 @@
             if (!$result) {
                 echo '<p>That e-mail address is already in use.</p>';
             } else {
+                /* Send a message to the superadmin to notify them of the new registration 
+                THIS MUST BE CHANGED, IT IS SENDING TO A TEST PROFILE FOR TESTING.
+                THE RECIPIENTID SHOULD BE:
+                    veronica@gwynethsgift.org 
+                */
+                $senderId = 'vmsroot@gmail.com';
+                $recipientId = 'fake@fake.com';
+                $title = "New Board Member Registration: " . $first . ' ' . $last . "!";
+                $message = $first . " " . $last . " has registered as a new board member. " . 
+                            "Please go to their profile and change their role status "
+                            . " from volunteer to boardmember to approve their registration.";
+                send_message($senderId, $recipientId, $title, $message);
                 if ($loggedIn) {
                     echo '<script>document.location = "index.php?registerSuccess=board";</script>';
                 } else {
