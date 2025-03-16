@@ -293,10 +293,10 @@ Board member fields in form:
             <legend>Affiliation With Outside Organization</legend>
             <p>The following information relates to an outside organization you may be affiliated with.</p>
             <label for="affiliation"><em> </em>Organization Affiliated With</label>
-            <input type="text" id="affiliation-org" name="affiliation-org" placeholder="Enter the organization name">
+            <input type="text" id="affiliated-org" name="affiliated-org" placeholder="Enter the organization name">
 
             <label for="affiliationTitle"><em> </em>Title at Affiliated Organization</label>
-            <input type="text" id="affiliation-title" name="affiliation-title" placeholder="Enter your title at your affiliated organization">
+            <input type="text" id="affiliated-title" name="affiliated-title" placeholder="Enter your title at your affiliated organization">
 
         </fieldset>
 

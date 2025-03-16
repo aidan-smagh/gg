@@ -88,9 +88,9 @@ class Person {
 	private $affiliated_org;
 	private $title_at_affiliated_org;
 
-	/*prefix, mailing_address, mailing_city, affiliated_org, title_at_affiliated_org are for board members onle
-	  Volunteer form does not ask for these fields. Defaults for these attributes are set to null. Passing them 
-	  in to the function call will overwrite the null default. Not passing them in will just set them to null */
+	/* prefix, mailing_address, mailing_city, affiliated_org, title_at_affiliated_org are for board members only
+			Volunteer form does not ask for these fields. Defaults for these attributes are set to null. Passing them 
+	   		in to the function call will overwrite the null default. Not passing them in will just set them to null */
 	function __construct($f, $l, $v, $a, $c, $s, $z, $pp, $p1, $p1t, $p2, $p2t, $e, $ts, $comp, $cam, $tran, $cn, $cpn, $rel,
 			$ct, $t, $st, $cntm, $pos, $credithours, $comm, $mot, $spe,
 			$convictions, $av, $sch, $hrs, $bd, $sd, $hdyh, $notes, $pass,
@@ -432,7 +432,7 @@ class Person {
 	function get_affiliated_org() {
 		return $this->affiliated_org;
 	}
-	
+
 	function get_title_at_affiliated_org() {
 		return $this->title_at_affiliated_org;
 	}
