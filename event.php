@@ -146,7 +146,7 @@
                 $eventType = $event['eventType'];
                 if ($eventType == 'board_meeting') {
                     $notificationSubject = "$name signed up for a board meeting.";
-                    $notificationText = "$name signed up for the [$eventName](event: $eventID) board meeting from $eventStart to $eventEnd on $eventDate.";
+                    $notificationText = "Hello,\r\n\r\n$name signed up for the [$eventName](event: $eventID) board meeting from $eventStart to $eventEnd on $eventDate.";
                 } else {
                     $notificationSubject = "$name signed up for an event!";
                     $notificationText = "Exciting news!\r\n\r\n$name signed up for the [$eventName](event: $eventID) event from $eventStart to $eventEnd on $eventDate.";
