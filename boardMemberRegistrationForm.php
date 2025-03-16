@@ -89,6 +89,17 @@ Board member fields in form:
     city
     state
 
+
+    New to database:
+        prefix
+        mailing_address (text)
+        mailing_city (text)
+        mailing_state (varchar(2))
+        mailing_zip (text)
+        affiliated_org (text?)
+        title_at_affiliated_org (text?)
+
+        latin1_swedish_ci
 */
 ?>
 
@@ -206,14 +217,20 @@ Board member fields in form:
         
         <fieldset>
             <legend>Mailing Address</legend>
+
+            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 8px; width: fit-content; margin-bottom: 30px;">
+                <label for="same-as-home"></em> </em>Same as Home Address</label>
+                <input type="checkbox" id="same-as-home" name="same-as-home" value="yes">
+            </div>
+
             <label for="address"><em>* </em>Street Address</label>
-            <input type="text" id="mailingAddress" name="mailingAddress" required placeholder="Enter your mailing street address">
+            <input type="text" id="mailing-address" name="mailing-address" required placeholder="Enter your mailing street address">
 
             <label for="city"><em>* </em>City</label>
-            <input type="text" id="mailingCity" name="mailingCity" required placeholder="Enter your mailing city">
+            <input type="text" id="mailing-city" name="mailing-city" required placeholder="Enter your mailing city">
 
             <label for="state"><em>* </em>State</label>
-            <select id="mailingState" name="mailingState" required>
+            <select id="mailing-state" name="mailing-state" required>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -268,7 +285,7 @@ Board member fields in form:
             </select>
 
             <label for="zip"><em>* </em>Zip Code</label>
-            <input type="text" id="mailingZip" name="mailingZip" pattern="[0-9]{5}" title="5-digit mailing zip code" required placeholder="Enter your 5-digit mailing zip code">
+            <input type="text" id="mailing-zip" name="mailing-zip" pattern="[0-9]{5}" title="5-digit mailing zip code" required placeholder="Enter your 5-digit mailing zip code">
         
         </fieldset>
 
@@ -276,10 +293,10 @@ Board member fields in form:
             <legend>Affiliation With Outside Organization</legend>
             <p>The following information relates to an outside organization you may be affiliated with.</p>
             <label for="affiliation"><em> </em>Organization Affiliated With</label>
-            <input type="text" id="affiliationOrg" name="affiliationOrg" placeholder="Enter the organization name">
+            <input type="text" id="affiliation-org" name="affiliation-org" placeholder="Enter the organization name">
 
             <label for="affiliationTitle"><em> </em>Title at Affiliated Organization</label>
-            <input type="text" id="affiliationTitle" name="affiliationTitle" placeholder="Enter your title at your affiliated organization">
+            <input type="text" id="affiliation-title" name="affiliation-title" placeholder="Enter your title at your affiliated organization">
 
         </fieldset>
 

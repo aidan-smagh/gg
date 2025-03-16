@@ -246,4 +246,5 @@
         }
     ?>
 </body>
+<script src="js/autofillSameAddress.js"></script>
 </html>
