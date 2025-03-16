@@ -68,8 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $startTime = time24hto12h($startTime);
         $endTime = time24hto12h($endTime);
         $date = date('l, F j, Y', strtotime($date));
+        $eventType = $args['event-type'];
         require_once('database/dbMessages.php');
-        system_message_all_users_except($userID, "A new event was created!", "Exciting news!\r\n\r\nThe [$name](event: $id) event from $startTime to $endTime on $date was added!\r\nSign up today!");
+        if ($eventType == 'board_meeting') {
+            system_message_all_board_members("A new board meeting was created.", "Hello,\r\n\r\nThe [$name](event: $id) board meeting from $startTime to $endTime on $date was added.");
+        } else {
+            system_message_all_users_except($userID, "A new event was created!", "Exciting news!\r\n\r\nThe [$name](event: $id) event from $startTime to $endTime on $date was added!\r\nSign up today!");
+        }
         header("Location: event.php?id=$id&createSuccess");
         die();
     }
