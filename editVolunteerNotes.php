@@ -39,7 +39,7 @@
         echo '<main class="signup-form"><p class="error-toast">That user does not exist.</p></main></body></html>';
         die();
     }
-    var_dump($person);
+    //var_dump($person);
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,5 +62,6 @@
                 <input type="text" id="notes" name="notes" value="<?php echo hsc($person->get_notes()); ?>">
             </fieldset>
         </main>
+    <a class="button" href="viewProfile.php">Confirm Changes</a>
 </body>
 </html>
