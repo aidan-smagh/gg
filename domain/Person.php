@@ -160,6 +160,7 @@ class Person {
 		$this->saturdaysStart = $sats;
 		$this->saturdaysEnd = $sate;
 		$this->gender = $gender;
+		$this->notes = $notes;
 	}
 
 	function get_id() {
