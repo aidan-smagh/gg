@@ -65,7 +65,9 @@ table, td, tr, th, form, fieldset, em, button, a {
     --secondary-accent-color: #f6a4b5;
 
     --calendar-event-color: #808080;
-    --calendar-event-color-hover: var(--main-color);
+    --calendar-event-color-hover: #404040;
+    --calendar-event-color-signup: var(--main-color);
+    --calendar-event-color-signup-hover: hsl(214, 31%, 13.5%);
     --calendar-today-border: 2px solid var(--secondary-accent-color);
 
     --button-font-color: white;
@@ -445,6 +447,16 @@ main.calendar-view th {
     padding: 0.25rem 0.5rem;
     text-decoration: none;
     transition: background-color .2s;
+}
+
+.calendar-event.signed-up:hover {
+    /* filter: brightness(1.2); */
+    background-color: var(--calendar-event-color-signup-hover);
+}
+
+.calendar-event.signed-up {
+    background-color: var(--calendar-event-color-signup);
+    color: var(--button-font-color);
 }
 
 .calendar-event:hover {

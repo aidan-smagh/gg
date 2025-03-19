@@ -111,16 +111,8 @@
                 echo 'bad contact method';
             }
 
-
-
             $econtactName = $args['econtact-name'];
-            $econtactPhone = validateAndFilterPhoneNumber($args['econtact-phone']);
-            if (!$econtactPhone) {
-                $errors = true;
-                echo 'bad econtact phone';
-            }
-
-            //$econtactPhone = $args['econtact-phone'];
+            $econtactPhone = $args['econtact-phone'];
     
             $econtactRelation = $args['econtact-relation'];
 
@@ -243,13 +235,14 @@
                 echo '<p>That e-mail address is already in use.</p>';
             } else {
                 if ($loggedIn) {
-                    echo '<script>document.location = "index.php?registerSuccess";</script>';
+                    echo '<script>document.location = "index.php?registerSuccess=board";</script>';
                 } else {
-                    echo '<script>document.location = "login.php?registerSuccess";</script>';
+                    echo '<script>document.location = "login.php?registerSuccess=board";</script>';
                 }
+                //insert logic to forward registration verification to administrator
             }
         } else {
-            require_once('registrationForm.php'); 
+            require_once('boardMemberRegistrationForm.php'); 
         }
     ?>
 </body>

@@ -17,8 +17,10 @@
 $accessLevelsByRole = [
 	'volunteer' => 1,
 	'admin' => 2,
-	'superadmin' => 3
+	'superadmin' => 3,
+	'boardmember' => 2
 ];
+//TODO BOARD MEMBER ACCESS LEVEL NEEDS TO BE EVALUATED
 
 class Person {
 	private $id;         // id (unique key) = first_name . phone1

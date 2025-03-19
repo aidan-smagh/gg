@@ -112,6 +112,10 @@
                         <img src="images/card-checklist.svg">
                         <span>View events</span>
                     </div>
+                <?php if ($_SESSION['access_level'] >= 2): ?>
+                    <div class="dashboard-item" data-link="externalDocuments.php">
+                    <span>External Documents</span>
+                </div>
                 <?php endif ?>
             </div>
         </main>
