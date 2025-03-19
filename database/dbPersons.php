@@ -84,8 +84,14 @@ function add_person($person) {
             $person->get_saturday_availability_end() . '","' .
             $person->get_profile_pic() . '","' .
             $person->is_password_change_required() . '","' .
-            $person->get_gender() .
-            '");'
+            $person->get_gender() . '","' . 
+            $person->get_prefix() . '","' .
+            $person->get_mailing_address() . '","' .
+            $person->get_mailing_city() . '","' .
+            $person->get_mailing_state() . '","' .
+            $person->get_affiliated_org() . '","' .
+            $person->get_title_at_affiliated_org() . '","' .
+            '");'            
         );							
         mysqli_close($con);
         return true;
@@ -344,7 +350,13 @@ function make_a_person($result_row) {
                     $result_row['saturdays_start'],
                     $result_row['saturdays_end'],
                     $result_row['force_password_change'],
-                    $result_row['gender']
+                    $result_row['gender'],
+                    $result_row['prefix'],
+                    $result_row['mailing_address'],
+                    $result_row['mailing_city'],
+                    $result_row['mailing_state'],
+                    $result_row['affiliated_org'],
+                    $result_row['title_at_affiliated_org']
                 );   
     return $thePerson;
 }

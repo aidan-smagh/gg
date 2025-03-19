@@ -109,6 +109,12 @@
                     <img src="images/logout.svg">
                     <span>Log out</span>
                 </div>
+                <?php if ($_SESSION['access_level'] >= 0): ?>
+                    <div class="dashboard-item" data-link="viewEvents.php">
+                        <img src="images/card-checklist.svg">
+                        <span>View events</span>
+                    </div>
+                <?php endif ?>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="externalDocuments.php">
                     <span>External Documents</span>

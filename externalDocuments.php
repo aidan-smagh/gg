@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
                 exit;
             }
             else if ($insertResult === "error") {
+                // redirect user to external docs page, with error parameter
                 header("Location: externalDocuments.php?documentAdded=error");
                 exit;
             }
@@ -147,8 +148,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
     </div>
     
     <!-- Add document form, for superadmin only -->
-    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
-        <?php if ($isSuperAdmin): ?>
+    <?php if ($isSuperAdmin): ?>
+        <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
             <h2 style="
                 font-size: 1.5rem;
                 font-weight: 500;
@@ -172,12 +173,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
 
                 <button type="submit">Submit New Document</button>
             </form>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php endif; ?>
 
     <!-- Delete document form. For superadmin only -->
-    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
-        <?php if ($isSuperAdmin): ?>
+    <?php if ($isSuperAdmin): ?>
+        <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
             <h2 style="
                     font-size: 1.5rem;
                     font-weight: 500;
@@ -204,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
 
                 <button type="submit">Submit Document Deletion</button>
             </form>
-        <?php endif;?>
-    </div>
+        </div>
+    <?php endif;?>
 </body>
 </html>
