@@ -80,12 +80,24 @@ class Person {
 	private $saturdaysEnd;
 	private $mustChangePassword;
 	private $gender;
+	/* New data for board members */
+	private $prefix;
+	private $mailing_address;
+	private $mailing_city;
+	private $mailing_state;
+	private $affiliated_org;
+	private $title_at_affiliated_org;
 
+	/* prefix, mailing_address, mailing_city, affiliated_org, title_at_affiliated_org are for board members only
+			Volunteer form does not ask for these fields. Defaults for these attributes are set to null. Passing them 
+	   		in to the function call will overwrite the null default. Not passing them in will just set them to null */
 	function __construct($f, $l, $v, $a, $c, $s, $z, $pp, $p1, $p1t, $p2, $p2t, $e, $ts, $comp, $cam, $tran, $cn, $cpn, $rel,
 			$ct, $t, $st, $cntm, $pos, $credithours, $comm, $mot, $spe,
 			$convictions, $av, $sch, $hrs, $bd, $sd, $hdyh, $notes, $pass,
 			$suns, $sune, $mons, $mone, $tues, $tuee, $weds, $wede,
-			$thus, $thue, $fris, $frie, $sats, $sate, $mcp, $gender) {
+			$thus, $thue, $fris, $frie, $sats, $sate, $mcp, $gender,
+			$prefix = null, $mailing_address = null, $mailing_city = null, $mailing_state = null, $affiliated_org = null, 
+			$title_at_affiliated_org = null) {
 		$this->id = $e;
 		$this->start_date = $sd;
 		$this->venue = $v;
@@ -160,6 +172,13 @@ class Person {
 		$this->saturdaysStart = $sats;
 		$this->saturdaysEnd = $sate;
 		$this->gender = $gender;
+		/* New data for board members */
+		$this->prefix = $prefix;
+		$this->mailing_address = $mailing_address;
+		$this->mailing_city = $mailing_city;
+		$this->mailing_state = $mailing_state;
+		$this->affiliated_org = $affiliated_org;
+		$this->title_at_affiliated_org = $title_at_affiliated_org;
 	}
 
 	function get_id() {
@@ -392,5 +411,29 @@ class Person {
 
 	function get_gender() {
 		return $this->gender;
+	}
+
+	function  get_prefix() {
+		return $this->prefix;
+	}
+
+	function get_mailing_address() {
+		return $this->mailing_address;
+	}
+
+	function get_mailing_city() {
+		return $this->mailing_city;
+	}
+
+	function get_mailing_state() {
+		return $this->mailing_state;
+	}
+
+	function get_affiliated_org() {
+		return $this->affiliated_org;
+	}
+
+	function get_title_at_affiliated_org() {
+		return $this->title_at_affiliated_org;
 	}
 }
