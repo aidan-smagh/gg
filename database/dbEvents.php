@@ -89,6 +89,10 @@ function retrieve_event($id) {
     return $theEvent;
 }
 
+function get_event($id) {
+    return retrieve_event($id);
+}
+
 // not in use, may be useful for future iterations in changing how events are edited (i.e. change the remove and create new event process)
 function update_event_date($id, $new_event_date) {
 	$con=connect();
