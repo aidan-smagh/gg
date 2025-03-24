@@ -30,7 +30,7 @@ function get_all_posts() {
  */
 function get_all_posts_by($poster) {
     $con = connect();
-    $stmt = $con->prepare("SELECT * FROM dbforums ORDER BY timePosted DESC WHERE poster = ?");
+    $stmt = $con->prepare("SELECT * FROM dbforums WHERE poster = ? ORDER BY timePosted DESC");
     //bind the parameters to the statement. ss because both parameters are string types
     $stmt->bind_param("s", $poster);
     // Execute the query and store it in the table $result
