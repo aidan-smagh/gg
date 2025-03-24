@@ -79,7 +79,7 @@ function add_post($title, $person, $url) {
 function delete_post($id) {
     $con = connect();
     /* prepare the deletion statement */
-    $stmt = $con->prepare("DELETE FROM dbforum WHERE id = ?");
+    $stmt = $con->prepare("DELETE FROM dbforums WHERE id = ?");
     $stmt->bind_param("i", $id);
 
     /* Attempt to execute the deletion, storing the bool result in $success */
