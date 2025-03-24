@@ -140,10 +140,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {
         <?php endif; ?>
     </div>
     
-    <!-- Add post form, for superadmin only -->
-    <?php if ($isSuperAdmin): ?>
-        <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
-            <h2 style="
+    <!-- Add post form -->
+    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
+        <h2 style="
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            background-color: var(--main-color);
+            color: var(--page-background-color);
+            width: 100%;
+            text-align: center;
+            padding: 1rem;">
+            Create Post
+        </h2>
+
+        <form method="POST" action="forums.php">
+            <input type="hidden" name="form_type" value="add_post">
+
+            <label for="title">Post Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="url">Post URL:</label>
+            <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
+
+            <button type="submit">Submit Post</button>
+        </form>
+    </div>
+
+    <!-- Delete post form. Non-superadmins can only delete their own posts. -->
+    <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
+        <h2 style="
                 font-size: 1.5rem;
                 font-weight: 500;
                 margin-bottom: 2rem;
@@ -152,53 +178,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {
                 width: 100%;
                 text-align: center;
                 padding: 1rem;">
-                Create Post
-            </h2>
+                Delete Post
+        </h2>
+        <form method="POST" action ="forums.php">
+            <input type="hidden" name="form_type" value="delete_post">
 
-            <form method="POST" action="forums.php">
-                <input type="hidden" name="form_type" value="add_post">
+            <label for="title_to_delete">Select Post to Delete:</label>
+            <select id="title_to_delete" name="title_to_delete" required>
+                <option value="">Select a post</option>
+                <?php
+                    if ($isSuperAdmin) {
+                        $deleteablePosts = $posts;
+                    } else {
+                        $deleteablePosts = get_all_posts_by($_SESSION['_id']);
+                    }
+                ?>
+                <?php foreach ($deleteablePosts as $post): ?>
+                    <option value="<?php echo htmlspecialchars($post['title']); ?>">
+                        <?php echo htmlspecialchars($post['title']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-                <label for="title">Post Title:</label>
-                <input type="text" id="title" name="title" required>
-
-                <label for="url">Post URL:</label>
-                <input type="url" id="url" name="url" required style="width: 100%; margin-bottom: 2rem;">
-
-                <button type="submit">Submit Post</button>
-            </form>
-        </div>
-    <?php endif; ?>
-
-    <!-- Delete post form. For superadmin only -->
-    <?php if ($isSuperAdmin): ?>
-        <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;"> 
-            <h2 style="
-                    font-size: 1.5rem;
-                    font-weight: 500;
-                    margin-bottom: 2rem;
-                    background-color: var(--main-color);
-                    color: var(--page-background-color);
-                    width: 100%;
-                    text-align: center;
-                    padding: 1rem;">
-                    Delete Post
-            </h2>
-            <form method="POST" action ="forums.php">
-                <input type="hidden" name="form_type" value="delete_post">
-
-                <label for="title_to_delete">Select Post to Delete:</label>
-                <select id="title_to_delete" name="title_to_delete" required>
-                    <option value="">Select a post</option>
-                    <?php foreach ($posts as $post): ?>
-                        <option value="<?php echo htmlspecialchars($post['title']); ?>">
-                            <?php echo htmlspecialchars($post['title']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-
-                <button type="submit">Delete Post</button>
-            </form>
-        </div>
-    <?php endif;?>
+            <button type="submit">Delete Post</button>
+        </form>
+    </div>
 </body>
 </html>
