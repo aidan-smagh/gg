@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {
         /* Collect the id to be deleted from the form */
         $idToDelete = $_POST["id_to_delete"];
 
-        if (!empty($titleToDelete)) {
+        if (!empty($idToDelete)) {
             /* function call to dbForums.php to delete the post */
             $deletionResult = delete_post($idToDelete);
             if ($deletionResult === "success") {
@@ -183,8 +183,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {
         <form method="POST" action ="forums.php">
             <input type="hidden" name="form_type" value="delete_post">
 
-            <label for="title_to_delete">Select Post to Delete:</label>
-            <select id="title_to_delete" name="title_to_delete" required>
+            <label for="id_to_delete">Select Post to Delete:</label>
+            <select id="id_to_delete" name="id_to_delete" required>
                 <option value="">Select a post</option>
                 <?php
                     if ($isSuperAdmin) {
@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {
                     }
                 ?>
                 <?php foreach ($deleteablePosts as $post): ?>
-                    <option value="<?php echo htmlspecialchars($post['title']); ?>">
+                    <option value="<?php echo htmlspecialchars($post['id']); ?>">
                         <?php echo htmlspecialchars($post['title']); ?>
                     </option>
                 <?php endforeach; ?>
