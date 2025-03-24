@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 05:43 PM
+-- Generation Time: Mar 24, 2025 at 03:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -382,6 +382,30 @@ CREATE TABLE `dbexternaldocuments` (
 INSERT INTO `dbexternaldocuments` (`id`, `title`, `url`) VALUES
 (1, 'fakeDocument', 'https://www.google.com'),
 (3, 'anotherFakeDocument', 'https://www.google.com/search?q=cheese&sca_esv=bd9db4ef3d63f955&sxsrf=AHTn8zpCHEwkj6-VDXo4_oQwQ10Vdxlz9g%3A1741970303743&source=hp&ei=f1vUZ5b4KtOf5NoP6df4gAk&iflsig=ACkRmUkAAAAAZ9Rpj7r-a0vd54dbbVSSjhbLRUsc8Vbo&ved=0ahUKEwjWs6WJgYqMAxXTD1kFHekrHpAQ4dUDCBo&uact=5&oq=cheese&gs_lp=Egdnd3Mtd2l6IgZjaGVlc2UyDhAuGIAEGLEDGNEDGMcBMggQABiABBixAzILEAAYgAQYkgMYigUyCxAAGIAEGJIDGIoFMgsQLhiABBjHARivATIIEAAYgAQYsQMyCxAuGIAEGMcBGK8BMggQLhiABBixAzIIEAAYgAQYyQMyCBAuGIAEGLEDSLIKUJAFWOAJcAF4AJABAJgBZqABwgOqAQM0LjG4AQPIAQD4AQGYAgagAvoDqAIKwgINECMY8AUYJxjJAhjqAsICBxAjGCcY6gLCAhEQLhiABBixAxjRAxiDARjHAcICBRAuGIAEwgILEAAYgAQYsQMYgwHCAg4QLhiABBixAxiDARiKBcICChAjGIAEGCcYigXCAgsQLhiABBixAxiDAcICBRAAGIAEmAMd8QWhhUDShXeG2JIHAzQuMqAHslA&sclient=gws-wiz');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbforums`
+--
+
+DROP TABLE IF EXISTS `dbforums`;
+CREATE TABLE `dbforums` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `timePosted` datetime NOT NULL DEFAULT current_timestamp(),
+  `poster` varchar(256) DEFAULT NULL,
+  `url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dbforums`
+--
+
+INSERT INTO `dbforums` (`id`, `title`, `timePosted`, `poster`, `url`) VALUES
+(1, 'whatever', '2025-03-23 22:19:07', NULL, 'http://localhost/gg/calendar.php'),
+(2, 'test', '2025-03-23 22:22:44', NULL, 'http://localhost/gg/index.php'),
+(3, 'let\'s try this again', '2025-03-23 22:27:12', 'test@test.test', 'http://localhost/gg/logout.php');
 
 -- --------------------------------------------------------
 
@@ -9586,6 +9610,7 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('tbanks@healthygenerations.org', '2024-11-12', 'portland', 'TaMara', 'Banks', '460 Lendall Ln', 'Fredericksburg', 'VA', '22405', '5404199638', 'work', '', '', '1972-08-28', 'tbanks@healthygenerations.org', 'XXL', '1', '1', '1', 'Chandler Hines', '(540) 498-07', 'Daughter', 'anytime', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$DMLpaxz8uYcShK1Qqw3oOOKh7eiDJyaQn/22l5IS2i.2ssQLmn2gC', '', '', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tcstabisz@gmail.com', '2023-08-28', 'portland', 'Chelsea', 'Tabisz', '3 Masters Dr', 'Stafford', 'VA', '22554', '6185306076', 'cellphone', '', '', '1984-07-20', 'tcstabisz@gmail.com', 'S', '1', '', '1', 'Shelley Waite', '7035981892', 'Mom', 'There is no best time', 'phone', '', '', '', '', '', 'Singing, people skills, love of GGF ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$vNfg9s2HR31NKEwRyucm.O6UYdiCeOd5slsT3nO1eZAjAVK5m.Swi', '', '', '', '', '', '', '', '', '18:00', '23:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('test@test.com', '2025-02-26', 'portland', 'Test', 'Test', '123 test street', 'testCity', 'VA', '22742', '1234567890', 'cellphone', '', '', '2001-01-01', 'test@test.com', 'S', '', '', '', 'testPerson', '(111) 222-33', 'moral support', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$2RrlZpDRF2dpdP0MYl8fG.BE1l5LIjKh2MW9rM2VDokj0tJnF1tpi', '15:00', '16:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('test@test.test', '2025-03-23', 'portland', 'test', 'test', 'yes', 'england', 'VA', '22222', '5555555555', 'cellphone', '', '', '2002-02-20', 'test@test.test', 'S', '1', '1', '1', '', '5555555555', '', '', 'text', '', '', '', '', '', '', '', 'superadmin', 'Active', '', '', '', '', '$2y$10$MaXYx2ClSbUdhTyvJTryMOp5yxuYcGhi17zDE5UTNq1/GIf5QRPnu', '00:00', '15:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '', ''),
 ('texascampos@yahoo.com', '2023-07-07', 'portland', 'Jennifer', 'CHESTNUT', '176 ellington drive', 'Fredericksburg', 'VA', '22405', '5406451098', 'cellphone', '', '', '1975-09-03', 'texascampos@yahoo.com', 'XL', '', '', '1', 'Philip Chestnut', '5406450353', 'Spouse', '3pm', 'text', '', '', '', '', '', 'Retired flight attendant...I can deal with a lot of situations  ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$Or0jeV3NvC33icLGhHz.eOLF/.9EPpjuRt4YA64Hr.Ea8UQ65o6ee', '', '', '', '', '', '', '13:00', '15:00', '', '', '13:00', '15:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('thehines@gmail.com', '2023-08-01', 'portland', 'Stephanie', 'Hine', '315 Cooper Street', 'Spotsylvania', 'VA', '22551', '5402204104', 'cellphone', '', '', '1980-03-20', 'thehines@gmail.com', 'XL', '1', '', '1', 'Lyman Hine', '5404196188', 'Spouse', 'Evenings', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$m.apR9cN9xlWUYpxKgo6seNCz77y3q71ufQ/LgBB9ob5UgBPChttq', '12:00', '20:00', '17:00', '20:00', '', '', '17:00', '20:00', '', '', '', '', '10:00', '16:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tiffany@gwynethsgift.org', '2024-11-05', 'portland', 'Tiffany', 'Steel', '1900 Charles Street', 'Fredericksburg', 'VA', '22401', '7033819995', 'work', '', '', '1996-06-27', 'tiffany@gwynethsgift.org', 'L', '1', '1', '1', 'Brandon Sisco', '(804) 572-72', 'Fiance', 'Days', 'text', '', '', '', '', '', '', '', 'superadmin', 'Active', '', '', '', 'Administrative', '$2y$10$Uwr.rLWRYv78MrDHtxcrbuw5YXzqlHMS3os0.oCO7WFE2FsJzzbNG', '12:00', '14:00', '', '', '', '', '17:00', '20:00', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9637,6 +9662,13 @@ ALTER TABLE `dbexternaldocuments`
   ADD UNIQUE KEY `title` (`title`);
 
 --
+-- Indexes for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `poster` (`poster`);
+
+--
 -- Indexes for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -9671,6 +9703,12 @@ ALTER TABLE `dbexternaldocuments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -9692,6 +9730,12 @@ ALTER TABLE `dbeventmedia`
 ALTER TABLE `dbeventvolunteers`
   ADD CONSTRAINT `FKeventID` FOREIGN KEY (`eventID`) REFERENCES `dbevents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FKpersonID` FOREIGN KEY (`userID`) REFERENCES `dbpersons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD CONSTRAINT `dbforums_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `dbpersons` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
