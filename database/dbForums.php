@@ -34,7 +34,8 @@ function get_all_posts_by($poster) {
     //bind the parameters to the statement. ss because both parameters are string types
     $stmt->bind_param("s", $poster);
     // Execute the query and store it in the table $result
-    $result = $stmt->execute();
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
     $stmt->close();
     // array to hold the posts for return
     $posts = [];
