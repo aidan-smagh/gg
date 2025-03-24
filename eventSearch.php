@@ -28,7 +28,7 @@
                 echo 'missing form data';
                 die();
             }
-            $events = find_event($args['name']);
+            $eventsUnfiltered = find_event($args['name']);
             $search = 'Results for Search by Name: "' . htmlspecialchars($_POST['name']) . '"';
         } else if (isset($args['submitDateRange'])) {
             if (!wereRequiredFieldsSubmitted($args, array('date-start', 'date-end'))) {
@@ -41,11 +41,22 @@
                 echo 'bad date range';
                 die();
             }
-            $events = fetch_events_in_date_range_as_array($start, $end);
+            $eventsUnfiltered = fetch_events_in_date_range_as_array($start, $end);
 
             $start = date('m/d/Y', strtotime($start));
             $end = date('m/d/Y', strtotime($end));
             $search = 'Results for Search by Date Range: ' . htmlspecialchars($_POST['date-start']) . ' - ' . htmlspecialchars($_POST['date-end']);
+        }
+
+        if ($accessLevel >= 2) {
+            $events = $eventsUnfiltered;
+        } else {
+            $events = [];
+            foreach ($eventsUnfiltered as $event) {
+                if ($event['eventType'] != 'board_meeting') {
+                    $events []= $event;
+                }
+            }
         }
     } else {
         $events = null;
@@ -78,6 +89,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        " . ($event['eventType'] == 'board_meeting' ? "<tr><td class='eventType'>Type</td><td class='eventType'>Board Meeting</td></tr>" : "") . "
                                         <tr><td>Date</td><td>" . $date . "</td></tr>
                                         <tr><td>Time</td><td>" . time24hto12h($event['startTime']) . " - " . time24hto12h($event['endTime']) . "</td></tr>
                                         <tr><td>Location</td><td>" . $event['location'] . "</td></tr>

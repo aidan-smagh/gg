@@ -163,10 +163,15 @@ if (date('m', strtotime($calendarEnd . ' +1 day')) == date('m', $first)) {
                                 $dayEvents = $events[$e];
                                 foreach ($dayEvents as $info) {
                                     $eventClasses = 'calendar-event';
+                                        if ($info['eventType'] == 'board_meeting') {
+                                            $eventClasses .= ' board';
+                                        }
                                         if (isset($eventsGoing[$info['id']])) {
                                             $eventClasses .= ' signed-up';
                                         }
-                                    $eventsStr .= '<a class="' . $eventClasses . '" href="event.php?id=' . $info['id'] . '">' . $info['abbrevName'] .  '</a>';
+                                    if ($info['eventType'] != 'board_meeting' || $accessLevel >= 2) {
+                                        $eventsStr .= '<a class="' . $eventClasses . '" href="event.php?id=' . $info['id'] . '">' . $info['abbrevName'] .  '</a>';
+                                    }
                                 }
                             }
                             echo '<td class="calendar-day' . $extraClasses . '" ' . $extraAttributes . ' data-date="' . date('Y-m-d', $date) . '">
