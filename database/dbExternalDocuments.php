@@ -56,7 +56,7 @@ function add_document($title, $url) {
     $stmt = $con->prepare("INSERT INTO dbexternaldocuments (title, url) VALUES (?, ?)");
     //bind the parameters to the statement. ss because both parameters are string types
     $stmt->bind_param("ss", $title, $url);
-    /* Attempt to execute the insertion, catching any errors */
+    /* Attempt to execute the insertion, retaining any errors */
     $success = $stmt->execute();
     $stmt->close();
     mysqli_close($con);

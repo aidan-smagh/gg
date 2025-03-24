@@ -89,8 +89,9 @@ function add_person($person) {
             $person->get_mailing_address() . '","' .
             $person->get_mailing_city() . '","' .
             $person->get_mailing_state() . '","' .
+            $person->get_mailing_zip() . '","' .
             $person->get_affiliated_org() . '","' .
-            $person->get_title_at_affiliated_org() . '","' .
+            $person->get_title_at_affiliated_org() . 
             '");'            
         );							
         mysqli_close($con);
@@ -355,6 +356,7 @@ function make_a_person($result_row) {
                     $result_row['mailing_address'],
                     $result_row['mailing_city'],
                     $result_row['mailing_state'],
+                    $result_row['mailing_zip'],
                     $result_row['affiliated_org'],
                     $result_row['title_at_affiliated_org']
                 );   
@@ -381,7 +383,7 @@ function getall_type($t) {
         mysqli_close($con);
         return false;
     }
-    mysqli_close;
+    mysqli_close($con);
     return $result;
 }
 
