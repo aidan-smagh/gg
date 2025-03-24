@@ -3,14 +3,39 @@
 include_once('database/dbinfo.php');
 
 /**
- * Collect all forums posts
- * @return array of documents (id, title, url)
+ * Collect all forum posts
+ * @return array of posts (id, title, url)
  */
 function get_all_posts() {
     $con = connect();
     $query = "SELECT * FROM dbforums ORDER BY timePosted DESC";
     // Execute the query and store it in the table $result
     $result = mysqli_query($con, $query);
+    // array to hold the posts for return
+    $posts = [];
+
+    // add each row of data, stored in the $result table, to the posts array
+    // a row in $result consists of id, title, and url
+    while ($row = mysqli_fetch_assoc($result)) {
+        $posts[] = $row;
+    }
+    // close database connection and return the posts array
+    mysqli_close($con);
+    return $posts;
+}
+
+/**
+ * Collect all forum posts posted by the provided user id
+ * @return array of posts (id, title, url)
+ */
+function get_all_posts_by($poster) {
+    $con = connect();
+    $stmt = $con->prepare("SELECT * FROM dbforums ORDER BY timePosted DESC WHERE poster = ?");
+    //bind the parameters to the statement. ss because both parameters are string types
+    $stmt->bind_param("s", $poster);
+    // Execute the query and store it in the table $result
+    $result = $stmt->execute();
+    $stmt->close();
     // array to hold the posts for return
     $posts = [];
 
