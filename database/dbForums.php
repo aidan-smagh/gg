@@ -12,7 +12,7 @@ function get_all_posts() {
     // Execute the query and store it in the table $result
     $result = mysqli_query($con, $query);
     // array to hold the posts for return
-    $potsts = [];
+    $posts = [];
 
     // add each row of data, stored in the $result table, to the posts array
     // a row in $result consists of id, title, and url
