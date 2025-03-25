@@ -85,6 +85,7 @@ class Person {
 	private $mailing_address;
 	private $mailing_city;
 	private $mailing_state;
+	private $mailing_zip;
 	private $affiliated_org;
 	private $title_at_affiliated_org;
 
@@ -96,7 +97,7 @@ class Person {
 			$convictions, $av, $sch, $hrs, $bd, $sd, $hdyh, $notes, $pass,
 			$suns, $sune, $mons, $mone, $tues, $tuee, $weds, $wede,
 			$thus, $thue, $fris, $frie, $sats, $sate, $mcp, $gender,
-			$prefix = null, $mailing_address = null, $mailing_city = null, $mailing_state = null, $affiliated_org = null, 
+			$prefix = null, $mailing_address = null, $mailing_city = null, $mailing_state = null, $mailing_zip = null, $affiliated_org = null, 
 			$title_at_affiliated_org = null) {
 		$this->id = $e;
 		$this->start_date = $sd;
@@ -177,6 +178,7 @@ class Person {
 		$this->mailing_address = $mailing_address;
 		$this->mailing_city = $mailing_city;
 		$this->mailing_state = $mailing_state;
+		$this->mailing_zip = $mailing_zip;
 		$this->affiliated_org = $affiliated_org;
 		$this->title_at_affiliated_org = $title_at_affiliated_org;
 	}
@@ -427,6 +429,10 @@ class Person {
 
 	function get_mailing_state() {
 		return $this->mailing_state;
+	}
+
+	function get_mailing_zip() {
+		return $this->mailing_zip;
 	}
 
 	function get_affiliated_org() {
