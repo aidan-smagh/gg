@@ -312,6 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </fieldset>
     <?php endif ?>
+    <fieldset>
     <label>Skills</label>
     <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
     <label>Additional Information</label>
