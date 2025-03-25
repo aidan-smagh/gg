@@ -15,11 +15,13 @@ class Event {
     private $volunteers;
     private $trainingMedia;
     private $postMedia;
+    private $eventType;
 
-    function __construct($id, $name, $abbrevName, $date, $startTime, $endTime, $description, $location, $capacity, $volunteers, $trainingMedia, $postMedia) {
+    function __construct($id, $name, $abbrevName, $eventType, $date, $startTime, $endTime, $description, $location, $capacity, $volunteers, $trainingMedia, $postMedia) {
         $this->id = $id;
         $this->name = $name;
         $this->abbrevName = $abbrevName;
+        $this->eventType = $eventType;
         $this->date = $date;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
@@ -41,6 +43,10 @@ class Event {
 
     function getAbbreviatedName() {
         return $this->abbrevName;
+    }
+
+    function getEventType() {
+        return $this->eventType;
     }
 
     function getDate() {

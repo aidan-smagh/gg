@@ -35,6 +35,8 @@
                 <div class="happy-toast">Password changed successfully!</div>
             <?php elseif (isset($_GET['registerSuccess'])): ?>
                 <div class="happy-toast">Volunteer registered successfully!</div>
+            <?php elseif (isset($_GET['eventError'])): ?>
+                <div class="error-toast">The event could not be accessed.</div>
             <?php endif ?>
             <p>Welcome back, <?php echo $person->get_first_name() ?>!</p>
             <p>Today is <?php echo date('l, F j, Y'); ?>.</p>

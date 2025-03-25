@@ -14,17 +14,6 @@
     if (isset($_SESSION['_id'])) {
         $loggedIn = true;
     }
-
-    // if (isset($_SESSION['_id'])) {
-    //     header('Location: index.php');
-    // } else {
-    //     $_SESSION['logged_in'] = 1;
-    //     $_SESSION['access_level'] = 0;
-    //     $_SESSION['venue'] = "";
-    //     $_SESSION['type'] = "";
-    //     $_SESSION['_id'] = "guest";
-    //     header('Location: personEdit.php?id=new');
-    // }
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,15 +26,11 @@
         require_once('header.php');
         require_once('domain/Person.php');
         require_once('database/dbPersons.php');
+        require_once('database/dbMessages.php');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // make every submitted field SQL-safe except for password
             $ignoreList = array('password');
             $args = sanitize($_POST, $ignoreList);
-
-            // echo "<p>The form was submitted:</p>";
-            // foreach ($args as $key => $value) {
-            //     echo "<p>$key: $value</p>";
-            // }
 
             $required = array(
                 'first-name', 'last-name', 'birthdate',
@@ -57,14 +42,25 @@
             if (!wereRequiredFieldsSubmitted($args, $required)) {
                 $errors = true;
             }
+
+            /* Personal Information Section Data */
             $first = $args['first-name'];
             $last = $args['last-name'];
+            $prefix = $args['prefix'];
+            $gender = $args['gender'];
             $dateOfBirth = validateDate($args['birthdate']);
             if (!$dateOfBirth) {
                 $errors = true;
                 echo 'bad dob';
             }
+            $shirtSize = $args['shirt-size'];
+            $startDate = validateDate($args['start-date']);
+            if (!$startDate) {
+                $errors = true;
+                echo 'bad start date';
+            }
 
+            /* Home Address Section Data */ 
             $address = $args['address'];
             $city = $args['city'];
             $state = $args['state'];
@@ -80,12 +76,62 @@
                 $errors = true;
                 echo 'bad zip';
             }
-            $email = strtolower($args['email']);
-            $email = validateEmail($email);
-            if (!$email) {
-                $errors = true;
-                echo 'bad email';
+
+            /* Mailing Address Section Data 
+               The mailing address fields are required. However, javascript allows the use to select "same-as-home".
+               If the use selects the same as home checkbox, the entry boxes for mailing address fields will be disabled.
+               The form will won't submit anything for those fields, so that logic must happen here
+            */
+            if (isset($args['mailing-address'])) {
+                // User entered separate value for mailing address
+                $mailingAddress = $args['mailing-address'];
             }
+            else {
+                //User selected Same as home, so use home address values
+                $mailingAddress = $address;
+            }
+            if (isset($args['mailing-city'])) {
+                //user entered separate value for mailing city
+                $mailingCity = $args['mailing-city'];
+            }
+            else {
+                //user selected same as home
+                $mailingCity = $city;
+            }
+            if (isset($args['mailing-state'])) {
+                //user entered separate value for mailing state
+                $mailingState = $args['mailing-state'];
+            }
+            else {
+                //user selected same as home
+                $mailingState = $state;
+            }
+            if (!valueConstrainedTo($mailingState, array('AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+                    'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+                    'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+                    'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+                    'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'))) {
+                $errors = true;
+            }
+            if (isset($args['mailing-zip'])) {
+                //user entered separate value for mailing zip
+                $mailingZip = $args['mailing-zip'];
+            }
+            else {
+                //user selected same as home
+                $mailingZip = $zipcode;
+            }
+            if (!validateZipcode($mailingZip)) {
+                $errors = true;
+                echo 'bad zip';
+            }
+
+            /* Affiliation With Outside Organization Section Data */
+            $affiliatedOrg = $args['affiliated-org'];
+            $titleAtAffiliatedOrg = $args['affiliated-title'];
+
+            /* Contact Information Section Data */
+            //Processing primary phone
             $phone = validateAndFilterPhoneNumber($args['phone']);
             if (!$phone) {
                 $errors = true;
@@ -94,11 +140,29 @@
             $phoneType = '';
             if (!isset($args['phone-type']) || $args['phone-type'] == '') {
                 $args['phone-type'] = 'cellphone';
-                }
+            }
             $phoneType = $args['phone-type'];
             if (!valueConstrainedTo($phoneType, array('cellphone', 'home', 'work',''))) {
                 $errors = true;
                 echo 'bad phone type';
+            }
+            //processing secondary phone, which is not a required field in the form
+            $phone2 = '';
+            // Only proceed if phone2 was provided in the form
+            if (!empty($args['phone2'])) {
+                $phone2 = validateAndFilterPhoneNumber($args['phone2']);
+                if (!$phone2) {
+                    $errors = true;
+                    echo 'bad phone2';
+                }
+            }
+            $phone2Type = '';
+            if (isset($args['phone2-type']) && !empty($args['phone2-type'])) {
+                $phone2Type = $args['phone2-type'];
+                if (!valueConstrainedTo($phone2Type, array('cellphone2', 'home2', 'work2',''))) {
+                    $errors = true;
+                    echo 'bad phone2 type';
+                }
             }
             $contactWhen = $args['contact-when'];
             $contactMethod = ''; // Initialize $contactMethod
@@ -111,129 +175,85 @@
                 echo 'bad contact method';
             }
 
-            $econtactName = $args['econtact-name'];
-            $econtactPhone = $args['econtact-phone'];
-    
-            $econtactRelation = $args['econtact-relation'];
-
-            $startDate = validateDate($args['start-date']);
-            if (!$startDate) {
-                $errors = true;
-                echo 'bad start date';
+            /* Emergency Contact Information Section Data */
+            // Collect econtact name if provided, otherwise set it to the empty string
+            if (isset($args['econtact-name']) && !empty($args['econtact-name'])) {
+                $econtactName = $args['econtact-name'];
             }
-            if($args['gender'] == 'Chose an option'){
-                $args['gender'] = 'N/A';
+            else {
+                $econtactName = '';
             }
-            $gender = $args['gender'];
-
-            $skills = '';
-            if (isset($args['skills'])) {
-                $skills = $args['skills'];
-            }
-            $hasComputer = isset($args['has-computer']);
-            $hasCamera = isset($args['has-camera']);
-            $hasTransportation = isset($args['has-transportation']);
-            $shirtSize = $args['shirt-size'];
-            
-
-            // May want to enforce password requirements at this step
-            $password = password_hash($args['password'], PASSWORD_BCRYPT);
-
-            $days = array('sundays', 'mondays', 'tuesdays', 'wednesdays', 'thursdays', 'fridays', 'saturdays');
-            $availability = array();
-            $availabilityCount = 0;
-            foreach ($days as $day) {
-                if (isset($args['available-' . $day])) {
-                    $startKey = $day . '-start';
-                    $endKey = $day . '-end';
-                    if (!isset($args[$startKey]) || !isset($args[$endKey])) {
-                        $errors = true;
-                    }
-                    $start = $args[$startKey];
-                    $end = $args[$endKey];
-                    // $range24h = validate12hTimeRangeAndConvertTo24h($start, $end);
-                    $range24h = null;
-                    if (validate24hTimeRange($start, $end)) {
-                        $range24h = [$start, $end];
-                    }
-                    if (!$range24h) {
-                        $errors = true;
-                        echo "bad $day availability";
-                    }
-                    $availability[$day] = $range24h;
-                    $availabilityCount++;
-                } else {
-                    $availability[$day] = null;
+            // Collect and validate econtact phone if provided, otherwise set it to the empty string
+            if (isset($args['econtact-phone']) && !empty($args['econtact-phone'])) {
+                $econtactPhone = validateAndFilterPhoneNumber($args['econtact-phone']);
+                if (!$econtactPhone) {
+                    $errors = true;
+                    echo 'bad econtact phone';
                 }
             }
-            if ($availabilityCount == 0) {
+            else {
+                $econtactPhone = '';
+            }
+            // Collect econtact relation if provided, otherwise set it to the empty string
+            if (isset($args['econtact-relation']) && !empty($args['econtact-relation'])) {
+                $econtactRelation = $args['econtact-relation'];
+            }
+            else {
+                $econtactRelation = '';
+            }
+
+            /* Login Credentials Section Data */
+            // May want to enforce password requirements at this step
+            $email = strtolower($args['email']);
+            $email = validateEmail($email);
+            if (!$email) {
                 $errors = true;
-                echo 'bad availability - none chosen';
+                echo 'bad email';
             }
-            $sundaysStart = '';
-            $sundaysEnd = '';
-            if ($availability['sundays']) {
-                $sundaysStart = $availability['sundays'][0];
-                $sundaysEnd = $availability['sundays'][1];
-            }
-            $mondaysStart = '';
-            $mondaysEnd = '';
-            if ($availability['mondays']) {
-                $mondaysStart = $availability['mondays'][0];
-                $mondaysEnd = $availability['mondays'][1];
-            }
-            $tuesdaysStart = '';
-            $tuesdaysEnd = '';
-            if ($availability['tuesdays']) {
-                $tuesdaysStart = $availability['tuesdays'][0];
-                $tuesdaysEnd = $availability['tuesdays'][1];
-            }
-            $wednesdaysStart = '';
-            $wednesdaysEnd = '';
-            if ($availability['wednesdays']) {
-                $wednesdaysStart = $availability['wednesdays'][0];
-                $wednesdaysEnd = $availability['wednesdays'][1];
-            }
-            $thursdaysStart = '';
-            $thursdaysEnd = '';
-            if ($availability['thursdays']) {
-                $thursdaysStart = $availability['thursdays'][0];
-                $thursdaysEnd = $availability['thursdays'][1];
-            }
-            $fridaysStart = '';
-            $fridaysEnd = '';
-            if ($availability['fridays']) {
-                $fridaysStart = $availability['fridays'][0];
-                $fridaysEnd = $availability['fridays'][1];
-            }
-            $saturdaysStart = '';
-            $saturdaysEnd = '';
-            if ($availability['saturdays']) {
-                $saturdaysStart = $availability['saturdays'][0];
-                $saturdaysEnd = $availability['saturdays'][1];
-            }
+            $password = password_hash($args['password'], PASSWORD_BCRYPT);
 
             if ($errors) {
                 echo '<p>Your form submission contained unexpected input.</p>';
                 die();
             }
-            // need to incorporate availability here
-            $newperson = new Person($first, $last, 'portland', 
-                $address, $city, $state, $zipcode, "",
-                $phone, $phoneType, null, null,
-                $email, $shirtSize, $hasComputer, $hasCamera, $hasTransportation, $econtactName, $econtactPhone, $econtactRelation, 
-                $contactWhen, 'volunteer', 'Active', $contactMethod, null, null,
-                null, null, $skills, null, '', '', '', 
+            /* The new board member form (boardMemberRegistrationForm.php) does not collect every possible data field
+                relating to a person. Entries not collected by the form are entered either as null (if the database allows null)
+                or they are entered as '' (if the database does not allow null) 
+                
+                Board Members are created as volunteers. They must be later changed to boardmember by superAdmin 
+            */
+            $newperson = new Person(
+                $first, $last, 'portland', 
+                $address, $city, $state, $zipcode, "", 
+                $phone, $phoneType, $phone2, $phone2Type,
+                $email, $shirtSize, false, false, true, 
+                $econtactName, $econtactPhone, $econtactRelation, 
+                $contactWhen, 'volunteer', 'Active', $contactMethod, 
+                null, null, null, null, null, null, '', '', '', 
                 $dateOfBirth, $startDate, null, null, $password,
-                $sundaysStart, $sundaysEnd, $mondaysStart, $mondaysEnd,
-                $tuesdaysStart, $tuesdaysEnd, $wednesdaysStart, $wednesdaysEnd,
-                $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
-                $saturdaysStart, $saturdaysEnd, 0, $gender
+                null, null, null, null,
+                null, null, null, null,
+                null, null, null, null,
+                null, null, 0, $gender, $prefix,
+                $mailingAddress, $mailingCity, $mailingState, $mailingZip,
+                $affiliatedOrg, $titleAtAffiliatedOrg
             );
             $result = add_person($newperson);
             if (!$result) {
                 echo '<p>That e-mail address is already in use.</p>';
             } else {
+                /* Send a message to the superadmin to notify them of the new registration 
+                THIS MUST BE CHANGED, IT IS SENDING TO A TEST PROFILE FOR TESTING.
+                THE RECIPIENTID SHOULD BE:
+                    veronica@gwynethsgift.org 
+                */
+                $senderId = 'vmsroot@gmail.com';
+                $recipientId = 'fake@fake.com';
+                $title = "New Board Member Registration: " . $first . ' ' . $last . "!";
+                $message = $first . " " . $last . " has registered as a new board member. " . 
+                            "Please go to their profile and change their role status "
+                            . " from volunteer to boardmember to approve their registration.";
+                send_message($senderId, $recipientId, $title, $message);
                 if ($loggedIn) {
                     echo '<script>document.location = "index.php?registerSuccess=board";</script>';
                 } else {
@@ -246,4 +266,5 @@
         }
     ?>
 </body>
+<script src="js/autofillSameAddress.js"></script>
 </html>
