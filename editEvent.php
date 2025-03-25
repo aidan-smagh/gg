@@ -28,7 +28,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $args = sanitize($_POST, null);
         $required = array(
-            "id", "name", "abbrev-name", "date", "start-time", "end-time", "description", "location", "capacity"
+            "id", "name", "abbrev-name", "event-type", "date", "start-time", "end-time", "description", "location", "capacity"
         );
         if (!wereRequiredFieldsSubmitted($args, $required)) {
             echo 'bad form data';
@@ -58,6 +58,15 @@
                 if (!$success){
                     echo "Oopsy!";
                     die();
+                }
+                if ($args['event-type'] == 'board_meeting') {
+                    $volunteers = getvolunteers_byevent($id);
+                    foreach ($volunteers as $volunteer) {
+                        require_once('domain/Person.php');
+                        if ($volunteer->get_type()[0] != 'boardmember') {
+                            remove_volunteer_from_event($id, $volunteer->get_id());
+                        }
+                    }
                 }
                 header('Location: event.php?id=' . $id . '&editSuccess');
             }
@@ -96,6 +105,11 @@
                 <input type="text" id="name" name="name" value="<?php echo $event['name'] ?>" required placeholder="Enter name"> 
                 <label for="name">Abbreviated Name</label>
                 <input type="text" id="abbrev-name" name="abbrev-name" value="<?php echo $event['abbrevName'] ?>" maxlength="11"  required placeholder="Enter name that will appear on calendar">
+                <label for="name">Select Event Type</label>
+                    <select name="event-type" id="event-type">
+                        <option value="volunteer_event" <?php if ($event["eventType"] == "volunteer_event") echo 'selected';?>>Volunteer Event</option>
+                        <option value="board_meeting" <?php if ($event["eventType"] == "board_meeting") echo 'selected';?>>Board Meeting</option>
+                    </select>
                 <label for="name">Date </label>
                 <input type="date" id="date" name="date" value="<?php echo $event['date'] ?>" min="<?php echo date('Y-m-d'); ?>" required>
                 <label for="name">Start Time </label>

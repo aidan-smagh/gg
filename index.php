@@ -35,6 +35,8 @@
                 <div class="happy-toast">Password changed successfully!</div>
             <?php elseif (isset($_GET['registerSuccess'])): ?>
                 <div class="happy-toast">Volunteer registered successfully!</div>
+            <?php elseif (isset($_GET['eventError'])): ?>
+                <div class="error-toast">The event could not be accessed.</div>
             <?php endif ?>
             <p>Welcome back, <?php echo $person->get_first_name() ?>!</p>
             <p>Today is <?php echo date('l, F j, Y'); ?>.</p>
@@ -107,6 +109,12 @@
                     <img src="images/logout.svg">
                     <span>Log out</span>
                 </div>
+                <?php if ($_SESSION['access_level'] >= 0): ?>
+                    <div class="dashboard-item" data-link="viewEvents.php">
+                        <img src="images/card-checklist.svg">
+                        <span>View events</span>
+                    </div>
+                <?php endif ?>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="externalDocuments.php">
                     <span>External Documents</span>
