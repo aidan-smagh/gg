@@ -89,9 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
             .certificate .header {
                 text-align: right;
             }
-            .certificate .signature {
-                margin-top: 3rem;
+            .certificate .header img {
+                max-width: 200px; 
+                margin-bottom: 2rem;
             }
+
+            .certificate .signature img {
+                max-width: 150px; /* smaller signature */
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
             .no-print { display: block; }
             @media print { .no-print { display: none; } }
         </style>
@@ -101,6 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
         <div class="certificate">
             <!-- Header with current date -->
             <div class="header">
+                <img src="images/logo.png" alt="Gwyneth’s Gift Logo">
                 <p>Date: <?php echo $currentDate; ?></p>
             </div>
             <br><br>
@@ -122,6 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
             </p>
             <br><br>
             <div class="signature">
+                <img src="images/signature.png" alt="Tiffany Kay Signature">
                 <p>Sincerely,</p>
                 <p>
                     Tiffany Kay<br>
