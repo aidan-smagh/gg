@@ -64,8 +64,14 @@ table, td, tr, th, form, fieldset, em, button, a {
     --accent-color: #f5c16e;
     --secondary-accent-color: #f6a4b5;
 
-    --calendar-event-color: #808080;
-    --calendar-event-color-hover: var(--main-color);
+    --calendar-event-color: #999;
+    --calendar-event-color-hover: #4c4c4c;
+    --calendar-event-color-signup: var(--accent-color);
+    --calendar-event-color-signup-hover: #7a6037;
+    --calendar-event-board-color: var(--main-color);
+    --calendar-event-board-color-hover: #17202c;
+    --calendar-event-board-color-signup: var(--secondary-accent-color);
+    --calendar-event-board-color-signup-hover: #7b525a;
     --calendar-today-border: 2px solid var(--secondary-accent-color);
 
     --button-font-color: white;
@@ -447,9 +453,39 @@ main.calendar-view th {
     transition: background-color .2s;
 }
 
+.calendar-event.board.signed-up:hover {
+    /* filter: brightness(1.2); */
+    background-color: var(--calendar-event-board-color-signup-hover);
+}
+
+.calendar-event.signed-up:hover {
+    /* filter: brightness(1.2); */
+    background-color: var(--calendar-event-color-signup-hover);
+}
+
+.calendar-event.board.signed-up {
+    background-color: var(--calendar-event-board-color-signup);
+    color: var(--button-font-color);
+}
+
+.calendar-event.signed-up {
+    background-color: var(--calendar-event-color-signup);
+    color: var(--button-font-color);
+}
+
+.calendar-event.board:hover {
+    /* filter: brightness(1.2); */
+    background-color: var(--calendar-event-board-color-hover);
+}
+
 .calendar-event:hover {
     /* filter: brightness(1.2); */
     background-color: var(--calendar-event-color-hover);
+}
+
+.calendar-event.board {
+    background-color: var(--calendar-event-board-color);
+    color: var(--button-font-color);
 }
 
 .calendar-event {
@@ -690,6 +726,10 @@ fieldset.event {
     gap: 0.5rem;
     width: 100%;
     padding: 1rem;
+}
+
+td.eventType {
+    font-weight: 500;
 }
 
 main.date {

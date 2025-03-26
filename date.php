@@ -50,7 +50,19 @@
                 require('database/dbEvents.php');
                 require('include/output.php');
                 require('include/time.php');
-                $events = fetch_events_on_date($date);
+                $eventsUnfiltered = fetch_events_on_date($date);
+
+                if ($accessLevel >= 2) {
+                    $events = $eventsUnfiltered;
+                } else {
+                    $events = [];
+                    foreach ($eventsUnfiltered as $event) {
+                        if ($event['eventType'] != 'board_meeting') {
+                            $events []= $event;
+                        }
+                    }
+                }
+
                 if ($events) {
                     foreach ($events as $event) {
                         $duration = calculateHourDuration($event['startTime'], $event['endTime']);
@@ -66,6 +78,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    " . ($event['eventType'] == 'board_meeting' ? "<tr><td class='eventType'>Type</td><td class='eventType'>Board Meeting</td></tr>" : "") . "
                                     <tr><td>Time</td><td>" . time24hto12h($event['startTime']) . " - " . time24hto12h($event['endTime']) . "</td></tr>
                                     <tr><td>Duration</td><td>" . $duration . " hours</td></tr>
                                     <tr><td>Location</td><td>" . $event['location'] . "</td></tr>

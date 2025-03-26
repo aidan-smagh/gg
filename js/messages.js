@@ -20,10 +20,10 @@ function sendAJAXRequest(url, requestData, onSuccess, onFailure) {
 }
 
 $(function() {
-    $('tr.message').click(function() {
+    /*$('tr.message').click(function() {
         let id = $(this).data('message-id');
         window.location = 'viewNotification.php?id=' + id;
-    });
+    });*/
 
     $('#delete-button').click(function() {
         let id = $(this).data('message-id');

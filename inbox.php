@@ -33,56 +33,44 @@
                 require_once('database/dbMessages.php');
                 $messages = get_user_messages($userID);
                 if (count($messages) > 0): ?>
-                <div class="table-wrapper">
-                    <table class="general">
-                        <thead>
-                            <tr>
-                                <th style="width:1px">From</th>
-                                <th>Title</th>
-                                <th style="width:1px">Received</th>
-                            </tr>
-                        </thead>
-                        <tbody class="standout">
-                            <?php 
-                                require_once('database/dbPersons.php');
-                                require_once('include/output.php');
-                                $id_to_name_hash = [];
-                                foreach ($messages as $message) {
-                                    $sender = $message['senderID'];
-                                    if (isset($id_to_name_hash[$sender])) {
-                                        $sender = $id_to_name_hash[$sender];
-                                    } else {
-                                        $lookup = get_name_from_id($sender);
-                                        $id_to_name_hash[$sender] = $lookup;
-                                        $sender = $lookup;
+                
+                <form id="delete-form" action="deleteMultipleNotifications.php" method="post">
+                    <button type="submit" class="delete_all">Delete Selected</button>
+                    <div class="table-wrapper">
+                        <table class="general">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th style="width:1px">From</th>
+                                    <th>Title</th>
+                                    <th style="width:1px">Received</th>
+                                </tr>
+                            </thead>
+                            <tbody class="standout">
+                                <?php 
+                                    require_once('database/dbPersons.php');
+                                    require_once('include/output.php');
+                                    foreach ($messages as $message) {
+                                        $messageID = $message['id'];
+                                        echo "
+                                            <tr class='message' data-message-id='$messageID'>
+                                                <td class='checkbox'>
+                                                    <input type='checkbox' name='message_ids[]' value='$messageID'>
+                                                </td>
+                                                <td>{$message['senderID']}</td>
+                                                <td><a href='viewNotification.php?id=".$messageID."'>{$message['title']}</a></td>
+                                                <td>{$message['time']}</td>
+                                            </tr>";
                                     }
-                                    $messageID = $message['id'];
-                                    $title = $message['title'];
-                                    $timePacked = $message['time'];
-                                    $pieces = explode('-', $timePacked);
-                                    $year = $pieces[0];
-                                    $month = $pieces[1];
-                                    $day = $pieces[2];
-                                    $time = time24hto12h($pieces[3]);
-                                    $class = 'message';
-                                    if (!$message['wasRead']) {
-                                        $class .= ' unread';
-                                    }
-                                    echo "
-                                        <tr class='$class' data-message-id='$messageID'>
-                                            <td>$sender</td>
-                                            <td>$title</td>
-                                            <td>$month/$day/$year $time</td>
-                                        </tr>";
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
             <?php else: ?>
                 <p class="no-messages standout">You currently have no unread messages.</p>
             <?php endif ?>
-            <!-- <button>Compose New Message</button> -->
             <a class="button cancel" href="index.php">Return to Dashboard</a>
         </main>
     </body>

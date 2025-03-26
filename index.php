@@ -101,6 +101,11 @@
                         <span>View My Hours</span>
                     </div>
                 <?php endif ?>
+                <?php if ($_SESSION['access_level'] >= 2): ?>
+                    <div class="dashboard-item" data-link="forums.php">
+                        <span>Forums</span>
+                    </div>
+                <?php endif ?>
                 <div class="dashboard-item" data-link="changePassword.php">
                     <img src="images/change-password.svg">
                     <span>Change Password</span>
@@ -117,13 +122,8 @@
                 <?php endif ?>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="externalDocuments.php">
-                    <span>External Documents</span>
-                </div>
-                <?php endif ?>
-                <?php if ($_SESSION['access_level'] >= 2): ?>
-                    <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
-                    <span>Generate Certificate</span>
-                </div>
+                        <span>External Documents</span>
+                    </div>
                 <?php endif ?>
             </div>
         </main>
