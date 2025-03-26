@@ -73,8 +73,14 @@
         $permission_array['report.php'] = 2;
         $permission_array['reportspage.php'] = 2;
         $permission_array['resetpassword.php'] = 2;
+        $permission_array['volunteerhoursconfirmation.php'] = 2;
+
         $permission_array['externaldocuments.php'] = 2;
+
         $permission_array['viewevents.php'] = 2;
+
+        $permission_array['forums.php'] = 2;
+
         $permission_array['editVolunteerNotes.php'] = 2;
 
         //Check if they're at a valid page for their access level.
