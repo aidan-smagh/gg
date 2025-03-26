@@ -119,15 +119,16 @@
                         <span style="text-align: center;">External Documents</span>
                     </div>
                 <?php endif ?>
+                <?php if ($_SESSION['access_level'] >= 2): ?>
+                    <div class="dashboard-item" data-link="volunteerhoursconfirmation.php">
+                        <img src="images/volunteer-hours.svg">
+                        <span>Volunteer Hours</span>
+                    </div>
+                <?php endif ?>
                 <div class="dashboard-item" data-link="changePassword.php">
                     <img src="images/change-password.svg">
                     <span>Change Password</span>
                 </div>
-                <?php if ($_SESSION['access_level'] >= 2): ?>
-                    <div class="dashboard-item" data-link="volunteerhoursconfirmation.php">
-                        <span>Volunteer Hours</span>
-                    </div>
-                <?php endif ?>
                 <div class="dashboard-item" data-link="logout.php">
                     <img src="images/logout.svg">
                     <span>Log out</span>
