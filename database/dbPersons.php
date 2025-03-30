@@ -816,7 +816,7 @@ function find_user_names($name) {
         $hours = 0;
         foreach ($events as $event) {
             $duration = $event['duration'];
-            $type = $event['type'];
+            $type = $event['eventType'];
             if ($duration > 0 && $type != 'board_meeting') {
                 $hours += $duration;
             }
@@ -829,7 +829,7 @@ function find_user_names($name) {
         $hours = 0;
         foreach ($events as $event) {
             $duration = $event['duration'];
-            $type = $event['type'];
+            $type = $event['eventType'];
             if ($duration > 0 && $type != 'board_meeting') {
                 $hours += $duration;
             }
