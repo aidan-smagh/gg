@@ -187,6 +187,10 @@
                     </div>
                 </div>
                 <div>
+                    <label for="event_name">Name</label>
+                    <input type="text" id="event_name" name="event_name" value="" placeholder="Enter the name of an event">
+                </div>
+                <div>
                     <label for="name">Name</label> <span><i><font size="3">*Individual Hours Report Only</font></i></span>
                     <input type="text" id="name" name="name" value="" placeholder="Enter a volunteer's first and/or last name">
                 </div>
