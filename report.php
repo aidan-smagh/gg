@@ -187,7 +187,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="event_name">Name</label>
+                    <label for="event_name">Event Name</label>
                     <input type="text" id="event_name" name="event_name" value="" placeholder="Enter the name of an event">
                 </div>
                 <div>
