@@ -554,6 +554,31 @@ function get_logged_hours($from, $to, $name_from, $name_to, $venue) {
         return $result;
     }
 
+    function update_board_member_profile(
+        $id,
+        $first, $last, $prefix, $gender, $dateOfBirth, $shirtSize, $startDate, 
+        $address, $city, $state, $zipcode, 
+        $mailingAddress, $mailingCity, $mailingState, $mailingZip,
+        $affiliatedOrg, $titleAtAffiliatedOrg, 
+        $email, $phone, $phoneType, $phone2, $phone2Type, $contactWhen, $contactMethod, 
+        $econtactName, $econtactPhone, $econtactRelation
+    ) {
+        $query = "update dbPersons set 
+            first_name='$first', last_name='$last', prefix='$prefix', gender='$gender', birthday='$dateOfBirth', shirt_size='$shirtSize', start_date='$startDate',
+            address='$address', city='$city', state='$state', zip='$zipcode', 
+            mailing_address='$mailingAddress', mailing_city='$mailingCity', mailing_state='$mailingState', mailing_zip='$mailingZip',
+            affiliated_org='$affiliatedOrg', title_at_affiliated_org='$titleAtAffiliatedOrg', 
+            email='$email', phone1='$phone', phone1type='$phoneType', phone2='$phone2', phone2type='$phone2Type', contact_time='$contactWhen', cMethod='$contactMethod',
+            contact_name='$econtactName', contact_num='$econtactPhone', relation='$econtactRelation'
+            where id='$id'";
+        $connection = connect();
+        $result = mysqli_query($connection, $query);
+        mysqli_commit($connection);
+        mysqli_close($connection);
+        return $result;
+    }
+
+
     /**
      * Searches the database and returns an array of all volunteers
      * that are eligible to attend the given event that have not yet
