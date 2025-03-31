@@ -34,6 +34,7 @@ if ($event_info == NULL || ($event_info['eventType'] == 'board_meeting' && $_SES
 }
 
 include_once('database/dbPersons.php');
+include_once('database/dbCheckInOut.php');
 $access_level = $_SESSION['access_level'];
 $user = retrieve_person($_SESSION['_id']);
 $active = $user->get_status() == 'Active';
@@ -120,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     if (isset($_POST['submitTime'])) {
-        insert_checkintime();
+        insert_checkintime($id);
         header('Location: event.php?id=' . $args['id'] . '&checkIn');
         die();
     }
@@ -420,7 +421,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </tr>
                             ';
                     }
-                    echo '
+
+                    if ($access_level >= 2 && $event_info['eventType'] == 'board_meeting') {
+                        echo '
                     <form method = "post">
                         <tr>
                             <td colspan="2">
@@ -431,6 +434,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                     </form>
                     ';
+                    }
 
 
                     ?>
