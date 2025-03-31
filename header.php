@@ -76,6 +76,7 @@
         $permission_array['volunteerhoursconfirmation.php'] = 2;
 
         $permission_array['externaldocuments.php'] = 2;
+        $permission_array['editboardmemberprofile.php'] = 2;
 
         $permission_array['viewevents.php'] = 2;
 
