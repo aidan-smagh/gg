@@ -249,9 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="happy-toast">Event details updated successfully!</div>
         <?php endif ?>
         <?php
-        if (isset($_GET["checkIn"])) {
-            echo "Test";
-        }
+
         require_once('include/output.php');
         $event_name = $event_info['name'];
         $event_type = $event_info['eventType'];
