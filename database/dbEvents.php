@@ -88,6 +88,28 @@ function retrieve_event($id) {
 //    mysqli_close($con);
     return $theEvent;
 }
+/*
+function get_event($id) {
+    return retrieve_event($id);
+}*/
+
+function getUpcomingEvents() {
+    /*global $conn;*/
+    $conn = connect();
+
+    $query = "SELECT * FROM dbEvents WHERE date >= CURDATE() ORDER BY date ASC";
+    $result = mysqli_query($conn, $query);
+
+    $events = [];
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $events[] = $row;
+        }
+    }
+
+    return $events;
+}
 
 // not in use, may be useful for future iterations in changing how events are edited (i.e. change the remove and create new event process)
 function update_event_date($id, $new_event_date) {
@@ -218,6 +240,7 @@ function create_event($event) {
     $connection = connect();
     $name = $event["name"];
     $abbrevName = $event["abbrev-name"];
+    $eventType = $event["event-type"];
     $date = $event["date"];
     $startTime = $event["start-time"];
     $endTime = $event["end-time"];
@@ -225,8 +248,8 @@ function create_event($event) {
     $location = $event["location"];
     $capacity = $event["capacity"];
     $query = "
-        insert into dbEvents (name, abbrevName, date, startTime, endTime, description, location, capacity)
-        values ('$name', '$abbrevName', '$date', '$startTime', '$endTime', '$description', '$location', '$capacity')
+        insert into dbEvents (name, abbrevName, eventType, date, startTime, endTime, description, location, capacity)
+        values ('$name', '$abbrevName', '$eventType', '$date', '$startTime', '$endTime', '$description', '$location', '$capacity')
     ";
     $result = mysqli_query($connection, $query);
     if (!$result) {
@@ -242,6 +265,7 @@ function update_event($eventID, $eventDetails) {
     $connection = connect();
     $name = $eventDetails["name"];
     $abbrevName = $eventDetails["abbrev-name"];
+    $eventType = $eventDetails["event-type"];
     $date = $eventDetails["date"];
     $startTime = $eventDetails["start-time"];
     $endTime = $eventDetails["end-time"];
@@ -249,7 +273,7 @@ function update_event($eventID, $eventDetails) {
     $location = $eventDetails["location"];
     $capacity = $eventDetails["capacity"];
     $query = "
-        update dbEvents set name='$name', abbrevName='$abbrevName', date='$date', startTime='$startTime', endTime='$endTime', description='$description', location='$location', capacity='$capacity'
+        update dbEvents set name='$name', abbrevName='$abbrevName', eventType='$eventType', date='$date', startTime='$startTime', endTime='$endTime', description='$description', location='$location', capacity='$capacity'
         where id='$eventID'
     ";
     $result = mysqli_query($connection, $query);

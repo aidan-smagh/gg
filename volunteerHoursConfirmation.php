@@ -1,6 +1,5 @@
 <?php
 // volunteerHoursConfirmation.php
-// Template for new VMS pages. Base your new page on this one.
 
 // Make session information accessible, allowing us to associate data with the logged-in user.
 session_cache_expire(30);
@@ -90,9 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
             .certificate .header {
                 text-align: right;
             }
-            .certificate .signature {
-                margin-top: 3rem;
+            .certificate .header img {
+                max-width: 200px; 
+                margin-bottom: 2rem;
             }
+
+            .certificate .signature img {
+                max-width: 150px; /* smaller signature */
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
             .no-print { display: block; }
             @media print { .no-print { display: none; } }
         </style>
@@ -102,6 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
         <div class="certificate">
             <!-- Header with current date -->
             <div class="header">
+                <img src="images/logo.png" alt="Gwyneth’s Gift Logo">
                 <p>Date: <?php echo $currentDate; ?></p>
             </div>
             <br><br>
@@ -123,6 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
             </p>
             <br><br>
             <div class="signature">
+                <img src="images/signature.png" alt="Tiffany Kay Signature">
                 <p>Sincerely,</p>
                 <p>
                     Tiffany Kay<br>
@@ -183,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
 </head>
 <body>
     <?php require_once('header.php'); ?>
-    <h1>Volunteer Certificate Lookup</h1>
+    <h1>Volunteer Certificate</h1>
     <main class="report">
         <p>Please enter your details to generate your volunteer certificate.</p>
         <div class="lookup-form">
@@ -195,13 +204,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
                 <label for="last_name">Last Name:</label>
                 <input type="text" id="last_name" name="last_name" required>
                 
-                <!-- Removed the (YYYY-MM-DD) text -->
                 <label for="birthday">Birthday:</label>
                 <input type="date" id="birthday" name="birthday" required>
                 
                 <!-- Removed the Start Date field since we use the database value -->
                 
-                <!-- Removed the (YYYY-MM-DD) text -->
                 <label for="end_date">Certificate End Date:</label>
                 <input type="date" id="end_date" name="end_date" required>
                 

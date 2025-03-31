@@ -225,7 +225,7 @@
             $sundaysStart, $sundaysEnd, $mondaysStart, $mondaysEnd,
             $tuesdaysStart, $tuesdaysEnd, $wednesdaysStart, $wednesdaysEnd,
             $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
-            $saturdaysStart, $saturdaysEnd, $gender
+            $saturdaysStart, $saturdaysEnd, $gender, $notes
         );
         if ($result) {
             if ($editingSelf) {

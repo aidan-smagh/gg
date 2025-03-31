@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 05:30 PM
+-- Generation Time: Mar 26, 2025 at 12:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `gwynethdb`
 --
+CREATE DATABASE IF NOT EXISTS `gwynethdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gwynethdb`;
 
 -- --------------------------------------------------------
 
@@ -72,6 +74,7 @@ CREATE TABLE `dbevents` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `abbrevName` text NOT NULL,
+  `eventType` text NOT NULL DEFAULT 'volunteer_event',
   `date` char(10) NOT NULL,
   `startTime` char(5) NOT NULL,
   `endTime` char(5) NOT NULL,
@@ -84,107 +87,107 @@ CREATE TABLE `dbevents` (
 -- Dumping data for table `dbevents`
 --
 
-INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `date`, `startTime`, `endTime`, `description`, `location`, `capacity`) VALUES
-(2, 'Fredericksburg Nationals Concession Stand', 'FredNats', '2023-05-04', '17:00', '22:00', 'You will work in the concession stand. Details to follow.', 'Fred Nats Stadium', 7),
-(3, 'Training at Katherine Middle School', 'Trng KMS', '2023-05-03', '07:20', '15:00', 'ALl day training at middle school.', '123 abc street', 10),
-(4, 'Fredericksburg Nationals Concession Stand', 'FredNats', '2023-05-18', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the FredNats concession stand. Meet other volunteers and supporters of our organization. All while supporting a great cause!                                                                  You must complete the training in order to volunteer.                                                                   Uniform Requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fred Nats Stadium', 10),
-(5, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-06-01', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand!  Meet other volunteers and supporters of our organization all while supporting a great cause!  You must complete the training in order to volunteer.  Uniform requirements:  Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(6, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-06-08', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(7, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-06-29', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(8, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-07-27', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(9, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-08-03', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(10, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-08-17', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(11, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', '2023-08-31', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
-(12, 'CPR Training, YMCA Power Scholars Camp', 'CPR Train.', '2023-06-21', '12:30', '15:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for YMCA Power Scholars campers.', 'TBA', 2),
-(13, 'CPR Training, YMCA Power Scholars Camp', 'CPR Train.', '2023-06-26', '12:30', '15:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for YMCA Power Scholars campers.', 'TBA', 2),
-(14, 'CPR Training, Volvo Huber Motors', 'CPR Train.', '2023-07-12', '09:00', '12:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for the team at Volvo Huber Motors.', 'TBA', 2),
-(15, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', '2023-07-13', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
-(16, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', '2023-07-19', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
-(17, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', '2023-07-20', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
-(18, 'CPR Training, Fredericksburg Pickleball Community', 'CPR Train.', '2023-07-26', '09:00', '11:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for members of the Fredericksburg Pickleball community.', 'Fredericksburg Library Downtown', 2),
-(19, 'VDOT Golf Tournament', 'VDOT Golf', '2023-09-08', '07:00', '15:00', 'Golf Tournament to benefit Gwyneth\'s Gift at Meadows Farm Golf Course                                                  Duties include: Registration, Hole Volunteer, Food Volunteer, Raffle Volunteer, Guest Volunteer, Floater, and Golf Cart Volunteers.    Registration opens at 8am. Shotgun at 9am. ALL VOLUNTEERS must be at location by 7am.', '4300 Flat Run Rd, Locust Grove, VA 22508', 15),
-(20, 'Whiskey Business 2023', 'WB EVNT 23', '2023-09-22', '16:00', '23:00', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event. This event takes place at the Old Silk Mill in FXBG.  Duties include: Registration, Silent Auction Volunteer, Food Volunteer, Raffle Volunteer, Guest Volunteer, Floater, and Entertainment Volunteers. Early Access opens at 6pm. General Admission opens at 7pm. ALL VOLUNTEERS must be at location by 4pm.', '1707 Princess Anne St, Fredericksburg, VA 22401', 15),
-(21, 'Whiskey Business 2023 Set Up', 'WB 23 SetUp', '2023-09-21', '09:15', '12:15', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event.  We need volunteers to help set up for the event the day prior. This is a great way to do something great for the community but also a way to network with other philanthropist! The event will take place at the Old Silk Mill in FXBG on Sept. 22. Duties for the setup include: setting up decor, tables, linen, silent auction tables, marketing signs, furniture, centerpieces, etc.', '1707 Princess Anne St, Fredericksburg, VA 22401', 20),
-(22, 'Whiskey Business 2023 Set Up- Event Day', 'WB Setup', '2023-09-22', '09:15', '14:00', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event.  We need volunteers to help with any finishing touches that did not get finalized the day prior. THIS IS NOT THE VOLUNTEER ROSTER FOR THE ACTUAL EVENT TIME IN THE EVENING. IF you want to do both, you can you just need to sign up for both. LUNCH will be provided.', '1707 Princess Anne St, Fredericksburg, VA 22401', 10),
-(24, 'CPR Training - Stafford Soccer', 'CPR Train.', '2023-10-24', '17:00', '19:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for Stafford Soccer Teams and Participants.', 'Embrey Mill Fields near the playground, 1600 Mine Rd., Stafford, VA 22554', 3),
-(25, 'GGF Intern Onboarding', 'GGF I.O.', '2023-11-14', '14:30', '16:30', 'Onboarding for our new GGF Intern!', '2217 Princess Anne St #101, Fredericksburg, VA 22401', 1),
-(26, 'GGF Intern Onboarding', 'GGF I.O.', '2023-11-15', '12:30', '14:30', 'Onboarding for our new GGF Intern!', '2217 Princess Anne St #101, Fredericksburg, VA 22401', 1),
-(27, 'Hands-only CPR Training at Hollywood Church of the Brethren', 'CPR Train.', '2023-12-05', '18:00', '19:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for Church members at Hollywood Church of the Brethren.', 'Hollywood Church of the Brethren', 1),
-(28, 'Hands-only CPR Training at Guadelupe Free Clinic - Colonial Beach', 'CPR Train.', '2023-12-12', '13:00', '14:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for the Guadelupe Free Clinic - Colonial Beach.', 'Guadelupe Free Clinic', 1),
-(29, 'Mom Prom 2024 Diamonds Are A Girls Best Friend - Set Up ONLY', 'Mom Prom', '2024-04-13', '09:00', '13:00', 'Mom Prom is one of our biggest fundraisers of the year. We need volunteers to assist with the set-up of the event from 9-1:00pm. Volunteer needs are: moving tables, helping with decor, helping set-up the raffle and silent auction area.  Contact number (540) 681-1632', 'Stevenson Ridge, : 6901 Meeting Street, Spotsylvania, Virginia 22553', 15),
-(30, 'Training at Longfellow Middle School', 'Training', '2024-02-20', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 5),
-(31, 'Training at Longfellow Middle School', 'Training', '2024-02-21', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 5),
-(32, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-04-25', '17:30', '22:00', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more volunteers we have the more opportunities we have to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 12),
-(33, 'Mother\'s Day Run - Participate NOT VOLUNTEER. 1 Mile, 5K, and 10K to benefit Gwyneth\'s Gift Foundation', 'Run/Walk', '2024-05-12', '07:30', '11:00', 'A race/walk to benefit Gwyneth\'s Gift Foundation through Bishop Events. To register for the race, go to: https://register.chronotrack.com/r/74986', 'Old Mill Park (2410 Caroline Street, Fredericksburg, VA 22401)', 10),
-(35, 'Training: Dare Day at Pratt Park', 'Training', '2024-05-21', '07:30', '12:00', 'Dare Day is for Stafford County Public School 5th graders to come and visit with all the vendors/booths. It is to celebrate the success and commitment of their young 5th graders who had pledged to stay drug and violence free.  The staff of GGF will have 2 booths set up to train any of the children that come by on Hands-Only CPR.  We need volunteers to help with registration, student crowd control in within the GGF Booths, and an extra set off hands for set up and breakdown. THERE IS NO TRAINING REQUIRED TO ASSIST WITH THIS EVENT.', 'Pratt Park - Meet in the soccer field. We are booth 26 in the map attached. You will see our blue tent with our logo.', 5),
-(36, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-05-23', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to review the Volunteer Acknowledgment Form watch a short training presentation. Upon completion, please print out the certificate and email it to veronica@gwynethsgift.org. For questions contact the POC: Veronica at (540)693-0465.                                                            Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(37, 'HeartStrides', 'Walk', '2024-05-28', '12:00', '13:00', 'Every month our organization is hosting a walk around the Canal Path starting at the Old Mill Park. This is a 3 mile walk around the path to promote Health &amp; Wellness. Stay tuned on our social media channels to find out of any special talks or guests. We will meet at the Corner of Germania St. and Caroline Street. If you sign up to walk below, it will allow us to know how many walkers to anticiapate!', 'Old Mill Park (2410 Caroline Street, Fredericksburg, VA 22401)', 15),
-(38, 'Training: Katherine John Middle School - NOVA', 'Training', '2024-05-29', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '3801 Jermantown Rd, Fairfax, VA 22030', 3),
-(39, 'Training: Katherine John Middle School - NOVA', 'Training', '2024-05-30', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '3801 Jermantown Rd, Fairfax, VA 22030', 3),
-(40, 'Awareness Event: Rouse Rally Pickleball Tournament at UMW Tennis Center', 'Awareness', '2024-06-01', '10:00', '15:00', 'The annual Rouse Rally will be taking place at the UMW Tennis Center. This full day long activity will benefit Gwyneth\'s Gift Foundation. We need a few volunteers to help set up, registration, and breakdown.', '1200 Hanover St, Fredericksburg, VA 22401', 3),
-(42, 'Training: Junior Deputies Stafford County', 'Training', '2024-06-04', '12:00', '13:00', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '1225 Courthouse Rd., Stafford VA 22554', 3),
-(43, 'Training: Junior Deputies Stafford County', 'Training', '2024-06-11', '12:00', '13:00', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '1225 Courthouse Rd., Stafford VA 22554', 3),
-(44, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-06-06', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(45, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-06-20', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(46, 'Training: Widewater Elementary', 'Training', '2024-06-27', '12:30', '14:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown. You will need to bring a state ID when you check into the school.', '101 Den Rich Rd, Stafford, VA 22554 ·', 3),
-(47, 'Training: Conway Elementary School', 'Training', '2024-07-03', '12:30', '14:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown. You will need to bring a state ID when you check into the school.', '105 Primmer House Rd, Fredericksburg, VA 22405', 3),
-(48, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-07-11', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(49, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-07-25', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(50, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-08-08', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(51, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-08-15', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 9),
-(52, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', '2024-09-05', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
-(53, 'Whiskey Business: Northern Nights - SET UP HELP ONLY', 'WBSetUp', '2024-09-20', '09:00', '14:00', 'We will need assistance with final set up hours before the event in the evening. Ensuring that all decor and set up is complete. Any last minute items are finalized. Help with any pick-ups from vendors in the area. More information will be emailed to anyone that signs up as the weeks leading up to the event    *******IMPORTANT****** if you would like to volunteer for the evening of the event, you will need to sign up for that as well. Go Back to the calendar and sign up for the job you are interested. Slots are limited.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
-(54, 'Whiskey Business: Northern Nights - VIP and GENERAL ADMISSION REGISTRATION VOLUNTEERS ONLY', 'WBRegistrat', '2024-09-20', '16:00', '22:00', 'We will need 5 that are 21 and over volunteers to assist with welcoming and checking off guest from our lists of attendees. Details are still being determined. You will need to be there by 4:00 pm to receive all the important details to date. Our VIP guests will arrive 15 minutes prior to the 6:00 PM start time. It will be imperative that we are all set up and ready to go. Snacks and dinner will be available for all volunteers.  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
-(55, 'Whiskey Business: Northern Nights - Silent Auction Volunteers ONLY', 'WBSilentAuc', '2024-09-20', '17:00', '22:00', 'We will need 6  volunteers  that are 21 and over that will be comfortable with engaging with guests throughout the night looking at the silent auction items. You will help encourage our guests to bid on the items displayed. You will help collect information and secure payment for any of the winning bidders. If you love sales this is the job for you!  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
-(56, 'Whiskey Business: Northern Nights - VIP/ Copper Room Area ONLY', 'WBVip', '2024-09-20', '17:00', '22:00', 'We will need 2 volunteers that are 21 and over that will be comfortable with engaging with guests throughout the night, ensuring that the vendors in these areas have what they need.  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 2),
-(57, 'Whiskey Business: Northern Nights -Set UP ONLY', 'WBSetUp', '2024-09-19', '09:00', '16:00', 'We will need volunteers throughout the day helping set up the venue. This will include heavy lifting, decor, staging, help with pick ups, sorting, and other misc. task. We welcome volunteers to come for a couple of hours of the full day. We appreciate all the help, and we will provide snacks and lunch.', '1707 Princess Anne Street Fredericksburg, VA 22401', 20),
-(58, 'Caroline County Fire &amp;amp; Rescue Camp Training', 'Training', '2024-07-10', '09:30', '11:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '9344 Stonewall Jackson Road, Woodford, VA 22580', 2),
-(59, 'Golf Tournament at Meadows Farms', 'Golf Tourn.', '2024-10-21', '08:00', '16:00', 'Various volunteer opportunities are available at this full day fundraising event. Positions/duties include: Running the registration table, selling raffle tickets and mulligans, supervising hole competitions, coordinating awards ceremony, set-up/breakdown of breakfast and lunch, and general floating assistance. Food will be provided. All volunteers must attend (either in-person or virtually) a volunteer prep meeting before the event.', '4300 Flat Run Rd, Locust Grove, VA 22508', 15),
-(60, 'Pure Barre FXBG', 'Training', '2024-11-03', '18:30', '20:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '1460 Central Park Blvd Ste 102, Fredericksburg, VA 22401', 1),
-(61, 'Answer Church of God in Christ', 'Training', '2024-11-04', '09:30', '11:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '104 Caisson Rd, Fredericksburg, VA 22405', 1),
-(63, 'Office Help - Ryan Lawrence (ONLY)', 'Honor', '2024-09-09', '14:00', '15:30', 'Ryan is earning credit/hours for volunteering at our offices for his honor program at UMW', '2217 Princess Anne St.', 1),
-(64, 'National Night Out', 'Ntl Night', '2024-10-01', '16:30', '20:00', 'National Night Out is a FREE community event were anyone can come and engage with local law enforcement and discover other organizations that provide services to the community. We will be providing information on our CPR and AED training and training anyone that would like to receive this training at the event. We NEED TWO (2) volunteers to help us get people registered while we train.', 'Stafford Market Place by the Home Goods Parking Lot', 2),
-(65, 'Zion Presbyterian', 'Training', '2024-11-16', '10:00', '11:30', 'Hands-Only CPR &amp;amp;amp;amp; Training at Zion. Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '410 Deacon Rd. Fredericksburg, VA 22405', 2),
-(66, 'FREE CPR &amp; AED Training', 'CPR', '2024-11-30', '10:00', '13:00', 'Free CERTIFIED CPR &amp; AED training. This includes infant training. Class will begin promptly at 10:00 AM and end at 12:00 PM. Water and light snacks will be provided. You MUST Register to be in attendance.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 20),
-(67, 'THANK YOU PARTY', 'PARTY', '2024-12-05', '17:00', '19:00', 'This is our annual Thank You Party where we get the opportunity to say thank you to our volunteers, donors, and continued supporters. We will have festive heavy apps and drinks, award one volunteer for their outstanding service for the year, award for outstanding organization, and much more! Let us say thank you to all of you for that you do for our organization. Have the opportunity to network with other influential leaders in the community and meet your other fellow volunteers. Let&#039;s grow our network together.                              YOU MUST RSVP by Dec 1st. You can add your name below or text me at 562-400-2637.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 20),
-(68, 'Hope4Horses Training', 'Training', '2025-02-02', '12:00', '15:00', 'Hands-Only CPR Training at our Gwyneth&#039;s Gift office. Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 3),
-(69, 'Keller Williams Training in Fairfax VA', 'Training', '2025-02-08', '10:00', '12:00', 'Hands-Only CPR Training provided to guest of Keller Williams Realty in Fairfax, VA. Location is TBD. Set up time will start at 9:30am, with training starting at 10am-11pm. We will be out by 12pm. Snacks will be provided.  Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', 'TBD - Will be in Fairfax, VA (You can drive up by yourself or you can drive up with one of the GGF Staff)', 2),
-(70, 'Middle School Training: Longfellow Middle School', 'Training', '2025-02-19', '07:30', '14:30', 'This training will be in Northern Virigina at Longfellow Middle School. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 10),
-(71, 'Middle School Training: Longfellow Middle School', 'Training', '2025-02-20', '07:30', '14:30', 'This training will be in Northern Virigina at Longfellow Middle School. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 10),
-(72, 'Keller Williams Training in Alexandria', 'Training', '2025-02-22', '10:00', '12:00', 'The staff of GGF will need assistance with ensuring individuals are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. This training will be in DC.', 'TBD - Will be in Alexandria (You can drive up by yourself or you can drive up with one of the GGF Staff)', 2),
-(73, 'Fredericksburg Nationals', 'FredNats', '2025-04-10', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(74, 'Fredericksburg Nationals', 'FredNats', '2025-04-24', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(75, 'Fredericksburg Nationals', 'FredNats', '2025-05-08', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(76, 'Fredericksburg Nationals', 'FredNats', '2025-05-22', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(77, 'Fredericksburg Nationals', 'FredNats', '2025-06-05', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(78, 'Fredericksburg Nationals', 'FredNats', '2025-06-26', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(79, 'Fredericksburg Nationals', 'FredNats', '2025-07-24', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(80, 'Fredericksburg Nationals', 'FredNats', '2025-08-14', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(81, 'Fredericksburg Nationals', 'FredNats', '2025-08-21', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(82, 'Fredericksburg Nationals', 'FredNats', '2025-09-04', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
-(83, 'Covenant Funeral Home', 'Training', '2025-02-06', '09:30', '11:00', 'Hands-Only CPR &amp; Training. Volunteers will be needed to set up manikins and kneeling pads. A volunteer will be stationed at the registration tables upon sign in and make sure throughout the training that every participant has registered. Volunteers may be asked to take pictures, help with hand placements during CPR and anything else that is needed. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '10830 Patriot Highway, Fredericksburg, VA, 22408', 2),
-(84, 'Keller Williams Training in DC', 'Training', '2025-08-23', '10:00', '12:00', 'Hands-Only CPR &amp; Training. Volunteers will be needed to set up manikins and kneeling pads. A volunteer will be stationed at the registration tables upon sign in and make sure throughout the training that every participant has registered. Volunteers may be asked to take pictures, help with hand placements during CPR and anything else that is needed. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '500 N St SW, Washington, DC 20024 (You can drive yourself or ride with us)', 2),
-(85, '4th Annual Intern Expo (FXBG Convention Center)', 'Awareness', '2025-02-05', '08:30', '14:30', '4th Annual Intern Expo where high school students from Stafford and Spotsylvania county schools come in and visit vendor booths to learn about opportunities to intern. We use this event to set up a booth and provide information about the programs we have and highlight our Scholarship opportunities. We need 1-2 volunteers throughout the 9-2pm time frame to help with set up, signing in visitors to the booth, pictures, and breakdown.  Lunch provided.', '2371 Carl D Silver Pkwy', 3),
-(86, 'Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1', 'Mom Prom', '2025-04-12', '08:30', '12:00', 'Assist with preparing the event space by arranging tables, chairs, decorations, and signage. Help set up areas/stations, organize materials, be a runner of errands, and ensure everything is ready for the event.', '2371 Carl D Silver Pkwy', 7),
-(87, 'Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 2', 'Mom Prom', '2025-04-12', '12:00', '17:00', 'Assist with preparing the event space by arranging tables, chairs, decorations, and signage. Help set up areas/stations, organize materials, be a runner of errands, and ensure everything is ready for the event.', '2371 Carl D Silver Pkwy', 7),
-(88, 'Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS', 'Mom Prom', '2025-04-12', '16:30', '23:30', 'We will need volunteers to serve as greeters, registration table, guest assistance, silent auction/raffles, vendor assistance, floater volunteers, throughout the entire event. In addition, we will need these volunteers to assist with the breakdown at the end of event. Consisting of: taking down decorations, packing materials, and ensuring venue is left in excellent condition.', '2371 Carl D Silver Pkwy', 15),
-(89, 'Salon 730 Training', 'Training', '2025-01-24', '16:00', '18:00', 'Hands-Only CPR Training provided to Salon 730 Employees. Location is 730 Kenmore Ave. FXBG, VA 22401. Set up time will start at 4:00pm, with training starting at 4:30pm-5:30pm. We will be out by 6:00pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '730 Kenmore Avenue, Fredericksburg VA, 22401', 2),
-(90, 'ATI High School Training', 'Training', '2025-01-28', '10:15', '12:30', 'This is a new school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. We will have set up starting at 10:15am with first training starting at 10:50am and ending at 12pm with clean up after. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you don&#039;t already have one.. No Open toed shoes.', '121 University Blvd, Fredericksburg, VA 22406', 5),
-(91, 'Holy Family Catholic School Training', 'Training', '2025-01-29', '08:30', '10:30', 'This is a school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. We will also need help with set up, break down and taking pictures during the training. Set up starts at 8:30am, training is from 9am-10am and breakdown is after.   You will need to bring a state ID when you check into the school. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. . No Open toed shoes.', '14160 Ferndale Rd, Dale City, VA 22193', 8),
-(92, 'Cubscouts 242 Training', 'Training', '2025-01-27', '18:00', '19:30', 'Hands-Only CPR Training provided to Aquia Harbor Cubscouts Troop 242. Set up time will start at 6:00pm, with training starting at 6:30pm-7:00pm. We will be out by 7:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training. The duration of the training will be a half hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '204 Bow Cove, Stafford, VA 22554', 2),
-(93, 'Stafford Soccer Training', 'Training', '2025-03-01', '08:00', '12:00', 'Hands-Only CPR &amp; AED Training provided to Stafford Soccer. Set up time will start at 8:00am, with training starting at 8:30am. This will be done in multiple sessions with people rolling through. It will be flexible timing.  Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. If you can only volunteer for a partial time, please let us know. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '101 Hospital Center Blvd, Stafford VA, 22554', 5);
-INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `date`, `startTime`, `endTime`, `description`, `location`, `capacity`) VALUES
-(94, 'Trinity Episcopal Church Training', 'Training', '2025-03-22', '09:30', '11:30', 'Hands-Only CPR &amp; AED Training provided to Trinity Episcopal Church. Set up time will start at 9:30am, with training starting at 10:00am-11:00am. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '825 College Avenue, Fredericksburg, VA 22401', 2),
-(95, 'Herndon Middle School Training', 'Training', '2025-04-23', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '901 Locust Street, Herndon VA 20170', 10),
-(96, 'Herndon Middle School Training', 'Training', '2025-04-24', '06:30', '14:30', 'his is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '901 Locust Street, Herndon VA 20170', 10),
-(97, 'St. Leo the Great Training', 'Training', '2025-04-30', '08:00', '12:00', 'This is a school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3704 Old Lee Hwy, Fairfax VA 22030', 5),
-(98, 'Katherine Johnson Middle School', 'Training', '2025-05-05', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3801 Jermantown Rd, Fairfax, VA 22030', 10),
-(99, 'Katherine Johnson Middle School', 'Training', '2025-05-06', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3801 Jermantown Rd, Fairfax, VA 22030', 10),
-(100, 'Stafford County Sherriff&#039;s Summer Junior Deputy Program Training', 'Training', '2025-06-03', '12:00', '14:00', 'Hands-Only CPR &amp; AED Training provided to Stafford County Sherriff&#039;s Junior Deputy Program. Set up time will start at 12:00pm, with training starting at 12:30pm-1:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '1300 Courthouse Rd, Stafford, VA 22554', 2),
-(101, 'Stafford County Sherriff&#039;s Summer Junior Deputy Program Training', 'Training', '2025-06-10', '12:00', '14:00', 'Hands-Only CPR &amp; AED Training provided to Stafford County Sherriff&#039;s Junior Deputy Program. Set up time will start at 12:00pm, with training starting at 12:30pm-1:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '1300 Courthouse Rd, Stafford, VA 22554', 2),
-(102, 'Volunteer Training Zoom', 'Volunteer', '2025-01-22', '12:00', '13:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
-(103, 'Volunteer Training Zoom', 'Volunteer', '2025-02-03', '13:00', '14:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
-(104, 'Livingston Elementary School Training', 'Training', '2025-01-14', '12:15', '15:30', 'This is a school day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', 'Livingston Elementary School', 5);
+INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startTime`, `endTime`, `description`, `location`, `capacity`) VALUES
+(2, 'Fredericksburg Nationals Concession Stand', 'FredNats', 'volunteer_event', '2023-05-04', '17:00', '22:00', 'You will work in the concession stand. Details to follow.', 'Fred Nats Stadium', 7),
+(3, 'Training at Katherine Middle School', 'Trng KMS', 'volunteer_event', '2023-05-03', '07:20', '15:00', 'ALl day training at middle school.', '123 abc street', 10),
+(4, 'Fredericksburg Nationals Concession Stand', 'FredNats', 'volunteer_event', '2023-05-18', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the FredNats concession stand. Meet other volunteers and supporters of our organization. All while supporting a great cause!                                                                  You must complete the training in order to volunteer.                                                                   Uniform Requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fred Nats Stadium', 10),
+(5, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-06-01', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand!  Meet other volunteers and supporters of our organization all while supporting a great cause!  You must complete the training in order to volunteer.  Uniform requirements:  Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(6, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-06-08', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(7, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-06-29', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(8, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-07-27', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(9, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-08-03', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(10, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-08-17', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(11, 'Fredericksburg Nationals Concession Stand', 'Fred Nats', 'volunteer_event', '2023-08-31', '17:00', '21:30', 'Volunteer with Gwyneth\'s Gift Foundation at the Fredericksburg Nationals concession stand! Meet other volunteers and supporters of our organization all while supporting a great cause! You must complete the training in order to volunteer. Uniform requirements: Khaki or dark navy pants, non slip shoes, and a GGF provided shirt and cap.', 'Fredericksburg Nationals Baseball Stadium', 10),
+(12, 'CPR Training, YMCA Power Scholars Camp', 'CPR Train.', 'volunteer_event', '2023-06-21', '12:30', '15:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for YMCA Power Scholars campers.', 'TBA', 2),
+(13, 'CPR Training, YMCA Power Scholars Camp', 'CPR Train.', 'volunteer_event', '2023-06-26', '12:30', '15:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for YMCA Power Scholars campers.', 'TBA', 2),
+(14, 'CPR Training, Volvo Huber Motors', 'CPR Train.', 'volunteer_event', '2023-07-12', '09:00', '12:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for the team at Volvo Huber Motors.', 'TBA', 2),
+(15, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', 'volunteer_event', '2023-07-13', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
+(16, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', 'volunteer_event', '2023-07-19', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
+(17, 'CPR Training, iDX corporation - Fredericksburg', 'CPR Train.', 'volunteer_event', '2023-07-20', '11:30', '13:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for team members at iDX corporation - Fredericksburg.', 'TBA', 2),
+(18, 'CPR Training, Fredericksburg Pickleball Community', 'CPR Train.', 'volunteer_event', '2023-07-26', '09:00', '11:00', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for members of the Fredericksburg Pickleball community.', 'Fredericksburg Library Downtown', 2),
+(19, 'VDOT Golf Tournament', 'VDOT Golf', 'volunteer_event', '2023-09-08', '07:00', '15:00', 'Golf Tournament to benefit Gwyneth\'s Gift at Meadows Farm Golf Course                                                  Duties include: Registration, Hole Volunteer, Food Volunteer, Raffle Volunteer, Guest Volunteer, Floater, and Golf Cart Volunteers.    Registration opens at 8am. Shotgun at 9am. ALL VOLUNTEERS must be at location by 7am.', '4300 Flat Run Rd, Locust Grove, VA 22508', 15),
+(20, 'Whiskey Business 2023', 'WB EVNT 23', 'volunteer_event', '2023-09-22', '16:00', '23:00', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event. This event takes place at the Old Silk Mill in FXBG.  Duties include: Registration, Silent Auction Volunteer, Food Volunteer, Raffle Volunteer, Guest Volunteer, Floater, and Entertainment Volunteers. Early Access opens at 6pm. General Admission opens at 7pm. ALL VOLUNTEERS must be at location by 4pm.', '1707 Princess Anne St, Fredericksburg, VA 22401', 15),
+(21, 'Whiskey Business 2023 Set Up', 'WB 23 SetUp', 'volunteer_event', '2023-09-21', '09:15', '12:15', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event.  We need volunteers to help set up for the event the day prior. This is a great way to do something great for the community but also a way to network with other philanthropist! The event will take place at the Old Silk Mill in FXBG on Sept. 22. Duties for the setup include: setting up decor, tables, linen, silent auction tables, marketing signs, furniture, centerpieces, etc.', '1707 Princess Anne St, Fredericksburg, VA 22401', 20),
+(22, 'Whiskey Business 2023 Set Up- Event Day', 'WB Setup', 'volunteer_event', '2023-09-22', '09:15', '14:00', 'Whiskey Business is Gwyneth\'s Gift\'s Foundations Signature Event.  We need volunteers to help with any finishing touches that did not get finalized the day prior. THIS IS NOT THE VOLUNTEER ROSTER FOR THE ACTUAL EVENT TIME IN THE EVENING. IF you want to do both, you can you just need to sign up for both. LUNCH will be provided.', '1707 Princess Anne St, Fredericksburg, VA 22401', 10),
+(24, 'CPR Training - Stafford Soccer', 'CPR Train.', 'volunteer_event', '2023-10-24', '17:00', '19:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for Stafford Soccer Teams and Participants.', 'Embrey Mill Fields near the playground, 1600 Mine Rd., Stafford, VA 22554', 3),
+(25, 'GGF Intern Onboarding', 'GGF I.O.', 'volunteer_event', '2023-11-14', '14:30', '16:30', 'Onboarding for our new GGF Intern!', '2217 Princess Anne St #101, Fredericksburg, VA 22401', 1),
+(26, 'GGF Intern Onboarding', 'GGF I.O.', 'volunteer_event', '2023-11-15', '12:30', '14:30', 'Onboarding for our new GGF Intern!', '2217 Princess Anne St #101, Fredericksburg, VA 22401', 1),
+(27, 'Hands-only CPR Training at Hollywood Church of the Brethren', 'CPR Train.', 'volunteer_event', '2023-12-05', '18:00', '19:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for Church members at Hollywood Church of the Brethren.', 'Hollywood Church of the Brethren', 1),
+(28, 'Hands-only CPR Training at Guadelupe Free Clinic - Colonial Beach', 'CPR Train.', 'volunteer_event', '2023-12-12', '13:00', '14:30', 'The Gwyneth\'s Gift Foundation will lead CPR and AED Training for the Guadelupe Free Clinic - Colonial Beach.', 'Guadelupe Free Clinic', 1),
+(29, 'Mom Prom 2024 Diamonds Are A Girls Best Friend - Set Up ONLY', 'Mom Prom', 'volunteer_event', '2024-04-13', '09:00', '13:00', 'Mom Prom is one of our biggest fundraisers of the year. We need volunteers to assist with the set-up of the event from 9-1:00pm. Volunteer needs are: moving tables, helping with decor, helping set-up the raffle and silent auction area.  Contact number (540) 681-1632', 'Stevenson Ridge, : 6901 Meeting Street, Spotsylvania, Virginia 22553', 15),
+(30, 'Training at Longfellow Middle School', 'Training', 'volunteer_event', '2024-02-20', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 5),
+(31, 'Training at Longfellow Middle School', 'Training', 'volunteer_event', '2024-02-21', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 5),
+(32, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-04-25', '17:30', '22:00', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more volunteers we have the more opportunities we have to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 12),
+(33, 'Mother\'s Day Run - Participate NOT VOLUNTEER. 1 Mile, 5K, and 10K to benefit Gwyneth\'s Gift Foundation', 'Run/Walk', 'volunteer_event', '2024-05-12', '07:30', '11:00', 'A race/walk to benefit Gwyneth\'s Gift Foundation through Bishop Events. To register for the race, go to: https://register.chronotrack.com/r/74986', 'Old Mill Park (2410 Caroline Street, Fredericksburg, VA 22401)', 10),
+(35, 'Training: Dare Day at Pratt Park', 'Training', 'volunteer_event', '2024-05-21', '07:30', '12:00', 'Dare Day is for Stafford County Public School 5th graders to come and visit with all the vendors/booths. It is to celebrate the success and commitment of their young 5th graders who had pledged to stay drug and violence free.  The staff of GGF will have 2 booths set up to train any of the children that come by on Hands-Only CPR.  We need volunteers to help with registration, student crowd control in within the GGF Booths, and an extra set off hands for set up and breakdown. THERE IS NO TRAINING REQUIRED TO ASSIST WITH THIS EVENT.', 'Pratt Park - Meet in the soccer field. We are booth 26 in the map attached. You will see our blue tent with our logo.', 5),
+(36, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-05-23', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to review the Volunteer Acknowledgment Form watch a short training presentation. Upon completion, please print out the certificate and email it to veronica@gwynethsgift.org. For questions contact the POC: Veronica at (540)693-0465.                                                            Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(37, 'HeartStrides', 'Walk', 'volunteer_event', '2024-05-28', '12:00', '13:00', 'Every month our organization is hosting a walk around the Canal Path starting at the Old Mill Park. This is a 3 mile walk around the path to promote Health &amp; Wellness. Stay tuned on our social media channels to find out of any special talks or guests. We will meet at the Corner of Germania St. and Caroline Street. If you sign up to walk below, it will allow us to know how many walkers to anticiapate!', 'Old Mill Park (2410 Caroline Street, Fredericksburg, VA 22401)', 15),
+(38, 'Training: Katherine John Middle School - NOVA', 'Training', 'volunteer_event', '2024-05-29', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '3801 Jermantown Rd, Fairfax, VA 22030', 3),
+(39, 'Training: Katherine John Middle School - NOVA', 'Training', 'volunteer_event', '2024-05-30', '07:30', '14:30', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '3801 Jermantown Rd, Fairfax, VA 22030', 3),
+(40, 'Awareness Event: Rouse Rally Pickleball Tournament at UMW Tennis Center', 'Awareness', 'volunteer_event', '2024-06-01', '10:00', '15:00', 'The annual Rouse Rally will be taking place at the UMW Tennis Center. This full day long activity will benefit Gwyneth\'s Gift Foundation. We need a few volunteers to help set up, registration, and breakdown.', '1200 Hanover St, Fredericksburg, VA 22401', 3),
+(42, 'Training: Junior Deputies Stafford County', 'Training', 'volunteer_event', '2024-06-04', '12:00', '13:00', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '1225 Courthouse Rd., Stafford VA 22554', 3),
+(43, 'Training: Junior Deputies Stafford County', 'Training', 'volunteer_event', '2024-06-11', '12:00', '13:00', 'The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', '1225 Courthouse Rd., Stafford VA 22554', 3),
+(44, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-06-06', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(45, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-06-20', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(46, 'Training: Widewater Elementary', 'Training', 'volunteer_event', '2024-06-27', '12:30', '14:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown. You will need to bring a state ID when you check into the school.', '101 Den Rich Rd, Stafford, VA 22554 ·', 3),
+(47, 'Training: Conway Elementary School', 'Training', 'volunteer_event', '2024-07-03', '12:30', '14:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown. You will need to bring a state ID when you check into the school.', '105 Primmer House Rd, Fredericksburg, VA 22405', 3),
+(48, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-07-11', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(49, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-07-25', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(50, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-08-08', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(51, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-08-15', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 9),
+(52, 'FredNats Concession Stand -VOLUNTEERS NEEDED', 'FredNats', 'volunteer_event', '2024-09-05', '17:30', '21:30', 'Gwyneth\'s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday\'s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause.  We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent.                          Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate.                                                              Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 7),
+(53, 'Whiskey Business: Northern Nights - SET UP HELP ONLY', 'WBSetUp', 'volunteer_event', '2024-09-20', '09:00', '14:00', 'We will need assistance with final set up hours before the event in the evening. Ensuring that all decor and set up is complete. Any last minute items are finalized. Help with any pick-ups from vendors in the area. More information will be emailed to anyone that signs up as the weeks leading up to the event    *******IMPORTANT****** if you would like to volunteer for the evening of the event, you will need to sign up for that as well. Go Back to the calendar and sign up for the job you are interested. Slots are limited.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
+(54, 'Whiskey Business: Northern Nights - VIP and GENERAL ADMISSION REGISTRATION VOLUNTEERS ONLY', 'WBRegistrat', 'volunteer_event', '2024-09-20', '16:00', '22:00', 'We will need 5 that are 21 and over volunteers to assist with welcoming and checking off guest from our lists of attendees. Details are still being determined. You will need to be there by 4:00 pm to receive all the important details to date. Our VIP guests will arrive 15 minutes prior to the 6:00 PM start time. It will be imperative that we are all set up and ready to go. Snacks and dinner will be available for all volunteers.  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
+(55, 'Whiskey Business: Northern Nights - Silent Auction Volunteers ONLY', 'WBSilentAuc', 'volunteer_event', '2024-09-20', '17:00', '22:00', 'We will need 6  volunteers  that are 21 and over that will be comfortable with engaging with guests throughout the night looking at the silent auction items. You will help encourage our guests to bid on the items displayed. You will help collect information and secure payment for any of the winning bidders. If you love sales this is the job for you!  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 6),
+(56, 'Whiskey Business: Northern Nights - VIP/ Copper Room Area ONLY', 'WBVip', 'volunteer_event', '2024-09-20', '17:00', '22:00', 'We will need 2 volunteers that are 21 and over that will be comfortable with engaging with guests throughout the night, ensuring that the vendors in these areas have what they need.  There will be a meeting in-person/ZOOM that will be required for you to attend to ensure you are prepared for that night. Attire is business attire with comfortable shoes. You must be able to stand for long periods of time.', '1707 Princess Anne Street Fredericksburg, VA 22401', 2),
+(57, 'Whiskey Business: Northern Nights -Set UP ONLY', 'WBSetUp', 'volunteer_event', '2024-09-19', '09:00', '16:00', 'We will need volunteers throughout the day helping set up the venue. This will include heavy lifting, decor, staging, help with pick ups, sorting, and other misc. task. We welcome volunteers to come for a couple of hours of the full day. We appreciate all the help, and we will provide snacks and lunch.', '1707 Princess Anne Street Fredericksburg, VA 22401', 20),
+(58, 'Caroline County Fire &amp;amp; Rescue Camp Training', 'Training', 'volunteer_event', '2024-07-10', '09:30', '11:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '9344 Stonewall Jackson Road, Woodford, VA 22580', 2),
+(59, 'Golf Tournament at Meadows Farms', 'Golf Tourn.', 'volunteer_event', '2024-10-21', '08:00', '16:00', 'Various volunteer opportunities are available at this full day fundraising event. Positions/duties include: Running the registration table, selling raffle tickets and mulligans, supervising hole competitions, coordinating awards ceremony, set-up/breakdown of breakfast and lunch, and general floating assistance. Food will be provided. All volunteers must attend (either in-person or virtually) a volunteer prep meeting before the event.', '4300 Flat Run Rd, Locust Grove, VA 22508', 15),
+(60, 'Pure Barre FXBG', 'Training', 'volunteer_event', '2024-11-03', '18:30', '20:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '1460 Central Park Blvd Ste 102, Fredericksburg, VA 22401', 1),
+(61, 'Answer Church of God in Christ', 'Training', 'volunteer_event', '2024-11-04', '09:30', '11:30', 'The staff of GGF will need assistance with set up, ensuring students are engaged and properly following instructions, and breakdown.', '104 Caisson Rd, Fredericksburg, VA 22405', 1),
+(63, 'Office Help - Ryan Lawrence (ONLY)', 'Honor', 'volunteer_event', '2024-09-09', '14:00', '15:30', 'Ryan is earning credit/hours for volunteering at our offices for his honor program at UMW', '2217 Princess Anne St.', 1),
+(64, 'National Night Out', 'Ntl Night', 'volunteer_event', '2024-10-01', '16:30', '20:00', 'National Night Out is a FREE community event were anyone can come and engage with local law enforcement and discover other organizations that provide services to the community. We will be providing information on our CPR and AED training and training anyone that would like to receive this training at the event. We NEED TWO (2) volunteers to help us get people registered while we train.', 'Stafford Market Place by the Home Goods Parking Lot', 2),
+(65, 'Zion Presbyterian', 'Training', 'volunteer_event', '2024-11-16', '10:00', '11:30', 'Hands-Only CPR &amp;amp;amp;amp; Training at Zion. Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '410 Deacon Rd. Fredericksburg, VA 22405', 2),
+(66, 'FREE CPR &amp; AED Training', 'CPR', 'volunteer_event', '2024-11-30', '10:00', '13:00', 'Free CERTIFIED CPR &amp; AED training. This includes infant training. Class will begin promptly at 10:00 AM and end at 12:00 PM. Water and light snacks will be provided. You MUST Register to be in attendance.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 20),
+(67, 'THANK YOU PARTY', 'PARTY', 'volunteer_event', '2024-12-05', '17:00', '19:00', 'This is our annual Thank You Party where we get the opportunity to say thank you to our volunteers, donors, and continued supporters. We will have festive heavy apps and drinks, award one volunteer for their outstanding service for the year, award for outstanding organization, and much more! Let us say thank you to all of you for that you do for our organization. Have the opportunity to network with other influential leaders in the community and meet your other fellow volunteers. Let&#039;s grow our network together.                              YOU MUST RSVP by Dec 1st. You can add your name below or text me at 562-400-2637.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 20),
+(68, 'Hope4Horses Training', 'Training', 'volunteer_event', '2025-02-02', '12:00', '15:00', 'Hands-Only CPR Training at our Gwyneth&#039;s Gift office. Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '2217 Princess Anne St. Suite 101, Fredericksburg, VA 22401', 3),
+(69, 'Keller Williams Training in Fairfax VA', 'Training', 'volunteer_event', '2025-02-08', '10:00', '12:00', 'Hands-Only CPR Training provided to guest of Keller Williams Realty in Fairfax, VA. Location is TBD. Set up time will start at 9:30am, with training starting at 10am-11pm. We will be out by 12pm. Snacks will be provided.  Volunteers will be needed to set up manikins and kneeling pads. The duration of the training will be an hour. We will need volunteers to also help break down.                                                      What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', 'TBD - Will be in Fairfax, VA (You can drive up by yourself or you can drive up with one of the GGF Staff)', 2),
+(70, 'Middle School Training: Longfellow Middle School', 'Training', 'volunteer_event', '2025-02-19', '07:30', '14:30', 'This training will be in Northern Virigina at Longfellow Middle School. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 10),
+(71, 'Middle School Training: Longfellow Middle School', 'Training', 'volunteer_event', '2025-02-20', '07:30', '14:30', 'This training will be in Northern Virigina at Longfellow Middle School. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sesions. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.', 'Longfellow Middle School 2000 Westmoreland St, Falls Church, VA 22043', 10),
+(72, 'Keller Williams Training in Alexandria', 'Training', 'volunteer_event', '2025-02-22', '10:00', '12:00', 'The staff of GGF will need assistance with ensuring individuals are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. This training will be in DC.', 'TBD - Will be in Alexandria (You can drive up by yourself or you can drive up with one of the GGF Staff)', 2),
+(73, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-04-10', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(74, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-04-24', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(75, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-05-08', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(76, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-05-22', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(77, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-06-05', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(78, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-06-26', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(79, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-07-24', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(80, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-08-14', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(81, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-08-21', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(82, 'Fredericksburg Nationals', 'FredNats', 'volunteer_event', '2025-09-04', '17:30', '21:30', 'Gwyneth&#039;s Gift Foundation needs volunteers to help us with a concession stand at the FredNats Home Games on Thursday&#039;s. We run the concession stand which includes ringing up food and beverages. A percentage of the food sales and tips goes back to our organization. This is a fantastic fundraiser for us that is fun while supporting our cause. We need at least 6 volunteers for each game. The more we have the more opportunities to have shifts. You can be 16 and over with parent consent. Volunteers will have to take a training via video and complete a volunteer acknowledgement form to participate. Attire: Khaki pants or shorts, nonslip/comfortable shoes, a GGF shirt (We will provide), and a GGF Hat (We will provide).', 'FredNats Baseball Stadium, 42 Jackie Robinson Way, FXBG, VA 22401', 8),
+(83, 'Covenant Funeral Home', 'Training', 'volunteer_event', '2025-02-06', '09:30', '11:00', 'Hands-Only CPR &amp; Training. Volunteers will be needed to set up manikins and kneeling pads. A volunteer will be stationed at the registration tables upon sign in and make sure throughout the training that every participant has registered. Volunteers may be asked to take pictures, help with hand placements during CPR and anything else that is needed. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '10830 Patriot Highway, Fredericksburg, VA, 22408', 2),
+(84, 'Keller Williams Training in DC', 'Training', 'volunteer_event', '2025-08-23', '10:00', '12:00', 'Hands-Only CPR &amp; Training. Volunteers will be needed to set up manikins and kneeling pads. A volunteer will be stationed at the registration tables upon sign in and make sure throughout the training that every participant has registered. Volunteers may be asked to take pictures, help with hand placements during CPR and anything else that is needed. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '500 N St SW, Washington, DC 20024 (You can drive yourself or ride with us)', 2),
+(85, '4th Annual Intern Expo (FXBG Convention Center)', 'Awareness', 'volunteer_event', '2025-02-05', '08:30', '14:30', '4th Annual Intern Expo where high school students from Stafford and Spotsylvania county schools come in and visit vendor booths to learn about opportunities to intern. We use this event to set up a booth and provide information about the programs we have and highlight our Scholarship opportunities. We need 1-2 volunteers throughout the 9-2pm time frame to help with set up, signing in visitors to the booth, pictures, and breakdown.  Lunch provided.', '2371 Carl D Silver Pkwy', 3),
+(86, 'Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1', 'Mom Prom', 'volunteer_event', '2025-04-12', '08:30', '12:00', 'Assist with preparing the event space by arranging tables, chairs, decorations, and signage. Help set up areas/stations, organize materials, be a runner of errands, and ensure everything is ready for the event.', '2371 Carl D Silver Pkwy', 7),
+(87, 'Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 2', 'Mom Prom', 'volunteer_event', '2025-04-12', '12:00', '17:00', 'Assist with preparing the event space by arranging tables, chairs, decorations, and signage. Help set up areas/stations, organize materials, be a runner of errands, and ensure everything is ready for the event.', '2371 Carl D Silver Pkwy', 7),
+(88, 'Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS', 'Mom Prom', 'volunteer_event', '2025-04-12', '16:30', '23:30', 'We will need volunteers to serve as greeters, registration table, guest assistance, silent auction/raffles, vendor assistance, floater volunteers, throughout the entire event. In addition, we will need these volunteers to assist with the breakdown at the end of event. Consisting of: taking down decorations, packing materials, and ensuring venue is left in excellent condition.', '2371 Carl D Silver Pkwy', 15),
+(89, 'Salon 730 Training', 'Training', 'volunteer_event', '2025-01-24', '16:00', '18:00', 'Hands-Only CPR Training provided to Salon 730 Employees. Location is 730 Kenmore Ave. FXBG, VA 22401. Set up time will start at 4:00pm, with training starting at 4:30pm-5:30pm. We will be out by 6:00pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training. The duration of the training will be an hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt. No Open toed shoes.', '730 Kenmore Avenue, Fredericksburg VA, 22401', 2),
+(90, 'ATI High School Training', 'Training', 'volunteer_event', '2025-01-28', '10:15', '12:30', 'This is a new school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. We will have set up starting at 10:15am with first training starting at 10:50am and ending at 12pm with clean up after. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you don&#039;t already have one.. No Open toed shoes.', '121 University Blvd, Fredericksburg, VA 22406', 5),
+(91, 'Holy Family Catholic School Training', 'Training', 'volunteer_event', '2025-01-29', '08:30', '10:30', 'This is a school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. We will also need help with set up, break down and taking pictures during the training. Set up starts at 8:30am, training is from 9am-10am and breakdown is after.   You will need to bring a state ID when you check into the school. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. . No Open toed shoes.', '14160 Ferndale Rd, Dale City, VA 22193', 8);
+INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startTime`, `endTime`, `description`, `location`, `capacity`) VALUES
+(92, 'Cubscouts 242 Training', 'Training', 'volunteer_event', '2025-01-27', '18:00', '19:30', 'Hands-Only CPR Training provided to Aquia Harbor Cubscouts Troop 242. Set up time will start at 6:00pm, with training starting at 6:30pm-7:00pm. We will be out by 7:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training. The duration of the training will be a half hour. We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '204 Bow Cove, Stafford, VA 22554', 2),
+(93, 'Stafford Soccer Training', 'Training', 'volunteer_event', '2025-03-01', '08:00', '12:00', 'Hands-Only CPR &amp; AED Training provided to Stafford Soccer. Set up time will start at 8:00am, with training starting at 8:30am. This will be done in multiple sessions with people rolling through. It will be flexible timing.  Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. If you can only volunteer for a partial time, please let us know. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '101 Hospital Center Blvd, Stafford VA, 22554', 5),
+(94, 'Trinity Episcopal Church Training', 'Training', 'volunteer_event', '2025-03-22', '09:30', '11:30', 'Hands-Only CPR &amp; AED Training provided to Trinity Episcopal Church. Set up time will start at 9:30am, with training starting at 10:00am-11:00am. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '825 College Avenue, Fredericksburg, VA 22401', 2),
+(95, 'Herndon Middle School Training', 'Training', 'volunteer_event', '2025-04-23', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '901 Locust Street, Herndon VA 20170', 10),
+(96, 'Herndon Middle School Training', 'Training', 'volunteer_event', '2025-04-24', '06:30', '14:30', 'his is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '901 Locust Street, Herndon VA 20170', 10),
+(97, 'St. Leo the Great Training', 'Training', 'volunteer_event', '2025-04-30', '08:00', '12:00', 'This is a school training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3704 Old Lee Hwy, Fairfax VA 22030', 5),
+(98, 'Katherine Johnson Middle School', 'Training', 'volunteer_event', '2025-05-05', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3801 Jermantown Rd, Fairfax, VA 22030', 10),
+(99, 'Katherine Johnson Middle School', 'Training', 'volunteer_event', '2025-05-06', '06:30', '14:30', 'This is a school 2 day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '3801 Jermantown Rd, Fairfax, VA 22030', 10),
+(100, 'Stafford County Sherriff&#039;s Summer Junior Deputy Program Training', 'Training', 'volunteer_event', '2025-06-03', '12:00', '14:00', 'Hands-Only CPR &amp; AED Training provided to Stafford County Sherriff&#039;s Junior Deputy Program. Set up time will start at 12:00pm, with training starting at 12:30pm-1:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '1300 Courthouse Rd, Stafford, VA 22554', 2),
+(101, 'Stafford County Sherriff&#039;s Summer Junior Deputy Program Training', 'Training', 'volunteer_event', '2025-06-10', '12:00', '14:00', 'Hands-Only CPR &amp; AED Training provided to Stafford County Sherriff&#039;s Junior Deputy Program. Set up time will start at 12:00pm, with training starting at 12:30pm-1:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '1300 Courthouse Rd, Stafford, VA 22554', 2),
+(102, 'Volunteer Training Zoom', 'Volunteer', 'volunteer_event', '2025-01-22', '12:00', '13:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
+(103, 'Volunteer Training Zoom', 'Volunteer', 'volunteer_event', '2025-02-03', '13:00', '14:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
+(104, 'Livingston Elementary School Training', 'Training', 'volunteer_event', '2025-01-14', '12:15', '15:30', 'This is a school day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', 'Livingston Elementary School', 5);
 
 -- --------------------------------------------------------
 
@@ -381,6 +384,21 @@ CREATE TABLE `dbexternaldocuments` (
 INSERT INTO `dbexternaldocuments` (`id`, `title`, `url`) VALUES
 (1, 'fakeDocument', 'https://www.google.com'),
 (3, 'anotherFakeDocument', 'https://www.google.com/search?q=cheese&sca_esv=bd9db4ef3d63f955&sxsrf=AHTn8zpCHEwkj6-VDXo4_oQwQ10Vdxlz9g%3A1741970303743&source=hp&ei=f1vUZ5b4KtOf5NoP6df4gAk&iflsig=ACkRmUkAAAAAZ9Rpj7r-a0vd54dbbVSSjhbLRUsc8Vbo&ved=0ahUKEwjWs6WJgYqMAxXTD1kFHekrHpAQ4dUDCBo&uact=5&oq=cheese&gs_lp=Egdnd3Mtd2l6IgZjaGVlc2UyDhAuGIAEGLEDGNEDGMcBMggQABiABBixAzILEAAYgAQYkgMYigUyCxAAGIAEGJIDGIoFMgsQLhiABBjHARivATIIEAAYgAQYsQMyCxAuGIAEGMcBGK8BMggQLhiABBixAzIIEAAYgAQYyQMyCBAuGIAEGLEDSLIKUJAFWOAJcAF4AJABAJgBZqABwgOqAQM0LjG4AQPIAQD4AQGYAgagAvoDqAIKwgINECMY8AUYJxjJAhjqAsICBxAjGCcY6gLCAhEQLhiABBixAxjRAxiDARjHAcICBRAuGIAEwgILEAAYgAQYsQMYgwHCAg4QLhiABBixAxiDARiKBcICChAjGIAEGCcYigXCAgsQLhiABBixAxiDAcICBRAAGIAEmAMd8QWhhUDShXeG2JIHAzQuMqAHslA&sclient=gws-wiz');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbforums`
+--
+
+DROP TABLE IF EXISTS `dbforums`;
+CREATE TABLE `dbforums` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `timePosted` datetime NOT NULL DEFAULT current_timestamp(),
+  `poster` varchar(256) DEFAULT NULL,
+  `url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -9384,7 +9402,8 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 (8990, 'vmsroot', 'tiffany@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8991, 'vmsroot', 'veronica@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8996, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: william knight!', 'william knight has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-16-19:44', 1),
-(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0);
+(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0),
+(8998, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: test2 test2!', 'test2 test2 has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-24-17:52', 0);
 
 -- --------------------------------------------------------
 
@@ -9585,6 +9604,8 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('tbanks@healthygenerations.org', '2024-11-12', 'portland', 'TaMara', 'Banks', '460 Lendall Ln', 'Fredericksburg', 'VA', '22405', '5404199638', 'work', '', '', '1972-08-28', 'tbanks@healthygenerations.org', 'XXL', '1', '1', '1', 'Chandler Hines', '(540) 498-07', 'Daughter', 'anytime', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$DMLpaxz8uYcShK1Qqw3oOOKh7eiDJyaQn/22l5IS2i.2ssQLmn2gC', '', '', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tcstabisz@gmail.com', '2023-08-28', 'portland', 'Chelsea', 'Tabisz', '3 Masters Dr', 'Stafford', 'VA', '22554', '6185306076', 'cellphone', '', '', '1984-07-20', 'tcstabisz@gmail.com', 'S', '1', '', '1', 'Shelley Waite', '7035981892', 'Mom', 'There is no best time', 'phone', '', '', '', '', '', 'Singing, people skills, love of GGF ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$vNfg9s2HR31NKEwRyucm.O6UYdiCeOd5slsT3nO1eZAjAVK5m.Swi', '', '', '', '', '', '', '', '', '18:00', '23:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('test@test.com', '2025-02-26', 'portland', 'Test', 'Test', '123 test street', 'testCity', 'VA', '22742', '1234567890', 'cellphone', '', '', '2001-01-01', 'test@test.com', 'S', '', '', '', 'testPerson', '(111) 222-33', 'moral support', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$2RrlZpDRF2dpdP0MYl8fG.BE1l5LIjKh2MW9rM2VDokj0tJnF1tpi', '15:00', '16:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('test@test.org', '2025-03-24', 'portland', 'test2', 'test2', 'asdf', 'asdf', 'VA', '22222', '5555555555', 'cellphone', '', '', '2002-02-20', 'test@test.org', 'S', '', '', '1', '', '5555555555', '', '', 'text', '', '', '', '', '', '', '', 'boardmember', 'Active', '', '', '', '', '$2y$10$8R0kAwFFfB.rfpuYeVXamevKANzso3.W12pRe/Lql5L6YHr60pb4e', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', 'asdf', 'asdf', 'VA', '22222', 'yes', 'owner'),
+('test@test.test', '2025-03-23', 'portland', 'test', 'test', 'yes', 'england', 'VA', '22222', '5555555555', 'cellphone', '', '', '2002-02-20', 'test@test.test', 'S', '1', '1', '1', '', '5555555555', '', '', 'text', '', '', '', '', '', '', '', 'boardmember', 'Active', '', '', '', '', '$2y$10$MaXYx2ClSbUdhTyvJTryMOp5yxuYcGhi17zDE5UTNq1/GIf5QRPnu', '00:00', '15:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '', ''),
 ('texascampos@yahoo.com', '2023-07-07', 'portland', 'Jennifer', 'CHESTNUT', '176 ellington drive', 'Fredericksburg', 'VA', '22405', '5406451098', 'cellphone', '', '', '1975-09-03', 'texascampos@yahoo.com', 'XL', '', '', '1', 'Philip Chestnut', '5406450353', 'Spouse', '3pm', 'text', '', '', '', '', '', 'Retired flight attendant...I can deal with a lot of situations  ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$Or0jeV3NvC33icLGhHz.eOLF/.9EPpjuRt4YA64Hr.Ea8UQ65o6ee', '', '', '', '', '', '', '13:00', '15:00', '', '', '13:00', '15:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('thehines@gmail.com', '2023-08-01', 'portland', 'Stephanie', 'Hine', '315 Cooper Street', 'Spotsylvania', 'VA', '22551', '5402204104', 'cellphone', '', '', '1980-03-20', 'thehines@gmail.com', 'XL', '1', '', '1', 'Lyman Hine', '5404196188', 'Spouse', 'Evenings', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$m.apR9cN9xlWUYpxKgo6seNCz77y3q71ufQ/LgBB9ob5UgBPChttq', '12:00', '20:00', '17:00', '20:00', '', '', '17:00', '20:00', '', '', '', '', '10:00', '16:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tiffany@gwynethsgift.org', '2024-11-05', 'portland', 'Tiffany', 'Steel', '1900 Charles Street', 'Fredericksburg', 'VA', '22401', '7033819995', 'work', '', '', '1996-06-27', 'tiffany@gwynethsgift.org', 'L', '1', '1', '1', 'Brandon Sisco', '(804) 572-72', 'Fiance', 'Days', 'text', '', '', '', '', '', '', '', 'superadmin', 'Active', '', '', '', 'Administrative', '$2y$10$Uwr.rLWRYv78MrDHtxcrbuw5YXzqlHMS3os0.oCO7WFE2FsJzzbNG', '12:00', '14:00', '', '', '', '', '17:00', '20:00', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9636,6 +9657,13 @@ ALTER TABLE `dbexternaldocuments`
   ADD UNIQUE KEY `title` (`title`);
 
 --
+-- Indexes for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `poster` (`poster`);
+
+--
 -- Indexes for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -9670,10 +9698,16 @@ ALTER TABLE `dbexternaldocuments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8998;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8999;
 
 --
 -- Constraints for dumped tables
@@ -9691,6 +9725,480 @@ ALTER TABLE `dbeventmedia`
 ALTER TABLE `dbeventvolunteers`
   ADD CONSTRAINT `FKeventID` FOREIGN KEY (`eventID`) REFERENCES `dbevents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FKpersonID` FOREIGN KEY (`userID`) REFERENCES `dbpersons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD CONSTRAINT `dbforums_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `dbpersons` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+--
+-- Database: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__bookmark`
+--
+
+DROP TABLE IF EXISTS `pma__bookmark`;
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__central_columns`
+--
+
+DROP TABLE IF EXISTS `pma__central_columns`;
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__column_info`
+--
+
+DROP TABLE IF EXISTS `pma__column_info`;
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__designer_settings`
+--
+
+DROP TABLE IF EXISTS `pma__designer_settings`;
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__export_templates`
+--
+
+DROP TABLE IF EXISTS `pma__export_templates`;
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__favorite`
+--
+
+DROP TABLE IF EXISTS `pma__favorite`;
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__history`
+--
+
+DROP TABLE IF EXISTS `pma__history`;
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__navigationhiding`
+--
+
+DROP TABLE IF EXISTS `pma__navigationhiding`;
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__pdf_pages`
+--
+
+DROP TABLE IF EXISTS `pma__pdf_pages`;
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__recent`
+--
+
+DROP TABLE IF EXISTS `pma__recent`;
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Dumping data for table `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"gwynethdb\",\"table\":\"dbeventmedia\"},{\"db\":\"gwynethdb\",\"table\":\"dbevents\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__relation`
+--
+
+DROP TABLE IF EXISTS `pma__relation`;
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__savedsearches`
+--
+
+DROP TABLE IF EXISTS `pma__savedsearches`;
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_coords`
+--
+
+DROP TABLE IF EXISTS `pma__table_coords`;
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_info`
+--
+
+DROP TABLE IF EXISTS `pma__table_info`;
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_uiprefs`
+--
+
+DROP TABLE IF EXISTS `pma__table_uiprefs`;
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__tracking`
+--
+
+DROP TABLE IF EXISTS `pma__tracking`;
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__userconfig`
+--
+
+DROP TABLE IF EXISTS `pma__userconfig`;
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Dumping data for table `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2025-03-24 21:29:26', '{\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":389}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__usergroups`
+--
+
+DROP TABLE IF EXISTS `pma__usergroups`;
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__users`
+--
+
+DROP TABLE IF EXISTS `pma__users`;
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indexes for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indexes for table `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indexes for table `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indexes for table `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indexes for table `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indexes for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indexes for table `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indexes for table `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indexes for table `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indexes for table `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Database: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

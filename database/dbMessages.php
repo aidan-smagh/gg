@@ -120,6 +120,10 @@ function system_message_all_volunteers($title, $body) {
     return message_all_users_of_types('vmsroot', ['"volunteer"'], $title, $body);
 }
 
+function system_message_all_board_members($title, $body) {
+    return message_all_users_of_types('vmsroot', ['"boardmember"'], $title, $body);
+}
+
 function message_all_admins($from, $title, $body) {
     return message_all_users_of_types($from, ['"admin"', '"superadmin"'], $title, $body);
 }

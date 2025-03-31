@@ -312,8 +312,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </fieldset>
     <?php endif ?>
-    
+    <fieldset>
+    <label>Skills</label>
+    <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
+    <label>Additional Information</label>
+    <p><?php if ($user->get_computer()) echo 'Owns a computer';
+        else echo 'Does NOT own a computer'; ?></p>
+    <p><?php if ($user->get_camera()) echo 'Owns a camera';
+        else echo 'Does NOT own a camera'; ?></p>
+    <p><?php if ($user->get_transportation()) echo 'Has access to transportation';
+        else echo 'Does NOT have access to transportation'; ?></p>
+    <label>T-Shirt Size</label>
+    <p>
+        <?php
+        $sizes = [
+            null => '',
+            '' => '',
+            'S' => 'Small',
+            'M' => 'Medium',
+            'L' => 'Large',
+            'XL' => 'Extra Large',
+            'XXL' => '2X Large',
+        ];
+        $size = $sizes[$user->get_shirt_size()];
+        echo $size;
+        ?>
+    </p>
+</fieldset>
+<?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>    
+    <fieldset>
+        <legend>Notes</legend>
+        <label>Notes</label>
+        <p>
+            <?php echo $user->get_notes()?>
+        </p>
+    </fieldset>
+<?php endif ?>
 
+<a class="button" href="editVolunteerNotes.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Notes About A Volunteer</a>
+    
 <?php if (!$isBoardMember): ?>
     <a class="button" href="editProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
 <?php else: ?>
