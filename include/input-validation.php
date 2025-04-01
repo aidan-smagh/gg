@@ -188,4 +188,14 @@
         return filter_var($url, FILTER_VALIDATE_URL);
     }
 
+    /* function to retrun a an array of all the state abbreviatons, for ease of error checking */
+    function getStateAbbreviations() {
+        return [
+            'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA',
+            'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+            'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM',
+            'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX',
+            'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'
+        ];
+    }
 ?>

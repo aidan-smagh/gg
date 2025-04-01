@@ -351,7 +351,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <a class="button" href="editVolunteerNotes.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Notes About A Volunteer</a>
     
-<a class="button" href="editProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
+<?php if (!$isBoardMember): ?>
+    <a class="button" href="editProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
+<?php else: ?>
+    <a class="button" href="editBoardMemberProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
+<?php endif ?>
+
 <?php if ($id != $userID): ?>
     <?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>
         <a class="button" href="resetPassword.php?id=<?php echo htmlspecialchars($_GET['id']) ?>">Reset Password</a>

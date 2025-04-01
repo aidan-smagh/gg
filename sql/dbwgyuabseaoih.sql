@@ -50,7 +50,6 @@ INSERT INTO `checkintime` (`UserId`, `EventId`, `first_name`, `last_name`, `chec
 -- Table structure for table `dbeventmedia`
 --
 
-DROP TABLE IF EXISTS `dbeventmedia`;
 CREATE TABLE `dbeventmedia` (
   `id` int(11) NOT NULL,
   `eventID` int(11) NOT NULL,
@@ -90,12 +89,11 @@ INSERT INTO `dbeventmedia` (`id`, `eventID`, `url`, `type`, `format`, `descripti
 -- Table structure for table `dbevents`
 --
 
-DROP TABLE IF EXISTS `dbevents`;
 CREATE TABLE `dbevents` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `abbrevName` text NOT NULL,
-  `eventType` text NOT NULL DEFAULT 'volunteer_event',
+  `eventType` varchar(256) NOT NULL DEFAULT 'volunteer_event',
   `date` char(10) NOT NULL,
   `startTime` char(5) NOT NULL,
   `endTime` char(5) NOT NULL,
@@ -219,7 +217,6 @@ INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startT
 -- Table structure for table `dbeventvolunteers`
 --
 
-DROP TABLE IF EXISTS `dbeventvolunteers`;
 CREATE TABLE `dbeventvolunteers` (
   `eventID` int(11) NOT NULL,
   `userID` varchar(256) NOT NULL
@@ -865,7 +862,6 @@ INSERT INTO `dbeventvolunteers` (`eventID`, `userID`) VALUES
 -- Table structure for table `dbexternaldocuments`
 --
 
-DROP TABLE IF EXISTS `dbexternaldocuments`;
 CREATE TABLE `dbexternaldocuments` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -883,10 +879,23 @@ INSERT INTO `dbexternaldocuments` (`id`, `title`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dbforums`
+--
+
+CREATE TABLE `dbforums` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `timePosted` datetime NOT NULL DEFAULT current_timestamp(),
+  `poster` varchar(256) DEFAULT NULL,
+  `url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `dbmessages`
 --
 
-DROP TABLE IF EXISTS `dbmessages`;
 CREATE TABLE `dbmessages` (
   `id` int(11) NOT NULL,
   `senderID` varchar(256) NOT NULL,
@@ -9880,23 +9889,7 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 (8990, 'vmsroot', 'tiffany@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8991, 'vmsroot', 'veronica@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8996, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: william knight!', 'william knight has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-16-19:44', 1),
-(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0),
-(8998, 'vmsroot', 'erinm@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(8999, 'vmsroot', 'jenniferpolack@gmail.com', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9000, 'vmsroot', 'kdobyns@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9001, 'vmsroot', 'polack@umw.edu', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9002, 'vmsroot', 'rwarren@mail.umw.edu', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9003, 'vmsroot', 'sfrick@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9004, 'vmsroot', 'tiffany@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9005, 'vmsroot', 'veronica@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Mom Prom 2025 (FXBG Expo Center) - SET UP HELP Group 1](event: 86) event from 8:30 AM to 12:00 PM on Saturday, April 12, 2025.', '2025-03-27-11:57', 0),
-(9007, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: John T!', 'John T has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-27-18:28', 0),
-(9008, 'vmsroot', 'fake@fakeemail.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [Board](event: 105) board meeting from 12:00 PM to 1:00 PM on Friday, March 28, 2025 was added.', '2025-03-28-12:55', 0),
-(9009, 'vmsroot', 'william@fake.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [Board](event: 105) board meeting from 12:00 PM to 1:00 PM on Friday, March 28, 2025 was added.', '2025-03-28-12:55', 0),
-(9010, 'vmsroot', 'fake@fakeemail.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [Joseph Tsibu-Gyan](event: 106) board meeting from 2:00 PM to 3:00 PM on Friday, March 28, 2025 was added.', '2025-03-28-13:27', 0),
-(9011, 'vmsroot', 'william@fake.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [Joseph Tsibu-Gyan](event: 106) board meeting from 2:00 PM to 3:00 PM on Friday, March 28, 2025 was added.', '2025-03-28-13:27', 0),
-(9012, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: Joseph T!', 'Joseph T has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-28-13:37', 0),
-(9013, 'vmsroot', 'fake@fakeemail.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [12](event: 107) board meeting from 12:00 PM to 1:00 PM on Monday, March 31, 2025 was added.', '2025-03-30-14:04', 0),
-(9015, 'vmsroot', 'william@fake.com', 'A new board meeting was created.', 'Hello,\r\n\r\nThe [12](event: 107) board meeting from 12:00 PM to 1:00 PM on Monday, March 31, 2025 was added.', '2025-03-30-14:04', 0);
+(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0);
 
 -- --------------------------------------------------------
 
@@ -9904,7 +9897,6 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 -- Table structure for table `dbpersons`
 --
 
-DROP TABLE IF EXISTS `dbpersons`;
 CREATE TABLE `dbpersons` (
   `id` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `start_date` text DEFAULT NULL,
@@ -10101,6 +10093,8 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('tbanks@healthygenerations.org', '2024-11-12', 'portland', 'TaMara', 'Banks', '460 Lendall Ln', 'Fredericksburg', 'VA', '22405', '5404199638', 'work', '', '', '1972-08-28', 'tbanks@healthygenerations.org', 'XXL', '1', '1', '1', 'Chandler Hines', '(540) 498-07', 'Daughter', 'anytime', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$DMLpaxz8uYcShK1Qqw3oOOKh7eiDJyaQn/22l5IS2i.2ssQLmn2gC', '', '', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '09:00', '13:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tcstabisz@gmail.com', '2023-08-28', 'portland', 'Chelsea', 'Tabisz', '3 Masters Dr', 'Stafford', 'VA', '22554', '6185306076', 'cellphone', '', '', '1984-07-20', 'tcstabisz@gmail.com', 'S', '1', '', '1', 'Shelley Waite', '7035981892', 'Mom', 'There is no best time', 'phone', '', '', '', '', '', 'Singing, people skills, love of GGF ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$vNfg9s2HR31NKEwRyucm.O6UYdiCeOd5slsT3nO1eZAjAVK5m.Swi', '', '', '', '', '', '', '', '', '18:00', '23:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('test@test.com', '2025-02-26', 'portland', 'Test', 'Test', '123 test street', 'testCity', 'VA', '22742', '1234567890', 'cellphone', '', '', '2001-01-01', 'test@test.com', 'S', '', '', '', 'testPerson', '(111) 222-33', 'moral support', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$2RrlZpDRF2dpdP0MYl8fG.BE1l5LIjKh2MW9rM2VDokj0tJnF1tpi', '15:00', '16:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('test@test.org', '2025-03-24', 'portland', 'test2', 'test2', 'asdf', 'asdf', 'VA', '22222', '5555555555', 'cellphone', '', '', '2002-02-20', 'test@test.org', 'S', '', '', '1', '', '5555555555', '', '', 'text', '', '', '', '', '', '', '', 'boardmember', 'Active', '', '', '', '', '$2y$10$8R0kAwFFfB.rfpuYeVXamevKANzso3.W12pRe/Lql5L6YHr60pb4e', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', 'asdf', 'asdf', 'VA', '22222', 'yes', 'owner'),
+('test@test.test', '2025-03-23', 'portland', 'test', 'test', 'yes', 'england', 'VA', '22222', '5555555555', 'cellphone', '', '', '2002-02-20', 'test@test.test', 'S', '1', '1', '1', '', '5555555555', '', '', 'text', '', '', '', '', '', '', '', 'boardmember', 'Active', '', '', '', '', '$2y$10$MaXYx2ClSbUdhTyvJTryMOp5yxuYcGhi17zDE5UTNq1/GIf5QRPnu', '00:00', '15:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '', '', '', ''),
 ('texascampos@yahoo.com', '2023-07-07', 'portland', 'Jennifer', 'CHESTNUT', '176 ellington drive', 'Fredericksburg', 'VA', '22405', '5406451098', 'cellphone', '', '', '1975-09-03', 'texascampos@yahoo.com', 'XL', '', '', '1', 'Philip Chestnut', '5406450353', 'Spouse', '3pm', 'text', '', '', '', '', '', 'Retired flight attendant...I can deal with a lot of situations  ????', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$Or0jeV3NvC33icLGhHz.eOLF/.9EPpjuRt4YA64Hr.Ea8UQ65o6ee', '', '', '', '', '', '', '13:00', '15:00', '', '', '13:00', '15:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('thehines@gmail.com', '2023-08-01', 'portland', 'Stephanie', 'Hine', '315 Cooper Street', 'Spotsylvania', 'VA', '22551', '5402204104', 'cellphone', '', '', '1980-03-20', 'thehines@gmail.com', 'XL', '1', '', '1', 'Lyman Hine', '5404196188', 'Spouse', 'Evenings', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$m.apR9cN9xlWUYpxKgo6seNCz77y3q71ufQ/LgBB9ob5UgBPChttq', '12:00', '20:00', '17:00', '20:00', '', '', '17:00', '20:00', '', '', '', '', '10:00', '16:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('tiffany@gwynethsgift.org', '2024-11-05', 'portland', 'Tiffany', 'Steel', '1900 Charles Street', 'Fredericksburg', 'VA', '22401', '7033819995', 'work', '', '', '1996-06-27', 'tiffany@gwynethsgift.org', 'L', '1', '1', '1', 'Brandon Sisco', '(804) 572-72', 'Fiance', 'Days', 'text', '', '', '', '', '', '', '', 'superadmin', 'Active', '', '', '', 'Administrative', '$2y$10$Uwr.rLWRYv78MrDHtxcrbuw5YXzqlHMS3os0.oCO7WFE2FsJzzbNG', '12:00', '14:00', '', '', '', '', '17:00', '20:00', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -10152,6 +10146,13 @@ ALTER TABLE `dbexternaldocuments`
   ADD UNIQUE KEY `title` (`title`);
 
 --
+-- Indexes for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `poster` (`poster`);
+
+--
 -- Indexes for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -10186,10 +10187,16 @@ ALTER TABLE `dbexternaldocuments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9016;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8998;
 
 --
 -- Constraints for dumped tables
@@ -10207,6 +10214,12 @@ ALTER TABLE `dbeventmedia`
 ALTER TABLE `dbeventvolunteers`
   ADD CONSTRAINT `FKeventID` FOREIGN KEY (`eventID`) REFERENCES `dbevents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FKpersonID` FOREIGN KEY (`userID`) REFERENCES `dbpersons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD CONSTRAINT `dbforums_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `dbpersons` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

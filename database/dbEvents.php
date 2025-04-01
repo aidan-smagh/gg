@@ -88,9 +88,27 @@ function retrieve_event($id) {
 //    mysqli_close($con);
     return $theEvent;
 }
-
+/*
 function get_event($id) {
     return retrieve_event($id);
+}*/
+
+function getUpcomingEvents() {
+    /*global $conn;*/
+    $conn = connect();
+
+    $query = "SELECT * FROM dbEvents WHERE date >= CURDATE() ORDER BY date ASC";
+    $result = mysqli_query($conn, $query);
+
+    $events = [];
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $events[] = $row;
+        }
+    }
+
+    return $events;
 }
 
 // not in use, may be useful for future iterations in changing how events are edited (i.e. change the remove and create new event process)
