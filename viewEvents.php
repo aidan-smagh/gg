@@ -16,6 +16,7 @@ $events = getUpcomingEvents();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php require_once('universal.inc') ?>
     <link rel="stylesheet" href="css/messages.css">
@@ -32,6 +33,7 @@ $events = getUpcomingEvents();
         }
     </style>
 </head>
+
 <body>
     <?php require_once('header.php') ?>
     <h1>Upcoming Events</h1>
@@ -40,7 +42,7 @@ $events = getUpcomingEvents();
         <?php if (count($events) > 0): ?>
             <?php foreach ($events as $event): ?>
                 <?php
-                    $formattedDate = date("l, F j", strtotime($event['date']));
+                $formattedDate = date("l, F j", strtotime($event['date']));
                 ?>
                 <div class="message-body">
                     <div class="sender-time-line" style="flex-direction: column;">
@@ -57,4 +59,5 @@ $events = getUpcomingEvents();
         <?php endif; ?>
     </main>
 </body>
+
 </html>
