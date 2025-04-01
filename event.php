@@ -9,7 +9,7 @@ if (!isset($_SESSION['access_level']) || $_SESSION['access_level'] < 1) {
     die();
 }
 require_once('include/input-validation.php');
-require_once('./database/dbCheckInOut.php');
+require_once('./database/dbCheckIn.php');
 $args = sanitize($_GET);
 if (isset($args["id"])) {
     $id = $args["id"];
@@ -34,7 +34,7 @@ if ($event_info == NULL || ($event_info['eventType'] == 'board_meeting' && $_SES
 }
 
 include_once('database/dbPersons.php');
-include_once('database/dbCheckInOut.php');
+include_once('database/dbCheckIn.php');
 $access_level = $_SESSION['access_level'];
 $user = retrieve_person($_SESSION['_id']);
 $active = $user->get_status() == 'Active';
