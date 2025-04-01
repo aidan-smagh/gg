@@ -23,6 +23,20 @@
         <link rel="stylesheet" href="css/messages.css"></link>
         <script src="js/messages.js"></script>
         <title>Gwyneth's Gift VMS | Inbox</title>
+        <script>
+            // Function to toggle select/deselect all checkboxes
+            document.addEventListener("DOMContentLoaded", function() {
+                const selectAllCheckbox = document.getElementById("select-all");
+                if(selectAllCheckbox){
+                    selectAllCheckbox.addEventListener("change", function() {
+                        const checkboxes = document.querySelectorAll("input[type='checkbox'][name='message_ids[]']");
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.checked = selectAllCheckbox.checked;
+                        });
+                    });
+                }
+            });
+        </script>
     </head>
     <body>
         <?php require_once('header.php') ?>
@@ -40,7 +54,10 @@
                         <table class="general">
                             <thead>
                                 <tr>
-                                    <th>Select</th>
+                                    <th>
+                                        <input type="checkbox" id="select-all" style="display:inline-block;>
+                                        <label for="select-all"> Select All</label>
+                                    </th>
                                     <th style="width:1px">From</th>
                                     <th>Title</th>
                                     <th style="width:1px">Received</th>
