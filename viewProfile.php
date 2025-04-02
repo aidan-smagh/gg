@@ -31,6 +31,15 @@ if ($isAdmin && isset($_GET['id'])) {
     $id = $userID;
 }
 require_once('database/dbPersons.php');
+require_once('database/dbTrainings.php');
+$con = connect();
+
+$query = "SELECT dbTrainings.name AS training, dbPersons.id AS volunteer_name
+          FROM dbPersons
+          JOIN dbpersonstrainings ON dbPersons.id = dbpersonstrainings.id
+          JOIN dbTrainings ON dbpersonstrainings.training_name = dbTrainings.name";
+
+$result = mysqli_query($con, $query);
 if (isset($_GET['removePic'])) {
     if ($_GET['removePic'] === 'true') {
         remove_profile_picture($id);
@@ -285,8 +294,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Saturdays</label>
             <p><?php echo time24hTo12h($user->get_saturday_availability_start()) . ' - ' . time24hTo12h($user->get_saturday_availability_end()) ?></p>
         <?php endif ?>
-        <label>Skills</label>
+        <!--<label>Skills</label>
         <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
+        -->
         <label>Additional Information</label>
         <p><?php if ($user->get_computer()) echo 'Owns a computer';
             else echo 'Does NOT own a computer'; ?></p>
@@ -312,32 +322,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </fieldset>
     <?php endif ?>
-    <fieldset>
+<fieldset>
+    <legend>Miscellaneous</legend>
     <label>Skills</label>
     <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
-    <label>Additional Information</label>
-    <p><?php if ($user->get_computer()) echo 'Owns a computer';
-        else echo 'Does NOT own a computer'; ?></p>
-    <p><?php if ($user->get_camera()) echo 'Owns a camera';
-        else echo 'Does NOT own a camera'; ?></p>
-    <p><?php if ($user->get_transportation()) echo 'Has access to transportation';
-        else echo 'Does NOT have access to transportation'; ?></p>
-    <label>T-Shirt Size</label>
-    <p>
-        <?php
-        $sizes = [
-            null => '',
-            '' => '',
-            'S' => 'Small',
-            'M' => 'Medium',
-            'L' => 'Large',
-            'XL' => 'Extra Large',
-            'XXL' => '2X Large',
-        ];
-        $size = $sizes[$user->get_shirt_size()];
-        echo $size;
-        ?>
-    </p>
+    <label>Training</label>
+    <?php 
+        $training = get_trainings_for($id);
+        
+    ?>
+    <p><?php foreach($training as $trainings) {
+        echo $trainings . "<br>";
+    } ?></p>
+
 </fieldset>
 <?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>    
     <fieldset>
@@ -350,6 +347,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif ?>
 
 <a class="button" href="editVolunteerNotes.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Notes About A Volunteer</a>
+<a class="button" href="addTraining.php<?php if ($id != $userID) echo '?id=' . $id ?>">Add Completed Training</a>
     
 <?php if (!$isBoardMember): ?>
     <a class="button" href="editProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
