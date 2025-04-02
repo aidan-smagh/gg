@@ -26,7 +26,7 @@ function update_trainings($id, $updatedTraining) {
     //check if the combination is already in the database
     $checkquery = 'SELECT COUNT(*) FROM dbpersonstrainings WHERE id = ? AND training_name = ?';
     $stmt = mysqli_prepare($con, $checkquery);
-    mysqli_stmt_bind_param($stmt, "is", $id, $updatedTraining);
+    mysqli_stmt_bind_param($stmt, "ss", $id, $updatedTraining);
     $result = mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $count);
     mysqli_stmt_fetch($stmt);
@@ -36,7 +36,6 @@ function update_trainings($id, $updatedTraining) {
         mysqli_close($con);
         return false;
     }
-    var_dump($id);
     $query = 'INSERT INTO dbpersonstrainings (id, training_name) VALUES (?, ?)';
     $stmt = mysqli_prepare($con, $query);
     mysqli_stmt_bind_param($stmt, "ss", $id, $updatedTraining);
@@ -51,7 +50,7 @@ function get_trainings_for($id) {
     $con = connect();
     $query = 'SELECT training_name FROM dbpersonstrainings WHERE id = ?';
     $stmt = mysqli_prepare($con, $query);
-    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_bind_param($stmt, "s", $id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $trainingName);
 
