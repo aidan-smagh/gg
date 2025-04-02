@@ -329,6 +329,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label>Training</label>
     <?php 
         $training = get_trainings_for($id);
+        
     ?>
     <p><?php foreach($training as $trainings) {
         echo $trainings . "<br>";
