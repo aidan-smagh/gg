@@ -24,7 +24,140 @@ include_once(dirname(__FILE__).'/../domain/Person.php');
 function add_person($person) {
     if (!$person instanceof Person)
         die("Error: add_person type mismatch");
+    // connect to db
     $con=connect();
+    // prepare sql safe query to see if person already exists
+    $query = $con->prepare("SELECT id FROM dbPersons WHERE id = ?");
+    $id = $person->get_id();
+    $query->bind_param("s", $id);
+    // execute query and store its result
+    $query->execute();
+    $query->store_result();
+    // if the query return is empty, the person doesn't exist
+    if ($query->num_rows === 0) {
+        $insert = $con->prepare("INSERT INTO dbPersons (
+            id, start_date, venue, first_name, last_name, address, city, state, zip,
+            phone1, phone1type, phone2, phone2type, birthday, email, shirt_size,
+            computer, camera, transportation, contact_name, contact_num, relation,
+            contact_time, cMethod, position, credithours, howdidyouhear, commitment,
+            motivation, specialties, convictions, type, status, availability, schedule,
+            hours, notes, password, sundays_start, sundays_end,
+            mondays_start, mondays_end, tuesdays_start,
+            tuesdays_end, wednesdays_start, wednesdays_end,
+            thursdays_start, thursdays_end, fridays_start,
+            fridays_end, saturdays_start, saturdays_end,
+            profile_pic, force_password_change, gender, prefix, mailing_address,
+            mailing_city, mailing_state, mailing_zip, affiliated_org, title_at_affiliated_org
+            ) values (?,?,?,?,?,?,?,?,?,?,
+                      ?,?,?,?,?,?,?,?,?,?,
+                      ?,?,?,?,?,?,?,?,?,?,
+                      ?,?,?,?,?,?,?,?,?,?,
+                      ?,?,?,?,?,?,?,?,?,?,
+                      ?,?,?,?,?,?,?,?,?,?,
+                      ?,?
+        )");
+            // if prepare statement failed, exit and return the error
+            if (!$insert) {
+                die("Prepare statement failed ". $con->error);
+            }
+            // collect all of the variables to use in the bind_param
+            // id was already collected for the query
+            $start_date = $person->get_start_date();
+            $venue = $person->get_venue();
+            $first_name = $person->get_first_name();
+            $last_name = $person->get_last_name();
+            $address = $person->get_address();
+            $city = $person->get_city();
+            $state = $person->get_state();
+            $zip = $person->get_zip();
+            $phone1 = $person->get_phone1();
+            $phone1type = $person->get_phone1type();
+            
+            $phone2 = $person->get_phone2();
+            $phone2type = $person->get_phone2type();
+            $birthday = $person->get_birthday();
+            $email = $person->get_email();
+            $shirt_size = $person->get_shirt_size();
+            $computer = $person->get_computer();
+            $camera = $person->get_camera();
+            $transportation = $person->get_transportation();
+            $contact_name = $person->get_contact_name();
+            $contact_num = $person->get_contact_num();
+            
+            $relation = $person->get_relation();
+            $contact_time = $person->get_contact_time();
+            $cMethod = $person->get_cMethod();
+            $position = $person->get_position();
+            $credithours = $person->get_credithours();
+            $howdidyouhear = $person->get_howdidyouhear();
+            $commitment = $person->get_commitment();
+            $motivation = $person->get_motivation();
+            $specialties = $person->get_specialties();
+            $convictions = $person->get_convictions();
+            
+            $type = implode(',', $person->get_type());
+            $status = $person->get_status();
+            $availability = implode(',', $person->get_availability());
+            $schedule = implode(',', $person->get_schedule());
+            $hours = implode(',', $person->get_hours());
+            $notes = $person->get_notes();
+            $password = $person->get_password();
+            $sundays_start = $person->get_sunday_availability_start();
+            $sundays_end = $person->get_sunday_availability_end();
+            $mondays_start = $person->get_monday_availability_start();
+            
+            $mondays_end = $person->get_monday_availability_end();
+            $tuesdays_start = $person->get_tuesday_availability_start();
+            $tuesdays_end = $person->get_tuesday_availability_end();
+            $wednesdays_start = $person->get_wednesday_availability_start();
+            $wednesdays_end = $person->get_wednesday_availability_end();
+            $thursdays_start = $person->get_thursday_availability_start();
+            $thursdays_end = $person->get_thursday_availability_end();
+            $fridays_start = $person->get_friday_availability_start();
+            $fridays_end = $person->get_friday_availability_end();
+            $saturdays_start = $person->get_saturday_availability_start();
+            
+            $saturdays_end = $person->get_saturday_availability_end();
+            $profile_pic = $person->get_profile_pic();
+            $force_password_change = $person->is_password_change_required();
+            $gender = $person->get_gender();
+            $prefix = $person->get_prefix();
+            $mailing_address = $person->get_mailing_address();
+            $mailing_city = $person->get_mailing_city();
+            $mailing_state = $person->get_mailing_state();
+            $mailing_zip = $person->get_mailing_zip();
+            $affiliated_org = $person->get_affiliated_org();
+            
+            $title_at_affiliated_org = $person->get_title_at_affiliated_org();
+
+            // there are 62 fields, #1 - #53 are strings, #54 is int, the rest are strings
+            $insert->bind_param("sssssssssssssssssssssssssssssssssssssssssssssssssssssissssssss",
+            $id, $start_date, $venue, $first_name, $last_name, $address, $city, $state, $zip, $phone1, 
+            $phone1type, $phone2, $phone2type, $birthday, $email, $shirt_size, $computer, $camera, $transportation, $contact_name,
+            $contact_num, $relation, $contact_time, $cMethod, $position, $credithours, $howdidyouhear, $commitment, $motivation, $specialties,
+            $convictions, $type, $status, $availability, $schedule, $hours, $notes, $password, $sundays_start, $sundays_end,
+            $mondays_start, $mondays_end, $tuesdays_start, $tuesdays_end, $wednesdays_start, $wednesdays_end, $thursdays_start, $thursdays_end, $fridays_start, $fridays_end, 
+            $saturdays_start, $saturdays_end, $profile_pic, $force_password_change, $gender, $prefix, $mailing_address, $mailing_city, $mailing_state, 
+            $mailing_zip, $affiliated_org, $title_at_affiliated_org
+        );
+
+        // execute the insert statement, see if it worked, and return error if it didnt
+        if (!$insert->execute()) {
+            die("Insert execution failed " . $insert->error);
+        }
+
+        // success. close the insertion statement and the db connection
+        $insert->close();
+        $con->close();
+        return true;
+    }
+    //failure. close the query and db connection
+    $query->close();
+    $con->close();
+    return false;
+
+
+    /*
     $query = "SELECT * FROM dbPersons WHERE id = '" . $person->get_id() . "'";
     $result = mysqli_query($con,$query);
     //if there's no entry for this id, add it
@@ -83,7 +216,7 @@ function add_person($person) {
             $person->get_saturday_availability_start() . '","' .
             $person->get_saturday_availability_end() . '","' .
             $person->get_profile_pic() . '","' .
-            $person->is_password_change_required() . '","' .
+            $person->is_password_change_required() . '","' .     54
             $person->get_gender() . '","' . 
             $person->get_prefix() . '","' .
             $person->get_mailing_address() . '","' .
@@ -99,6 +232,7 @@ function add_person($person) {
     }
     mysqli_close($con);
     return false;
+    */
 }
 
 /*
