@@ -50,7 +50,7 @@
             $required = array(
                 'first-name', 'last-name', 'birthdate',
                 'address', 'city', 'state', 'zip', 
-                'email', 'phone',
+                'email', 'phone', 'econtactPhone', 'econtactName',
                 'start-date', 'password',
             );
             $errors = false;

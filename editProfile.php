@@ -12,6 +12,23 @@
 
     require_once('include/input-validation.php');
 
+    /*
+    // Allows for user type check 
+    require_once('domain/Person.php');
+    require_once('database/dbPersons.php');
+
+    // Determing whose profile is being edited 
+    if ($_SESSION['access_level'] >= 2 && isset($_GET['id'])) {
+        // admin is editing someone else's profile 
+        $id = $_GET['id'];
+    } else {
+        // person is editing their own profile 
+        $id = $_SESSION['_id'];
+    }
+    
+    $person = retrieve_person($id);
+    */
+
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["modify_access"]) && isset($_POST["id"])) {
         $id = $_POST['id'];
         header("Location: /gwyneth/modifyUserRole.php?id=$id");
