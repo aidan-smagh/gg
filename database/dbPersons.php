@@ -61,7 +61,8 @@ function add_person($person) {
                 die("Prepare statement failed ". $con->error);
             }
             // collect all of the variables to use in the bind_param
-            // id was already collected for the query
+            // id was already collected in previous query
+            // broken into blocks of 10 for ease of counting
             $start_date = $person->get_start_date();
             $venue = $person->get_venue();
             $first_name = $person->get_first_name();
@@ -155,84 +156,6 @@ function add_person($person) {
     $query->close();
     $con->close();
     return false;
-
-
-    /*
-    $query = "SELECT * FROM dbPersons WHERE id = '" . $person->get_id() . "'";
-    $result = mysqli_query($con,$query);
-    //if there's no entry for this id, add it
-    if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_query($con,'INSERT INTO dbPersons VALUES("' .
-            $person->get_id() . '","' .
-            $person->get_start_date() . '","' .
-            $person->get_venue() . '","' .
-            $person->get_first_name() . '","' .
-            $person->get_last_name() . '","' .
-            $person->get_address() . '","' .
-            $person->get_city() . '","' .
-            $person->get_state() . '","' .
-            $person->get_zip() . '","' .
-            $person->get_phone1() . '","' .
-            $person->get_phone1type() . '","' .
-            $person->get_phone2() . '","' .
-            $person->get_phone2type() . '","' .
-            $person->get_birthday() . '","' .
-            $person->get_email() . '","' .
-            $person->get_shirt_size() . '","' .
-            $person->get_computer() . '","' .
-            $person->get_camera() . '","' .
-            $person->get_transportation() . '","' .
-            $person->get_contact_name() . '","' .
-            $person->get_contact_num() . '","' .
-            $person->get_relation() . '","' .
-            $person->get_contact_time() . '","' .
-            $person->get_cMethod() . '","' . 
-            $person->get_position() . '","' . 
-            $person->get_credithours() . '","' . 
-            $person->get_howdidyouhear() . '","' . 
-            $person->get_commitment() . '","' . 
-            $person->get_motivation() . '","' . 
-            $person->get_specialties() . '","' . 
-            $person->get_convictions() . '","' . 
-            implode(',', $person->get_type()) . '","' .
-            $person->get_status() . '","' .
-            implode(',', $person->get_availability()) . '","' .
-            implode(',', $person->get_schedule()) . '","' .
-            implode(',', $person->get_hours()) . '","' .
-            $person->get_notes() . '","' .
-            $person->get_password() . '","' .
-            $person->get_sunday_availability_start() . '","' .
-            $person->get_sunday_availability_end() . '","' .
-            $person->get_monday_availability_start() . '","' .
-            $person->get_monday_availability_end() . '","' .
-            $person->get_tuesday_availability_start() . '","' .
-            $person->get_tuesday_availability_end() . '","' .
-            $person->get_wednesday_availability_start() . '","' .
-            $person->get_wednesday_availability_end() . '","' .
-            $person->get_thursday_availability_start() . '","' .
-            $person->get_thursday_availability_end() . '","' .
-            $person->get_friday_availability_start() . '","' .
-            $person->get_friday_availability_end() . '","' .
-            $person->get_saturday_availability_start() . '","' .
-            $person->get_saturday_availability_end() . '","' .
-            $person->get_profile_pic() . '","' .
-            $person->is_password_change_required() . '","' .     54
-            $person->get_gender() . '","' . 
-            $person->get_prefix() . '","' .
-            $person->get_mailing_address() . '","' .
-            $person->get_mailing_city() . '","' .
-            $person->get_mailing_state() . '","' .
-            $person->get_mailing_zip() . '","' .
-            $person->get_affiliated_org() . '","' .
-            $person->get_title_at_affiliated_org() . 
-            '");'            
-        );							
-        mysqli_close($con);
-        return true;
-    }
-    mysqli_close($con);
-    return false;
-    */
 }
 
 /*
@@ -688,29 +611,53 @@ function get_logged_hours($from, $to, $name_from, $name_to, $venue) {
         return $result;
     }
 
-    function update_board_member_profile(
-        $id,
-        $first, $last, $prefix, $gender, $dateOfBirth, $shirtSize, $startDate, 
-        $address, $city, $state, $zipcode, 
-        $mailingAddress, $mailingCity, $mailingState, $mailingZip,
-        $affiliatedOrg, $titleAtAffiliatedOrg, 
-        $email, $phone, $phoneType, $phone2, $phone2Type, $contactWhen, $contactMethod, 
-        $econtactName, $econtactPhone, $econtactRelation
-    ) {
-        $query = "update dbPersons set 
-            first_name='$first', last_name='$last', prefix='$prefix', gender='$gender', birthday='$dateOfBirth', shirt_size='$shirtSize', start_date='$startDate',
-            address='$address', city='$city', state='$state', zip='$zipcode', 
-            mailing_address='$mailingAddress', mailing_city='$mailingCity', mailing_state='$mailingState', mailing_zip='$mailingZip',
-            affiliated_org='$affiliatedOrg', title_at_affiliated_org='$titleAtAffiliatedOrg', 
-            email='$email', phone1='$phone', phone1type='$phoneType', phone2='$phone2', phone2type='$phone2Type', contact_time='$contactWhen', cMethod='$contactMethod',
-            contact_name='$econtactName', contact_num='$econtactPhone', relation='$econtactRelation'
-            where id='$id'";
-        $connection = connect();
-        $result = mysqli_query($connection, $query);
-        mysqli_commit($connection);
-        mysqli_close($connection);
-        return $result;
+/* function to update an existing board member profile */
+function update_board_member_profile(
+    $id,
+    $first, $last, $prefix, $gender, $dateOfBirth, $shirtSize, $startDate, 
+    $address, $city, $state, $zipcode, 
+    $mailingAddress, $mailingCity, $mailingState, $mailingZip,
+    $affiliatedOrg, $titleAtAffiliatedOrg, 
+    $email, $phone, $phoneType, $phone2, $phone2Type, $contactWhen, $contactMethod, 
+    $econtactName, $econtactPhone, $econtactRelation
+) {
+    // build sql safe update query
+    $query = "update dbPersons set 
+        first_name= ?, last_name= ?, prefix= ?, gender= ?, birthday= ?, shirt_size= ?, start_date= ?,
+        address= ?, city= ?, state= ?, zip= ?, 
+        mailing_address= ?, mailing_city= ?, mailing_state= ?, mailing_zip= ?,
+        affiliated_org= ?, title_at_affiliated_org= ?, 
+        email= ?, phone1= ?, phone1type= ?, phone2= ?, phone2type= ?, contact_time= ?, cMethod= ?,
+        contact_name= ?, contact_num= ?, relation= ?
+        where id= ?";
+
+    // connect to db
+    $con = connect();
+    // prepare the query to fill with parameters
+    $stmt = mysqli_prepare($con, $query);
+    // if $stmt is false, prepare statement failed, so return any errors
+    if (!$stmt) {
+        die("Prepare statement failed: " . mysqli_error($con));
     }
+    // bind all parameters to the update statement
+    mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssssssssss", 
+        $first, $last, $prefix, $gender, $dateOfBirth, $shirtSize, $startDate,
+        $address, $city, $state, $zipcode,
+        $mailingAddress, $mailingCity, $mailingState, $mailingZip,
+        $affiliatedOrg, $titleAtAffiliatedOrg,
+        $email, $phone, $phoneType, $phone2, $phone2Type, 
+        $contactWhen, $contactMethod,
+        $econtactName, $econtactPhone, $econtactRelation,
+        $id
+    );
+    // execute the update statement and store the result
+    $result = mysqli_stmt_execute($stmt);
+    // close the statement and the db connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($con);
+
+    return $result;
+}
 
 
     /**
