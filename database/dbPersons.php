@@ -211,35 +211,67 @@ function remove_person($id) {
  */
 
 function retrieve_person($id) {
+    //connect to db
     $con=connect();
-    $query = "SELECT * FROM dbPersons WHERE id = '" . $id . "'";
-    $result = mysqli_query($con,$query);
-    if (mysqli_num_rows($result) !== 1) {
-        mysqli_close($con);
+    //sql safe query to retrieve a person by id
+    $query = $con->prepare("SELECT * FROM dbPersons WHERE id = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+
+    // bind parameters, execute query, store result
+    $query->bind_param("s", $id);
+    $query->execute();
+    $result = $query->get_result();
+
+    // if the result doesn't return 1 person's data, return false
+    if ($result->num_rows !== 1) {
+        $query->close();
+        $con->close();
         return false;
     }
-    $result_row = mysqli_fetch_assoc($result);
-    // var_dump($result_row);
-    $thePerson = make_a_person($result_row);
-//    mysqli_close($con);
-    return $thePerson;
+
+    // fetch the result row (person's data) 
+    $result_row = $result->fetch_assoc();
+    //convert the data to a person object
+    $person = make_a_person($result_row);
+
+    //close everything and return
+    $query->close();
+    $con->close();
+    return $person;
 }
+
 // Name is first concat with last name. Example 'James Jones'
 // return array of Persons.
 function retrieve_persons_by_name ($name) {
 	$persons = array();
 	if (!isset($name) || $name == "" || $name == null) return $persons;
 	$con=connect();
-	$name = explode(" ", $name);
-	$first_name = $name[0];
-	$last_name = $name[1];
-    $query = "SELECT * FROM dbPersons WHERE first_name = '" . $first_name . "' AND last_name = '". $last_name ."'";
-    $result = mysqli_query($con,$query);
-    while ($result_row = mysqli_fetch_assoc($result)) {
-        $the_person = make_a_person($result_row);
-        $persons[] = $the_person;
+
+    // separate name into first and last
+    $separated_name = explode(" ", $name);
+    $first_name = $separated_name[0];
+    $last_name = $separated_name[1];
+
+    // prepare sql safe query to retrieve persons by first and last name
+    $query = $con->prepare("SELECT * FROM dbPersons WHERE first_name = ? AND last_name = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
     }
-    return $persons;	
+    // bind parameters to prepared query
+    $query->bind_param("ss", $first_name, $last_name);
+    // execute query and store result
+    $query->execute();
+    $result = $query->get_result();
+
+    // collect each matching result and convert to Person object
+    while ($result_row = $result->fetch_assoc()) {
+        //create the person
+        $thePerson =make_a_person($result_row);
+        //append the person to the $persons array
+        $persons[] = $thePerson;
+    }
 }
 
 function change_password($id, $newPass) {
