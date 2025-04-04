@@ -738,20 +738,43 @@ function update_person_profile(
     $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
     $saturdaysStart, $saturdaysEnd, $gender
 ) {
-    $query = "update dbPersons set 
-        first_name='$first', last_name='$last', birthday='$dateOfBirth', address='$address', city='$city', zip='$zipcode',
-        email='$email', phone1='$phone', phone1type='$phoneType', contact_time='$contactWhen', cMethod='$contactMethod',
-        contact_name='$econtactName', contact_num='$econtactPhone', relation='$econtactRelation',
-        specialties='$skills', computer='$hasComputer', camera='$hasCamera', transportation='$hasTransportation', shirt_size='$shirtSize',
-        sundays_start='$sundaysStart', sundays_end='$sundaysEnd', mondays_start='$mondaysStart', mondays_end='$mondaysEnd',
-        tuesdays_start='$tuesdaysStart', tuesdays_end='$tuesdaysEnd', wednesdays_start='$wednesdaysStart', wednesdays_end='$wednesdaysEnd',
-        thursdays_start='$thursdaysStart', thursdays_end='$thursdaysEnd', fridays_start='$fridaysStart', fridays_end='$fridaysEnd',
-        saturdays_start='$saturdaysStart', saturdays_end='$saturdaysEnd', gender='$gender'
-        where id='$id'";
-    $connection = connect();
-    $result = mysqli_query($connection, $query);
-    mysqli_commit($connection);
-    mysqli_close($connection);
+    $con = connect();
+    // prepare sql safe update query
+    // 36 parameters given
+    $query = $con->prepare("UPDATE dbPersons SET
+        first_name= ?, last_name= ?, birthday= ?, address= ?, city= ?, state = ?, zip= ?,
+        email= ?, phone1= ?, phone1type= ?, contact_time= ?, cMethod= ?,
+        contact_name= ?, contact_num= ?, relation= ?,
+        specialties= ?, computer= ?, camera= ?, transportation= ?, shirt_size= ?,
+        sundays_start= ?, sundays_end= ?, mondays_start= ?, mondays_end= ?,
+        tuesdays_start= ?, tuesdays_end= ?, wednesdays_start= ?, wednesdays_end= ?,
+        thursdays_start= ?, thursdays_end= ?, fridays_start= ?, fridays_end= ?,
+        saturdays_start= ?, saturdays_end= ?, gender= ?
+        WHERE id= ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameters to the update statement
+    $query->bind_param("ssssssssssssssssssssssssssssssssssss", 
+        $first, $last, $dateOfBirth, $address, $city, $state, $zipcode,
+        $email, $phone, $phoneType, $contactWhen, $contactMethod,
+        $econtactName, $econtactPhone, $econtactRelation,
+        $skills, $hasComputer, $hasCamera, $hasTransportation, $shirtSize,
+        $sundaysStart, $sundaysEnd, 
+        $mondaysStart, $mondaysEnd,
+        $tuesdaysStart, $tuesdaysEnd,
+        $wednesdaysStart, $wednesdaysEnd,
+        $thursdaysStart, $thursdaysEnd,
+        $fridaysStart, $fridaysEnd,
+        $saturdaysStart, $saturdaysEnd,
+        $gender,
+        $id
+    );
+    // execute the update statement and store the result
+    $result = $query->execute();
+    // close everything and return result
+    $query->close();
+    $con->close();
     return $result;
 }
 
