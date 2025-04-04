@@ -393,6 +393,8 @@ function update_start_date($id, $new_start_date) {
 /*
  * @return all rows from dbPersons table ordered by last name
  * if none there, return false
+ * 
+ * WAITING TO MAKE SQL SAFE UNTIL SOMONE TELLS ME THEYRE DONE WITH IT
  */
 
 function getall_dbPersons($name_from, $name_to, $venue) {
@@ -418,7 +420,8 @@ function getall_dbPersons($name_from, $name_to, $venue) {
 
 /*
   @return all rows from dbPersons
-
+  NOT CURRENTLY USED ANYWHERE 4/4/2025
+  NOT SQL SAFE!!!!!!!!!!!
 */
 function getall_volunteers() {
     $con=connect();
@@ -438,7 +441,8 @@ function getall_volunteers() {
     return $thePersons;
 }
 
-
+/* NOT CURRENTLY USED ANYWHERE 4/4/2025
+   NOT SQL SAFE!!!!!!!!!!!!!!!!! */
 function getall_volunteer_names() {
 	$con=connect();
     $type = "volunteer";
@@ -528,7 +532,8 @@ function make_a_person($result_row) {
                 );   
     return $thePerson;
 }
-
+/* NOT CURRENTLY USED ANYWHERE 4/4/2025
+   NOT SQL SAFE!!!!!!!!!!!! */
 function getall_names($status, $type, $venue) {
     $con=connect();
     $result = mysqli_query($con,"SELECT id,first_name,last_name,type FROM dbPersons " .
@@ -539,6 +544,8 @@ function getall_names($status, $type, $venue) {
 
 /*
  * @return all active people of type $t or subs from dbPersons table ordered by last name
+ * NOT CURRENTLY USED ANYWHERE 4/4/2025
+ * NOT SQL SAFE!!!!!!!!!!!!
  */
 
 function getall_type($t) {
@@ -555,6 +562,8 @@ function getall_type($t) {
 
 /*
  *   get all active volunteers and subs of $type who are available for the given $frequency,$week,$day,and $shift
+ *   Not currently used anywhere 4/4/2025
+ *   NOT SQL SAFE!!!!!!!!!!!!!
  */
 
 function getall_available($type, $day, $shift, $venue) {
