@@ -604,7 +604,11 @@ function getvolunteers_byevent($id){
 }
 
 
-// retrieve only those persons that match the criteria given in the arguments
+/*  retrieve only those persons that match the criteria given in the arguments
+    Not currently used anywhere 4/4/2025
+
+    NOT SQL SAFE!!!!!!!!!!!!!
+*/
 function getonlythose_dbPersons($type, $status, $name, $day, $shift, $venue) {
    $con=connect();
    $query = "SELECT * FROM dbPersons WHERE type LIKE '%" . $type . "%'" .
@@ -629,7 +633,7 @@ function phone_edit($phone) {
 		return substr($phone, 0, 3) . "-" . substr($phone, 3, 3) . "-" . substr($phone, 6);
 	else return "";
 }
-
+/* NOT SQL SAFE !!!!!!!!!!!!!!! */
 function get_people_for_export($attr, $first_name, $last_name, $type, $status, $start_date, $city, $zip, $phone, $email) {
 	$first_name = "'".$first_name."'";
 	$last_name = "'".$last_name."'";
@@ -671,11 +675,15 @@ function get_people_for_export($attr, $first_name, $last_name, $type, $status, $
 
 }
 
-//return an array of "last_name:first_name:birth_date", and sorted by month and day
+/*  return an array of "last_name:first_name:birth_date", and sorted by month and day
+    Not currently used anywhere 4/4/2025
+
+    NOT SQL SAFE!!!!!!!!!!!!!
+*/
 function get_birthdays($name_from, $name_to, $venue) {
 	$con=connect();
    	$query = "SELECT * FROM dbPersons WHERE availability LIKE '%" . $venue . "%'" . 
-   	$query.= " AND last_name BETWEEN '" .$name_from. "' AND '" .$name_to. "'";
+   	$query = " AND last_name BETWEEN '" .$name_from. "' AND '" .$name_to. "'";
     $query.= " ORDER BY birthday";
 	$result = mysqli_query($con,$query);
 	$thePersons = array();
@@ -687,8 +695,12 @@ function get_birthdays($name_from, $name_to, $venue) {
    	return $thePersons;
 }
 
-//return an array of "last_name;first_name;hours", which is "last_name;first_name;date:start_time-end_time:venue:totalhours"
-// and sorted alphabetically
+/* return an array of "last_name;first_name;hours", which is "last_name;first_name;date:start_time-end_time:venue:totalhours"
+   and sorted alphabetically
+
+   Not currently used anywhere 4/4/2025
+   NOT SQL SAFE!!!!!!!!!!!!!
+*/
 function get_logged_hours($from, $to, $name_from, $name_to, $venue) {
 	$con=connect();
    	$query = "SELECT first_name,last_name,hours,venue FROM dbPersons "; 
@@ -713,34 +725,35 @@ function get_logged_hours($from, $to, $name_from, $name_to, $venue) {
    	mysqli_close($con);
    	return $thePersons;
 }
-
-    function update_person_profile(
-        $id,
-        $first, $last, $dateOfBirth, $address, $city, $state, $zipcode,
-        $email, $phone, $phoneType, $contactWhen, $contactMethod, 
-        $econtactName, $econtactPhone, $econtactRelation,
-        $skills, $hasComputer, $hasCamera, $hasTransportation, $shirtSize,
-        $sundaysStart, $sundaysEnd, $mondaysStart, $mondaysEnd,
-        $tuesdaysStart, $tuesdaysEnd, $wednesdaysStart, $wednesdaysEnd,
-        $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
-        $saturdaysStart, $saturdaysEnd, $gender
-    ) {
-        $query = "update dbPersons set 
-            first_name='$first', last_name='$last', birthday='$dateOfBirth', address='$address', city='$city', zip='$zipcode',
-            email='$email', phone1='$phone', phone1type='$phoneType', contact_time='$contactWhen', cMethod='$contactMethod',
-            contact_name='$econtactName', contact_num='$econtactPhone', relation='$econtactRelation',
-            specialties='$skills', computer='$hasComputer', camera='$hasCamera', transportation='$hasTransportation', shirt_size='$shirtSize',
-            sundays_start='$sundaysStart', sundays_end='$sundaysEnd', mondays_start='$mondaysStart', mondays_end='$mondaysEnd',
-            tuesdays_start='$tuesdaysStart', tuesdays_end='$tuesdaysEnd', wednesdays_start='$wednesdaysStart', wednesdays_end='$wednesdaysEnd',
-            thursdays_start='$thursdaysStart', thursdays_end='$thursdaysEnd', fridays_start='$fridaysStart', fridays_end='$fridaysEnd',
-            saturdays_start='$saturdaysStart', saturdays_end='$saturdaysEnd', gender='$gender'
-            where id='$id'";
-        $connection = connect();
-        $result = mysqli_query($connection, $query);
-        mysqli_commit($connection);
-        mysqli_close($connection);
-        return $result;
-    }
+/*  Function to update a person (not a board member) profile
+*/
+function update_person_profile(
+    $id,
+    $first, $last, $dateOfBirth, $address, $city, $state, $zipcode,
+    $email, $phone, $phoneType, $contactWhen, $contactMethod, 
+    $econtactName, $econtactPhone, $econtactRelation,
+    $skills, $hasComputer, $hasCamera, $hasTransportation, $shirtSize,
+    $sundaysStart, $sundaysEnd, $mondaysStart, $mondaysEnd,
+    $tuesdaysStart, $tuesdaysEnd, $wednesdaysStart, $wednesdaysEnd,
+    $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
+    $saturdaysStart, $saturdaysEnd, $gender
+) {
+    $query = "update dbPersons set 
+        first_name='$first', last_name='$last', birthday='$dateOfBirth', address='$address', city='$city', zip='$zipcode',
+        email='$email', phone1='$phone', phone1type='$phoneType', contact_time='$contactWhen', cMethod='$contactMethod',
+        contact_name='$econtactName', contact_num='$econtactPhone', relation='$econtactRelation',
+        specialties='$skills', computer='$hasComputer', camera='$hasCamera', transportation='$hasTransportation', shirt_size='$shirtSize',
+        sundays_start='$sundaysStart', sundays_end='$sundaysEnd', mondays_start='$mondaysStart', mondays_end='$mondaysEnd',
+        tuesdays_start='$tuesdaysStart', tuesdays_end='$tuesdaysEnd', wednesdays_start='$wednesdaysStart', wednesdays_end='$wednesdaysEnd',
+        thursdays_start='$thursdaysStart', thursdays_end='$thursdaysEnd', fridays_start='$fridaysStart', fridays_end='$fridaysEnd',
+        saturdays_start='$saturdaysStart', saturdays_end='$saturdaysEnd', gender='$gender'
+        where id='$id'";
+    $connection = connect();
+    $result = mysqli_query($connection, $query);
+    mysqli_commit($connection);
+    mysqli_close($connection);
+    return $result;
+}
 
 /* function to update an existing board member profile */
 function update_board_member_profile(
