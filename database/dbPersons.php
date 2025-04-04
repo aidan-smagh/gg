@@ -577,17 +577,30 @@ function getall_available($type, $day, $shift, $venue) {
 }
 
 function getvolunteers_byevent($id){
-	 $con = connect();
-	 $query = 'SELECT * FROM dbEventVolunteers JOIN dbPersons WHERE eventID = "' . $id . '"' .
-	 			"AND dbEventVolunteers.userID = dbPersons.id";
-	 $result = mysqli_query($con, $query);
-	 $thePersons = array();
-    while ($result_row = mysqli_fetch_assoc($result)) {
-       $thePerson = make_a_person($result_row);
-       $thePersons[] = $thePerson;
-   }
-   mysqli_close($con);
-   return $thePersons;
+	$con = connect();
+    // make sql safe query
+    //POSSIBLE BUG: Should the WHERE clause here be a ON clause?
+    $query = $con->prepare("SELECT * FROM dbEventVolunteers JOIN dbPersons WHERE eventId = ? 
+                            AND dbEventVolunteers.userId = dbPersons.id");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameter to prepared query
+    $query->bind_param("s", $id);
+    //execute query and store result, which should be rows of data
+    $query->execute();
+    $result = $query->get_result();
+    // array to store the persons whose data are stored in $result_rows
+    $persons = array();
+    // collect each matching result and convert to Person object
+    while ($result_rows = $result->fetch_assoc()) {
+        $person = make_a_person($result_rows);
+        $persons[] = $person;
+    }
+    // close the query and connection
+    $query->close();
+    $con->close();
+    return $persons;
 }
 
 
