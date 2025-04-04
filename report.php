@@ -89,6 +89,7 @@
                     }
 
                     $status = $_POST['statusFilter'];
+                    $eventName = $_POST['event_name'];
 
                     if ($report=="indiv_vol_hours" && $name == NULL) {
                         echo "<b>Please enter a volunteer's first and/or last name.</b><br>";
@@ -129,7 +130,7 @@
                     } else {
                         // header("Location: /gwyneth/reportsPage.php?report_type=$report&date_from=$dFrom&date_to=$dTo&lname_start=$lastFrom&lname_end=$lastTo&name=$name&statusFilter=$status");
                         // NOT IDEAL. Can be broken by browsers with JS disabled.
-                        echo "<script>window.location.href = 'reportsPage.php?report_type=$report&date_from=$dFrom&date_to=$dTo&lname_start=$lastFrom&lname_end=$lastTo&name=$name&statusFilter=$status';</script>";
+                        echo "<script>window.location.href = 'reportsPage.php?report_type=$report&date_from=$dFrom&date_to=$dTo&lname_start=$lastFrom&lname_end=$lastTo&name=$name&event_name=$eventName&statusFilter=$status';</script>";
                     }
                 } 
                     // $alphabet = range('a', 'z');
@@ -179,11 +180,11 @@
                 <div class="row">
                     <div class="column">
                         <label for="lname_start">Last Name Range Start</label>
-                        <input name = "lname_start" type="text" id="lname_start" placeholder="A-Z">
+                        <input name = "lname_start" type="text" id="lname_start" placeholder="A-Z" maxlength="1">
                     </div>
                     <div class="column">
                         <label for="lname_end">Last Name Range End</label>
-                        <input name = "lname_end" type="text" id="lname_end" placeholder="A-Z">
+                        <input name = "lname_end" type="text" id="lname_end" placeholder="A-Z" maxlength="1">
                     </div>
                 </div>
                 <div>

@@ -33,6 +33,11 @@ $dateFrom = $get['date_from'];
 $dateTo = $get['date_to'];
 $lastFrom = strtoupper($get['lname_start']);
 $lastTo = strtoupper($get['lname_end']);
+$eventName = $get['event_name'];
+$eventNameWildcard = null;
+if ($eventName != null) {
+    $eventNameWildcard = '%' . $eventName . '%';
+}
 @$stats = $get['statusFilter'];
 $today = date('Y-m-d');
 
@@ -201,7 +206,7 @@ function getBetweenDates($startDate, $endDate)
     <main class="report">
         <div class="intro">
             <div>
-                <label>Reports Type:</label>
+                <label>Report Type:</label>
                 <span>
                     <?php echo '&nbsp&nbsp&nbsp';
                     if ($type == "top_perform") {
@@ -271,8 +276,8 @@ function getBetweenDates($startDate, $endDate)
                     ?>
                 </span>
             </div>
-            <div>
-                <?php if ($type == "indiv_vol_hours"): ?>
+            <?php if ($type == "indiv_vol_hours"): ?>
+                <div>
                     <label>Role:</label>
                     <span>
                         <?php echo '&nbsp&nbsp&nbsp';
@@ -282,28 +287,26 @@ function getBetweenDates($startDate, $endDate)
                         $theName = mysqli_fetch_assoc($result);
                         if ($role == 'volunteer')
                             $role = 'Volunteer';
+                        elseif ($role == 'boardmember')
+                            $role = 'Board Member';
                         elseif ($role == 'admin')
                             $role = 'Admin';
                         elseif ($role == 'superadmin')
                             $role = 'SuperAdmin';
                         echo $role ?>
-                    <?php endif ?>
-            </div>
+                </div>
+            <?php endif ?>
             <div>
-                <?php
-                if ($type != "top_perform") {
-                    echo "
-                <label>Total Volunteer Hours: </label>";
-                    echo '&nbsp&nbsp&nbsp';
-                    if ($type != 'indiv_vol_hours')
-                        echo get_tot_vol_hours($type, $stats, $dateFrom, $dateTo, $lastFrom, $lastTo);
-                    elseif ($type == 'indiv_vol_hours' && $dateTo == NULL && $dateFrom == NULL)
-                        echo get_hours_volunteered_by($indivID);
-                    elseif ($type == 'indiv_vol_hours' && $dateTo != NULL && $dateFrom != NULL)
-                        echo get_hours_volunteered_by_and_date($indivID, $dateFrom, $dateTo);
-                }
-                ?>
-                <!--- <h3 style="font-weight: bold">Result: <h3> -->
+                <label>Event name:</label>
+                <span>
+                    <?php echo '&nbsp&nbsp&nbsp';
+                    if ($eventName != null) {
+                        echo $eventName;
+                    } else {
+                        echo "(any)";
+                    }
+                    ?>
+                </span>
             </div>
     </main>
 
@@ -316,8 +319,144 @@ function getBetweenDates($startDate, $endDate)
         </a>
     </div>
     <div class="table-wrapper">
-        <?php
+        <?php /* */
 
+        echo "
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+        ";
+        if ($type == "general_volunteer_report") {
+            echo "
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Skills</th>
+            ";
+        } else if ($type == "total_vol_hours") {
+            echo "
+                <th>Event</th>
+                <th>Event Location</th>
+                <th>Event Date</th>
+            ";
+        }
+        echo "
+                <th>Volunteer Hours</th>
+            </tr>
+            <tbody>
+        ";
+
+        // query construction nightmare. trust me, it's way better than what used to be here.
+        $con = connect();
+        $query = "SELECT *, SUM(HOUR(TIMEDIFF(dbEvents.endTime, dbEvents.startTime))) as Dur
+            FROM dbPersons JOIN dbEventVolunteers ON dbPersons.id = dbEventVolunteers.userID
+            JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
+            WHERE eventType = 'volunteer_event' ";
+        $paramTypes = "";
+        $params = array();
+        if ($stats != "All") {
+            $query .= "AND dbPersons.status = ? ";
+            $paramTypes .= "s";
+            $params[] = $stats;
+        }
+        if ($dateFrom != NULL && $dateTo != NULL) {
+            $query .= "AND date >= ? AND date<= ? ";
+            $paramTypes .= "ss";
+            $params[] = $dateFrom;
+            $params[] = $dateTo;
+        }
+        if ($eventNameWildcard != null) {
+            $query .= "AND name LIKE ? OR abbrevName LIKE ? ";
+            $paramTypes .= "ss";
+            $params[] = $eventNameWildcard;
+            $params[] = $eventNameWildcard;
+        }
+        $query .= "GROUP BY dbPersons.first_name,dbPersons.last_name ";
+        switch ($type) {
+            case "general_volunteer_report":
+                $query .= "ORDER BY dbPersons.last_name, dbPersons.first_name";
+                break;
+            case "top_perform":
+                $query .= "ORDER BY Dur DESC LIMIT 5";
+                break;
+            case "total_vol_hours":
+                $query .= "ORDER BY dbEvents.date DESC, dbPersons.last_name, dbPersons.first_name";
+        }
+
+        $stmt = $con->prepare($query);
+        if ($paramTypes != "") {
+            $stmt->bind_param($paramTypes, ...$params);
+        }
+        $success = $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        try {
+            $sum = 0;
+
+            $nameRange = null;
+            if ($lastFrom != null && $lastTo != null) {
+                $nameRange = range($lastFrom, $lastTo);
+            }
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                if ($nameRange != null && !in_array($row["last_name"][0], $nameRange)) {
+                    continue;
+                }
+
+                echo "
+                    <tr>
+                        <td>" . $row['first_name'] . "</td>
+                        <td>" . $row['last_name'] . "</td>
+                ";
+                if ($type == "general_volunteer_report") {
+                    $phone = $row['phone1'];
+                    $mail = $row['email'];
+                    echo "
+                        <td><a href='tel:$phone'>" . formatPhoneNumber($row['phone1']) . "</a></td>
+                        <td><a href='mailto:$mail'>" . $row['email'] . "</a></td>
+                        <td>" . $row['specialties'] . "</td>
+                    ";
+                } else if ($type == "total_vol_hours") {
+                    echo "
+                        <td>" . $row['name'] . "</td>
+                        <td>" . $row['location'] . "</td>
+                        <td>" . $row['date'] . "</td>
+                    ";
+                }
+                echo "
+                        <td>" . $row['Dur'] . "</td>
+                    </tr>
+                ";
+
+                $sum += $row["Dur"];
+            }
+
+            echo "
+                <tr>
+                    <td style='border: none;' bgcolor='white'></td>
+            ";
+            if ($type != "top_perform") {
+                echo "
+                    <td style='border: none;' bgcolor='white'></td>
+                    <td style='border: none;' bgcolor='white'></td>
+                    <td style='border: none;' bgcolor='white'></td>
+                ";
+            }
+            echo "
+                    <td bgcolor='white'><label>Total Hours:</label></td>
+                    <td bgcolor='white'><label>" . $sum . "</label></td>
+                </tr>
+            ";
+        } catch (TypeError $e) {
+            // Code to handle the exception or error goes here
+            echo "No Results found!";
+        }
+
+
+        
+
+        /* 
         // view General volunteer report with all date range and all name range
         if ($type == "general_volunteer_report" && $dateFrom == NULL && $dateTo == NULL && $lastFrom == NULL && $lastTo == NULL) {
             echo "
@@ -1206,6 +1345,7 @@ function getBetweenDates($startDate, $endDate)
                 </tr>
             ";
         }
+            //*/
         ?>
 
             </tbody>
