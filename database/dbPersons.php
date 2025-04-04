@@ -276,9 +276,19 @@ function retrieve_persons_by_name ($name) {
 
 function change_password($id, $newPass) {
     $con=connect();
-    $query = 'UPDATE dbPersons SET password = "' . $newPass . '", force_password_change="0" WHERE id = "' . $id . '"';
-    $result = mysqli_query($con,$query);
-    mysqli_close($con);
+    // prepare sql safe update query to change password
+    $query = $con->prepare("UPDATE dbPersons SET password = ?, force_password_change='0' WHERE id = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameters to prepared query
+    $query->bind_param("ss", $newPass, $id);
+    //execute query and store result
+    $result = $query->execute();
+
+    //close everything and return
+    $query->close();
+    $con->close();
     return $result;
 }
 
