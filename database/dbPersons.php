@@ -827,51 +827,87 @@ function update_board_member_profile(
 }
 
 
-    /**
-     * Searches the database and returns an array of all volunteers
-     * that are eligible to attend the given event that have not yet
-     * signed up/been assigned to the event.
-     * 
-     * Eligibility criteria: availability falls within event start/end time
-     * and start date falls before or on the volunteer's start date.
-     */
-    function get_unassigned_available_volunteers($eventID) {
-        $connection = connect();
-        $query = "select * from dbEvents where id='$eventID'";
-        $result = mysqli_query($connection, $query);
-        if (!$result) {
-            mysqli_close($connection);
-            return null;
-        }
-        $event = mysqli_fetch_assoc($result);
-        $event_start = $event['startTime'];
-        $event_end = $event['startTime'];
-        $date = $event['date'];
-        $dateInt = strtotime($date);
-        $dayofweek = strtolower(date('l', $dateInt));
-        $dayname_start = $dayofweek . 's_start';
-        $dayname_end = $dayofweek . 's_end';
-        $query = "select * from dbPersons
-            where 
-            $dayname_start<='$event_start' and $dayname_end>='$event_end'
-            and start_date<='$date'
-            and id != 'vmsroot' 
-            and status='Active'
-            and id not in (select userID from dbEventVolunteers where eventID='$eventID')
-            order by last_name, first_name";
-        $result = mysqli_query($connection, $query);
-        if ($result == null || mysqli_num_rows($result) == 0) {
-            mysqli_close($connection);
-            return null;
-        }
-        $thePersons = array();
-        while ($result_row = mysqli_fetch_assoc($result)) {
-            $thePerson = make_a_person($result_row);
-            $thePersons[] = $thePerson;
-        }
-        mysqli_close($connection);
-        return $thePersons;
+/**
+ * Searches the database and returns an array of all volunteers
+ * that are eligible to attend the given event that have not yet
+ * signed up/been assigned to the event.
+ * 
+ * Eligibility criteria: availability falls within event start/end time
+ * and start date falls before or on the volunteer's start date.
+ */
+function get_unassigned_available_volunteers($eventID) {
+    $con = connect();
+    // prepare sql safe query to check if event exists
+    $eventQuery = $con->prepare("SELECT * FROM dbEvents WHERE id = ?");
+    if (!$eventQuery) {
+        die("Prepare statement failed: " . $con->error);
     }
+    // bind eventId parameter
+    $eventQuery->bind_param("i", $eventID);
+    // execute query and store result
+    $eventQuery->execute();
+    $result = $eventQuery->get_result();
+    // if there are no events with provided id, return null
+    if (!$result) {
+        $eventQuery->close();
+        $con->close();
+        return null;
+    }
+    // fetch the event row data
+    $event = $result->fetch_assoc();
+
+    // collect the event's time and data data for comparison with person availability
+    $event_start = $event['startTime'];
+    // correction made below. was $event_end = $event['startTime'}]
+    $event_end = $event['endTime'];
+    $date = $event['date'];
+    $dateInt = strtotime($date);
+    $dayofweek = strtolower(date('l', $dateInt));
+    $dayname_start = $dayofweek . 's_start';
+    $dayname_end = $dayofweek . 's_end';
+
+    // build sql safe query for volunteers who are available
+    // only injection risk is from $eventID
+    $personQuery = $con->prepare("SELECT * FROM dbPersons WHERE
+        $dayname_start<='$event_start' and $dayname_end>='$event_end'
+        AND start_date<='$date'
+        AND id != 'vmsroot' 
+        AND status='Active'
+        AND id not in (select userID from dbEventVolunteers where eventID= ?)
+        ORDER BY last_name, first_name"
+    );
+    if (!$personQuery) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind the eventID parameter to the prepared query
+    $personQuery->bind_param("i", $eventID);
+    // execute the query and store the result
+    $personQuery->execute();
+    $result = $personQuery->get_result();
+    // if no volunteers available, close everything and return null
+    if (!$result || $result->num_rows === 0) {
+        $eventQuery->close();
+        $personQuery->close();
+        $con->close();
+        return null;
+    }
+
+    // array to store the available volunteers
+    $availablePersons = array();
+    // loop through the $result persons data and create person objects
+    while ($result_row = $result->fetch_assoc()) {
+        // create a person object from the result row
+        $person = make_a_person($result_row);
+        // append the person object to the array
+        $availablePersons[] = $person;
+    }
+
+    // close everything and return the availablePersons array
+    $eventQuery->close();
+    $personQuery->close(); 
+    $con->close();
+    return $availablePersons;
+}
 
     function find_users($name, $id, $phone, $zip, $type, $status) {
         $where = 'where ';
