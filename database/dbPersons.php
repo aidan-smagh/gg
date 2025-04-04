@@ -909,77 +909,121 @@ function get_unassigned_available_volunteers($eventID) {
     return $availablePersons;
 }
 
-    function find_users($name, $id, $phone, $zip, $type, $status) {
-        $where = 'where ';
-        if (!($name || $id || $phone || $zip || $type || $status)) {
-            return [];
+/*
+    Function to find users based on any comnination of provided parameters
+*/
+function find_users($name, $id, $phone, $zip, $type, $status) {
+    $con = connect();
+    // array to store various where clauses based on provided parameters
+    $whereClauses = [];
+    // array to store provided parameters
+    $params = [];
+    // string to store the param types, for parameter binding
+    $paramTypes = "";
+    
+    // if $name is not empty, add it to the where clauses, params, and types
+    if ($name) {
+        // if there is a space in the name, split it into first and last names
+        if (strpos($name, ' ') !== false) {
+            $fullname = explode(' ', $name, 2);
+            $first = $fullname[0];
+            $last = $fullname[1];
+            // now we know we're searching by first AND last name
+            $whereClauses[] = "(first_name LIKE ? AND last_name LIKE ?)";
+            // add the parameters for binding
+            $params[] = "%$first%";
+            $params[] = "%$last%";
+            // first and last are both strings
+            $paramTypes .= "ss";
         }
-        $first = true;
-        if ($name) {
-            if (strpos($name, ' ')) {
-                $name = explode(' ', $name, 2);
-                $first = $name[0];
-                $last = $name[1];
-                $where .= "first_name like '%$first%' and last_name like '%$last%'";
-            } else {
-                $where .= "(first_name like '%$name%' or last_name like '%$name%')";
-            }
-            $first = false;
-        }
-        if ($id) {
-            if (!$first) {
-                $where .= ' and ';
-            }
-            $where .= "id like '%$id%'";
-            $first = false;
-        }
-        if ($phone) {
-            if (!$first) {
-                $where .= ' and ';
-            }
-            $where .= "phone1 like '%$phone%'";
-            $first = false;
-        }
-		if ($zip) {
-			if (!$first) {
-                $where .= ' and ';
-            }
-            $where .= "zip like '%$zip%'";
-            $first = false;
-		}
-        if ($type) {
-            if (!$first) {
-                $where .= ' and ';
-            }
-            $where .= "type='$type'";
-            $first = false;
-        }
-        if ($status) {
-            if (!$first) {
-                $where .= ' and ';
-            }
-            $where .= "status='$status'";
-            $first = false;
-        }
-        $query = "select * from dbPersons $where order by last_name, first_name";
-        // echo $query;
-        $connection = connect();
-        $result = mysqli_query($connection, $query);
-        if (!$result) {
-            mysqli_close($connection);
-            return [];
-        }
-        $raw = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $persons = [];
-        foreach ($raw as $row) {
-            if ($row['id'] == 'vmsroot') {
-                continue;
-            }
-            $persons []= make_a_person($row);
-        }
-        mysqli_close($connection);
-        return $persons;
+        // otherwise, only 1 name was provided. Unknown if it is first or last
+        else {
+            $whereClauses[] = "(first_name LIKE ? OR last_name LIKE ?)";
+            // $name will be inserted into both ? placeholders
+            $params[] = "%$name%";
+            $params[] = "%$name%";
+            // both are strings
+            $paramTypes .= "ss";
+        }   
     }
+    
+    // if $id isnt empty or null, do the same
+    if ($id) {
+        $whereClauses[] = "id LIKE ?";
+        $params[] = "%$id%";
+        // person ids are strings
+        $paramTypes .= "s"; 
+    }
+    
+    // if phone not empty or null, do the same
+    if ($phone) {
+        $whereClauses[] = "phone1 LIKE ?";
+        $params[] = "%$phone%";
+        // phone numbers are strings
+        $paramTypes .= "s"; 
+    }
+    
+    // same for zip code
+    if ($zip) {
+        $whereClauses[] = "zip LIKE ?";
+        $params[] = "%$zip%";
+        // zip codes are strings
+        $paramTypes .= "s";
+    }
+
+    // same for type
+    if ($type) {
+        $whereClauses[] = "type = ?";
+        $params[] = $type;
+        // type is a string
+        $paramTypes .= "s";
+    }
+
+    // same for status
+    if ($status) {
+        $whereClauses[] = "status = ?";
+        $params[] = $status;
+        // status is a string
+        $paramTypes .= "s";
+    }
+
+    // if $whereClauses is empty, no data was provided to search by, so close and return an empty array
+    if (empty($whereClauses)) {
+        $con->close();
+        return [];
+    }
+
+    // build the full where clause
+    $whereClause = "WHERE " . implode(" AND ", $whereClauses);
+    // build the full query
+    $query = "SELECT * FROM dbPersons $whereClause ORDER BY last_name, first_name";
+    // prepare the query for parameter binding
+    $stmt = $con->prepare($query);
+    if (!$stmt) {
+        die("Prepare statement failed: " . $con->error);
+    }
+
+    // bind the parameters. Since the params are stored in an array, they have to be unpacked
+    if (!empty($params)) {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    
+    // execute the query and store the result, which will be rows of person data
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // loop through all the person data returned and turn it into person objects
+    $persons = [];
+    while ($result_row = $result->fetch_assoc()) {
+        if ($result_row['id'] !== 'vmsroot')
+        $persons[] = make_a_person($result_row);
+    }
+    
+    // close everything and return the persons array
+    $stmt->close();
+    $con->close();
+    return $persons;
+}
 
 function find_user_names($name) {
         $where = 'where ';
