@@ -372,13 +372,22 @@ function get_age($birthday) {
 
   return $age;
 }
-
+/* NOT CURRENTLY USED ANYWHERE 4/4/2025 */
 function update_start_date($id, $new_start_date) {
 	$con=connect();
-	$query = 'UPDATE dbPersons SET start_date = "' . $new_start_date . '" WHERE id = "' . $id . '"';
-	$result = mysqli_query($con,$query);
-	mysqli_close($con);
-	return $result;
+    //prepare sql safe update query
+    $query = $con->prepare("UPDATE dbPersons SET start_date = ? WHERE id = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameters to prepared query
+    $query->bind_param("ss", $new_start_date, $id);
+    // execute query and store result
+    $result = $query->execute();
+    // close everything and return result
+    $query->close();
+    $con->close();
+    return $result;
 }
 
 /*
