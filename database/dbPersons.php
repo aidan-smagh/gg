@@ -163,17 +163,46 @@ function add_person($person) {
  */
 
 function remove_person($id) {
+    // connect to db
     $con=connect();
-    $query = 'SELECT * FROM dbPersons WHERE id = "' . $id . '"';
-    $result = mysqli_query($con,$query);
-    if ($result == null || mysqli_num_rows($result) == 0) {
-        mysqli_close($con);
+    // prepare sql safe query to see if person exists
+    $query = $con->prepare("SELECT 1 FROM dbPersons WHERE id = ?");
+    // if prepare statement failed, exit and return the error
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind the id parameter and execute the query
+    $query->bind_param("s", $id);
+    $query->execute();
+    $query->store_result();
+
+    // if the result is empty, person doesn't exist
+    if ($query->num_rows === 0) {
+        $query->close();
+        $con->close();
         return false;
     }
-    $query = 'DELETE FROM dbPersons WHERE id = "' . $id . '"';
-    $result = mysqli_query($con,$query);
-    mysqli_close($con);
-    return true;
+    // query is done so close it
+    $query->close();
+
+    // create sql safe person deletion statement
+    $stmt = $con->prepare("DELETE FROM dbPersons WHERE id = ?");
+    // if prepare statement failed, exit and return the error
+    if (!$stmt) {
+        die("Prepare statement failed: " . $con->error);
+    }
+
+    // bind the id parameter to the deletion statement
+    $stmt->bind_param("s", $id);
+    // ecxecute deletion and store result
+    $result = $stmt->execute();
+    if (!$result) {
+        die("Deletion execution failed: " . $con->error);
+    }
+    // done, close everything
+    $stmt->close();
+    $con->close();
+    return $result;
 }
 
 /*
