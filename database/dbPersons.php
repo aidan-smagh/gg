@@ -160,8 +160,8 @@ function add_person($person) {
 
 /*
  * remove a person from dbPersons table.  If already there, return false
+ * NOT CURRENTLY USED ANYWHERE 4/4/2025
  */
-
 function remove_person($id) {
     // connect to db
     $con=connect();
@@ -242,8 +242,7 @@ function retrieve_person($id) {
     return $person;
 }
 
-// Name is first concat with last name. Example 'James Jones'
-// return array of Persons.
+// function to retrieve a person by their name
 function retrieve_persons_by_name ($name) {
 	$persons = array();
 	if (!isset($name) || $name == "" || $name == null) return $persons;
@@ -273,7 +272,7 @@ function retrieve_persons_by_name ($name) {
         $persons[] = $thePerson;
     }
 }
-
+/* allows users to change their own password */
 function change_password($id, $newPass) {
     $con=connect();
     // prepare sql safe update query to change password
@@ -296,10 +295,20 @@ function change_password($id, $newPass) {
    Gives a temporary password to the admin, who must give it to the user.
    When the user logins in with the generated temp password, they are forced to change it. */
 function reset_password($id, $newPass) {
+    //62698030
     $con=connect();
-    $query = 'UPDATE dbPersons SET password = "' . $newPass . '", force_password_change="1" WHERE id = "' . $id . '"';
-    $result = mysqli_query($con,$query);
-    mysqli_close($con);
+    //prepare sql safe update query
+    $query = $con->prepare("UPDATE dbPersons SET password = ?, force_password_change='1' WHERE id = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameters to prepared query
+    $query->bind_param("ss", $newPass, $id);
+    // execute query and store result
+    $result = $query->execute();
+    //close everything and return
+    $query->close();
+    $con->close();
     return $result;
 }
 
@@ -310,13 +319,23 @@ function update_hours($id, $new_hours) {
     mysqli_close($con);
     return $result;
 }
+
 /* NOT CURRENTLY USED ANYWHERE 4/4/2025 */
 function update_birthday($id, $new_birthday) {
 	$con=connect();
-	$query = 'UPDATE dbPersons SET birthday = "' . $new_birthday . '" WHERE id = "' . $id . '"';
-	$result = mysqli_query($con,$query);
-	mysqli_close($con);
-	return $result;
+    // prepare sql safe update query
+    $query = $con->prepare("UPDATE dbPersons SET birthday = ? WHERE id = ?");
+    if (!$query) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // bind parameters to prepared query
+    $query->bind_param("ss", $new_birthday, $id);
+    // execute query and store result
+    $result = $query->execute();
+    //close everything and return
+    $query->close();
+    $con->close();
+    return $result;
 }
 
 /*
@@ -344,7 +363,6 @@ function update_profile_pic($id, $link) {
  * Returns the age of the person by subtracting the 
  * person's birthday from the current date
 */
-
 function get_age($birthday) {
 
   $today = date("Ymd");
