@@ -321,30 +321,40 @@ function getBetweenDates($startDate, $endDate)
     <div class="table-wrapper">
         <?php /* */
 
+        $columns = 0;
+
         echo "
             <table>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
         ";
+        if ($type != "indiv_vol_hours") {
+            echo "
+                <th>First Name</th>
+                <th>Last Name</th>
+            ";
+            $columns += 2;
+        }
         if ($type == "general_volunteer_report") {
             echo "
                 <th>Phone Number</th>
                 <th>Email Address</th>
                 <th>Skills</th>
             ";
-        } else if ($type == "total_vol_hours") {
+            $columns += 3;
+        } else if ($type == "total_vol_hours" || $type == "indiv_vol_hours") {
             echo "
                 <th>Event</th>
                 <th>Event Location</th>
                 <th>Event Date</th>
             ";
+            $columns += 3;
         }
         echo "
                 <th>Volunteer Hours</th>
             </tr>
             <tbody>
         ";
+        $columns += 1;
 
         // query construction nightmare. trust me, it's way better than what used to be here.
         $con = connect();
@@ -354,24 +364,38 @@ function getBetweenDates($startDate, $endDate)
             WHERE eventType = 'volunteer_event' ";
         $paramTypes = "";
         $params = array();
-        if ($stats != "All") {
+
+        if ($type == "indiv_vol_hours") {
+            $query .= "AND dbPersons.id = ? ";
+            $paramTypes .= "s";
+            $params[] = $indivID;
+        } else if ($stats != "All") {
             $query .= "AND dbPersons.status = ? ";
             $paramTypes .= "s";
             $params[] = $stats;
         }
+
         if ($dateFrom != NULL && $dateTo != NULL) {
             $query .= "AND date >= ? AND date<= ? ";
             $paramTypes .= "ss";
             $params[] = $dateFrom;
             $params[] = $dateTo;
         }
+
         if ($eventNameWildcard != null) {
             $query .= "AND name LIKE ? OR abbrevName LIKE ? ";
             $paramTypes .= "ss";
             $params[] = $eventNameWildcard;
             $params[] = $eventNameWildcard;
         }
-        $query .= "GROUP BY dbPersons.first_name,dbPersons.last_name ";
+
+        $query .= "GROUP BY ";
+        if ($type == "indiv_vol_hours") {
+            $query .= "dbEvents.name ";
+        } else {
+            $query .= "dbPersons.first_name,dbPersons.last_name ";
+        }
+
         switch ($type) {
             case "general_volunteer_report":
                 $query .= "ORDER BY dbPersons.last_name, dbPersons.first_name";
@@ -380,7 +404,9 @@ function getBetweenDates($startDate, $endDate)
                 $query .= "ORDER BY Dur DESC LIMIT 5";
                 break;
             case "total_vol_hours":
+            case "indiv_vol_hours":
                 $query .= "ORDER BY dbEvents.date DESC, dbPersons.last_name, dbPersons.first_name";
+                break;
         }
 
         $stmt = $con->prepare($query);
@@ -395,7 +421,7 @@ function getBetweenDates($startDate, $endDate)
             $sum = 0;
 
             $nameRange = null;
-            if ($lastFrom != null && $lastTo != null) {
+            if ($lastFrom != null && $lastTo != null && $type != "indiv_vol_hours") {
                 $nameRange = range($lastFrom, $lastTo);
             }
 
@@ -406,9 +432,13 @@ function getBetweenDates($startDate, $endDate)
 
                 echo "
                     <tr>
+                ";
+                if ($type != "indiv_vol_hours") {
+                    echo "
                         <td>" . $row['first_name'] . "</td>
                         <td>" . $row['last_name'] . "</td>
-                ";
+                    ";
+                }
                 if ($type == "general_volunteer_report") {
                     $phone = $row['phone1'];
                     $mail = $row['email'];
@@ -417,7 +447,7 @@ function getBetweenDates($startDate, $endDate)
                         <td><a href='mailto:$mail'>" . $row['email'] . "</a></td>
                         <td>" . $row['specialties'] . "</td>
                     ";
-                } else if ($type == "total_vol_hours") {
+                } else if ($type == "total_vol_hours" || $type == "indiv_vol_hours") {
                     echo "
                         <td>" . $row['name'] . "</td>
                         <td>" . $row['location'] . "</td>
@@ -434,14 +464,9 @@ function getBetweenDates($startDate, $endDate)
 
             echo "
                 <tr>
-                    <td style='border: none;' bgcolor='white'></td>
             ";
-            if ($type != "top_perform") {
-                echo "
-                    <td style='border: none;' bgcolor='white'></td>
-                    <td style='border: none;' bgcolor='white'></td>
-                    <td style='border: none;' bgcolor='white'></td>
-                ";
+            for ($i = 2; $i < $columns; $i++) {
+                echo "<td style='border: none;' bgcolor='white'></td>";
             }
             echo "
                     <td bgcolor='white'><label>Total Hours:</label></td>
