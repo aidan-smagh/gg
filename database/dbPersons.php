@@ -862,6 +862,7 @@ function find_user_names($name) {
         return $hours;
     }
 
+    // deprecated and marked for execution by firing squad
     function get_tot_vol_hours($type,$stats,$dateFrom,$dateTo,$lastFrom,$lastTo){
         $con = connect();
         $type1 = "volunteer";
