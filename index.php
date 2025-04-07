@@ -120,7 +120,7 @@
                     </div>
                 <?php endif ?>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
-                    <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
+                    <div class="dashboard-item" data-link="volunteerhoursconfirmation.php">
                         <img src="images/volunteer-hours.svg">
                         <span>Volunteer Hours</span>
                     </div>
