@@ -39,6 +39,7 @@ $access_level = $_SESSION['access_level'];
 $user = retrieve_person($_SESSION['_id']);
 $active = $user->get_status() == 'Active';
 
+
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -262,6 +263,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require_once('include/time.php');
         $event_duration = calculateHourDuration($event_info['startTime'], $event_info['endTime']);
         $event_duration = floatPrecision($event_duration, 2);
+
+        $currentDate = new DateTime();
+        $justDate = $currentDate->format('Y-m-d');  
+        $datePassed = false;  
+
+        if ($justDate > $event_info['date']) {
+            $datePassed = true;
+        }
+        
+        //var_dump($justDate);
+        //var_dump($event_info['date']);
+
         if ($event_duration == floor($event_duration)) {
             $event_duration = intval($event_duration);
         }
@@ -494,6 +507,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </ul>
             <?php
+            if ($event_in_past) {
+                    echo '<input type="submit" value="Confirm Hours">';
+                }
+            
             if ($remaining_slots > 0 && $user_id != 'vmsroot' && !$event_in_past) {
                 if (!$already_assigned) {
                     if ($active) {
