@@ -229,7 +229,7 @@
                 $email, $shirtSize, false, false, true, 
                 $econtactName, $econtactPhone, $econtactRelation, 
                 $contactWhen, 'volunteer', 'Active', $contactMethod, 
-                null, null, null, null, null, null, '', '', '', 
+                null, null, null, null, '', null, '', '', '', 
                 $dateOfBirth, $startDate, null, null, $password,
                 null, null, null, null,
                 null, null, null, null,
