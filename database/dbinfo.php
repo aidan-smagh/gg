@@ -21,8 +21,8 @@ function connect() {
     $user = "gwynethdb";
     $pass = "gwynethdb";
     if ($_SERVER['SERVER_NAME'] == 'jenniferp132.sg-host.com') {
-        $user = 'uflcystg6es8w';
-        $pass = "sqtyche1wfuc";
+        $user = 'ukegjxxjbkrcw';
+        $pass = "jdcsdviiykfz";
         $database = 'dbkgwdsk2pylv8';
     } else if ($_SERVER['SERVER_NAME'] == 'gwynethsgiftvms.org') {
         $user = "uybhc603shfl5";

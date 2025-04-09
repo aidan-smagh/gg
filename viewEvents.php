@@ -4,7 +4,7 @@ session_start();
 
 $loggedIn = false;
 $accessLevel = 0;
-$event_id = null;
+/*$event_id = null;*/
 if (isset($_SESSION['_id'])) {
     $loggedIn = true;
     $accessLevel = $_SESSION['access_level'];
@@ -22,12 +22,18 @@ $events = getUpcomingEvents();
     <script src="js/messages.js"></script>
     <title>Gwyneth's Gift VMS | Upcoming Events</title>
     <style>
-        .message-body {
+        a.event-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a.event-link .message-body {
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .message-body:hover {
-            background-color: rgb(235, 235, 235);
+        a.event-link:hover .message-body {
+            background-color: #f9f4ec;
+            cursor: pointer;
             transform: scale(1.01);
         }
     </style>
@@ -41,16 +47,18 @@ $events = getUpcomingEvents();
             <?php foreach ($events as $event): ?>
                 <?php
                     $formattedDate = date("l, F j", strtotime($event['date']));
+                    $eventUrl = 'event.php?id=' . urlencode($event['id']);
                 ?>
-                <div class="message-body">
-                    <div class="sender-time-line" style="flex-direction: column;">
-                        <strong><?php echo htmlspecialchars($event['name']); ?></strong>
-                        <span><?php echo $formattedDate; ?></span>
+                <a href="<?php echo $eventUrl; ?>" class="event-link">
+                    <div class="message-body">
+                        <div class="sender-time-line" style="flex-direction: column;">
+                            <strong><?php echo htmlspecialchars($event['name']); ?></strong>
+                            <span><?php echo $formattedDate; ?></span>
+                        </div>
+                        <div><?php echo($event['startTime']);?> - <?php echo($event['endTime']);?></div>
+                        <div><em>Location: <?php echo htmlspecialchars($event['location']); ?></em></div>
                     </div>
-                    <div><?php echo htmlspecialchars($event['startTime']) ?> - <?php echo htmlspecialchars($event['endTime']); ?></div>
-                    <div><?php echo htmlspecialchars($event['description']); ?></div>
-                    <div><em>Location: <?php echo htmlspecialchars($event['location']); ?></em></div>
-                </div>
+                </a>
             <?php endforeach; ?>
         <?php else: ?>
             <p class="no-messages">No upcoming events found.</p>

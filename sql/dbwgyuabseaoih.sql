@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 12:24 AM
+-- Generation Time: Apr 01, 2025 at 05:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,8 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `gwynethdb`
 --
-CREATE DATABASE IF NOT EXISTS `gwynethdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `gwynethdb`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkintime`
+--
+
+DROP TABLE IF EXISTS `checkintime`;
+CREATE TABLE `checkintime` (
+  `UserId` varchar(100) NOT NULL,
+  `EventId` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `checkin_time` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `checkintime`
+--
+
+INSERT INTO `checkintime` (`UserId`, `EventId`, `first_name`, `last_name`, `checkin_time`) VALUES
+('vmsroot@gmail.com', 105, 'admin', 'admin', '03/31/2025 05:05:16 pm'),
+('vmsroot@gmail.com', 107, 'admin', 'admin', '04/01/2025 11:48:30 am');
 
 -- --------------------------------------------------------
 
@@ -29,7 +50,6 @@ USE `gwynethdb`;
 -- Table structure for table `dbeventmedia`
 --
 
-DROP TABLE IF EXISTS `dbeventmedia`;
 CREATE TABLE `dbeventmedia` (
   `id` int(11) NOT NULL,
   `eventID` int(11) NOT NULL,
@@ -69,12 +89,11 @@ INSERT INTO `dbeventmedia` (`id`, `eventID`, `url`, `type`, `format`, `descripti
 -- Table structure for table `dbevents`
 --
 
-DROP TABLE IF EXISTS `dbevents`;
 CREATE TABLE `dbevents` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `abbrevName` text NOT NULL,
-  `eventType` text NOT NULL DEFAULT 'volunteer_event',
+  `eventType` varchar(256) NOT NULL DEFAULT 'volunteer_event',
   `date` char(10) NOT NULL,
   `startTime` char(5) NOT NULL,
   `endTime` char(5) NOT NULL,
@@ -187,7 +206,10 @@ INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startT
 (101, 'Stafford County Sherriff&#039;s Summer Junior Deputy Program Training', 'Training', 'volunteer_event', '2025-06-10', '12:00', '14:00', 'Hands-Only CPR &amp; AED Training provided to Stafford County Sherriff&#039;s Junior Deputy Program. Set up time will start at 12:00pm, with training starting at 12:30pm-1:30pm. Volunteers will be needed to set up manikins and kneeling pads and check people in. We will also need a volunteer to take pictures during the training.  We will need volunteers to also help break down. What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', '1300 Courthouse Rd, Stafford, VA 22554', 2),
 (102, 'Volunteer Training Zoom', 'Volunteer', 'volunteer_event', '2025-01-22', '12:00', '13:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
 (103, 'Volunteer Training Zoom', 'Volunteer', 'volunteer_event', '2025-02-03', '13:00', '14:00', 'This is a required Zoom session for all new and returning volunteers that will introduce you to the Foundation, our volunteer guidelines, and key responsibilities. Zoom link will be sent out to those who register.', 'Zoom', 20),
-(104, 'Livingston Elementary School Training', 'Training', 'volunteer_event', '2025-01-14', '12:15', '15:30', 'This is a school day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', 'Livingston Elementary School', 5);
+(104, 'Livingston Elementary School Training', 'Training', 'volunteer_event', '2025-01-14', '12:15', '15:30', 'This is a school day training. The staff of GGF will need assistance with ensuring students are engaged and properly following instructions. Help readjusting equipment for the training in between sessions. The staff will also need help setting up &amp; tearing down. This training is a full day. If you are only able to help for a certain period of time, please let us know. You will need to bring a state ID when you check into the school.What to wear: comfortable pants or shorts. You will be provided a volunteer shirt if you do not already have one. No Open toed shoes.', 'Livingston Elementary School', 5),
+(105, 'Board', 'ddd', 'board_meeting', '2025-03-28', '12:00', '13:00', 'nothin', 'Woodbridge, Virginia', 2),
+(106, 'Joseph Tsibu-Gyan', 'SM', 'board_meeting', '2025-03-28', '14:00', '15:00', 'nothin', 'Woodbridge, Virginia', 2),
+(107, '12', '1222', 'board_meeting', '2025-03-31', '12:00', '13:00', 'as', 'as', 10);
 
 -- --------------------------------------------------------
 
@@ -195,7 +217,6 @@ INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startT
 -- Table structure for table `dbeventvolunteers`
 --
 
-DROP TABLE IF EXISTS `dbeventvolunteers`;
 CREATE TABLE `dbeventvolunteers` (
   `eventID` int(11) NOT NULL,
   `userID` varchar(256) NOT NULL
@@ -362,6 +383,477 @@ INSERT INTO `dbeventvolunteers` (`eventID`, `userID`) VALUES
 (88, 'lvenable@linkbank.com'),
 (104, 'bsisco1@duck.com'),
 (88, 'ngoode1985@gmail.com'),
+(73, 'vmsroot@gmail.com'),
+(2, 'veronica@gwynethsgift.org'),
+(3, 'veronica@gwynethsgift.org'),
+(4, 'amursurf226@yahoo.com'),
+(4, 'kamarahr@vcu.edu'),
+(4, 'sales@evruso.com'),
+(4, 'marytokar1@gmail.com'),
+(4, 'dre1074@gmail.com'),
+(4, 'neelylewis@hotmail.com'),
+(5, 'amursurf226@yahoo.com'),
+(6, 'amursurf226@yahoo.com'),
+(7, 'amursurf226@yahoo.com'),
+(8, 'amursurf226@yahoo.com'),
+(9, 'amursurf226@yahoo.com'),
+(10, 'amursurf226@yahoo.com'),
+(5, 'sistercak@yahoo.com'),
+(5, 'aimee.kline226@gmail.com'),
+(6, 'angie@cegresults.com'),
+(6, 'kamarahr@vcu.edu'),
+(6, 'kdobyns@gwynethsgift.org'),
+(6, 'erinm@gwynethsgift.org'),
+(15, 'jadehkerey@gmail.com'),
+(7, 'lgould@vapartnersbank.com'),
+(7, 'kdobyns@gwynethsgift.org'),
+(7, 'erinm@gwynethsgift.org'),
+(7, 'kamarahr@vcu.edu'),
+(7, 'sales@evruso.com'),
+(7, 'sistercak@yahoo.com'),
+(7, 'annettasheriff03@gmail.com'),
+(18, 'wangkat18@gmail.com'),
+(7, 'wangkat18@gmail.com'),
+(8, 'annettasheriff03@gmail.com'),
+(8, 'kamarahr@vcu.edu'),
+(8, 'veronica@gwynethsgift.org'),
+(10, 'neelylewis@hotmail.com'),
+(9, 'kamarahr@vcu.edu'),
+(10, 'kamarahr@vcu.edu'),
+(11, 'kamarahr@vcu.edu'),
+(9, 'annettasheriff03@gmail.com'),
+(19, 'sandrasteelenp@gmail.com'),
+(21, 'lisaedurham@gmail.com'),
+(11, 'tcstabisz@gmail.com'),
+(19, 'matskig@gmail.com'),
+(19, 'bsilk@cox.net'),
+(22, 'amanda@fahass.org'),
+(21, 'angie@cegresults.com'),
+(22, 'kamarahr@vcu.edu'),
+(22, 'natesellsva@gmail.com'),
+(25, 'kathryndurhamkmd1@gmail.com'),
+(27, 'kathryndurhamkmd1@gmail.com'),
+(32, 'kamarahr@vcu.edu'),
+(36, 'digmankathleen@gmail.com'),
+(36, 'k.kilroy26@gmail.com'),
+(36, 'rhoads114@gmail.com'),
+(36, 'sales@evruso.com'),
+(36, 'rmgoodwin03@gmail.com'),
+(36, 'david.ruizrivera1@gmail.com'),
+(36, 'kamarahr@vcu.edu'),
+(54, 'adscaff12@yahoo.com'),
+(44, 'p.morris@live.com'),
+(44, 'todd@storagecollections.com'),
+(44, 'nevershoutkris@icloud.com'),
+(44, 'adscaff12@yahoo.com'),
+(42, 'sales@evruso.com'),
+(45, 'digmankathleen@gmail.com'),
+(45, 'nancy.dongweck@target.com'),
+(45, 'k.kilroy26@gmail.com'),
+(45, 'kjtj02@gmail.com'),
+(45, 'mary@kibbey.com'),
+(44, 'natesellsva@gmail.com'),
+(45, 'david.ruizrivera1@gmail.com'),
+(45, 'rmgoodwin03@gmail.com'),
+(44, 'tcstabisz@gmail.com'),
+(48, 'adscaff12@yahoo.com'),
+(51, 'adscaff12@yahoo.com'),
+(48, 'kmatuczinski@hotmail.com'),
+(50, 'kmatuczinski@hotmail.com'),
+(48, 'matskig@gmail.com'),
+(50, 'matskig@gmail.com'),
+(46, 'kmatuczinski@hotmail.com'),
+(47, 'kmatuczinski@hotmail.com'),
+(53, 'amursurf226@yahoo.com'),
+(54, 'amursurf226@yahoo.com'),
+(51, 'amursurf226@yahoo.com'),
+(48, 'nevershoutkris@icloud.com'),
+(52, 'planetofthekids@yahoo.com'),
+(48, 'lilysanford06@gmail.com'),
+(50, 'rmgoodwin03@gmail.com'),
+(50, 'david.ruizrivera1@gmail.com'),
+(57, 'kamarahr@vcu.edu'),
+(56, 'kamarahr@vcu.edu'),
+(48, 'kamarahr@vcu.edu'),
+(48, 'sales@evruso.com'),
+(52, 'adscaff12@yahoo.com'),
+(49, 'sfrick@gwynethsgift.org'),
+(49, 'veronica@gwynethsgift.org'),
+(49, 'sales@evruso.com'),
+(50, 'radantoniobt10@gmail.com'),
+(52, 'baileyweatherby24@yahoo.com'),
+(50, 'k.kilroy26@gmail.com'),
+(51, 'erod4@comcast.net'),
+(51, 'jmckline2000@yahoo.com'),
+(54, 'adrianahernandez335@yahoo.com'),
+(51, 'adrianahernandez335@yahoo.com'),
+(54, 'carlypleines@msn.com'),
+(51, 'david.ruizrivera1@gmail.com'),
+(51, 'rmgoodwin03@gmail.com'),
+(51, 'radantoniobt10@gmail.com'),
+(51, 'kkilroyfit@gmail.com'),
+(52, 'adrianahernandez335@yahoo.com'),
+(57, 'angie@cegresults.com'),
+(57, 'digmankathleen@gmail.com'),
+(52, 'rmgoodwin03@gmail.com'),
+(52, 'david.ruizrivera1@gmail.com'),
+(57, 'david.ruizrivera1@gmail.com'),
+(57, 'rmgoodwin03@gmail.com'),
+(56, 'reachamog@gmail.com'),
+(57, 'mary@kibbey.com'),
+(57, 'nancy.dongweck@target.com'),
+(54, 'egeorge@linkbank.com'),
+(55, 'egeorge@linkbank.com'),
+(53, 'sistercak@yahoo.com'),
+(54, 'sistercak@yahoo.com'),
+(55, 'lvenable@linkbank.com'),
+(59, '229313@carmax.com'),
+(59, 'kamarahr@vcu.edu'),
+(59, 'angie@cegresults.com'),
+(66, 'gennygymnast03@gmail.com'),
+(66, 'bsisco1@duck.com'),
+(66, 'sdsmith0613@yahoo.com'),
+(66, 'tsamuels2676@gmail.com'),
+(66, 'c_durtche@yahoo.com'),
+(66, 'jasminenduenas@gmail.com'),
+(66, 'vanessashantel2026@gmail.com'),
+(65, 'waldmanlex12@gmail.com'),
+(66, 'ebony89633@gmail.com'),
+(66, 'naftel@cox.net'),
+(66, 'carriejones0923@gmail.com'),
+(66, 'mlanderson0301@gmail.com'),
+(66, 'sisemann521@gmail.com'),
+(66, 'erin.lewis.homes@gmail.com'),
+(66, 'amy.sauro@icloud.com'),
+(66, 'tjax999@gmail.com'),
+(66, 'biddulph.katie@icloud.com'),
+(66, 'guzmanjulio498@icloud.com'),
+(66, 'rafael.hernandez@mwhc.com'),
+(66, 'ameliathib825@gmail.com'),
+(77, 'deloris_clark@carmax.com'),
+(78, 'deloris_clark@carmax.com'),
+(77, '272281@carmax.com'),
+(88, 'sistercak@yahoo.com'),
+(102, 'kmatuczinski@hotmail.com'),
+(94, 'kmatuczinski@hotmail.com'),
+(94, 'matskig@gmail.com'),
+(88, 'lvenable@linkbank.com'),
+(104, 'bsisco1@duck.com'),
+(88, 'ngoode1985@gmail.com'),
+(73, 'vmsroot@gmail.com'),
+(2, 'veronica@gwynethsgift.org'),
+(3, 'veronica@gwynethsgift.org'),
+(4, 'amursurf226@yahoo.com'),
+(4, 'kamarahr@vcu.edu'),
+(4, 'sales@evruso.com'),
+(4, 'marytokar1@gmail.com'),
+(4, 'dre1074@gmail.com'),
+(4, 'neelylewis@hotmail.com'),
+(5, 'amursurf226@yahoo.com'),
+(6, 'amursurf226@yahoo.com'),
+(7, 'amursurf226@yahoo.com'),
+(8, 'amursurf226@yahoo.com'),
+(9, 'amursurf226@yahoo.com'),
+(10, 'amursurf226@yahoo.com'),
+(5, 'sistercak@yahoo.com'),
+(5, 'aimee.kline226@gmail.com'),
+(6, 'angie@cegresults.com'),
+(6, 'kamarahr@vcu.edu'),
+(6, 'kdobyns@gwynethsgift.org'),
+(6, 'erinm@gwynethsgift.org'),
+(15, 'jadehkerey@gmail.com'),
+(7, 'lgould@vapartnersbank.com'),
+(7, 'kdobyns@gwynethsgift.org'),
+(7, 'erinm@gwynethsgift.org'),
+(7, 'kamarahr@vcu.edu'),
+(7, 'sales@evruso.com'),
+(7, 'sistercak@yahoo.com'),
+(7, 'annettasheriff03@gmail.com'),
+(18, 'wangkat18@gmail.com'),
+(7, 'wangkat18@gmail.com'),
+(8, 'annettasheriff03@gmail.com'),
+(8, 'kamarahr@vcu.edu'),
+(8, 'veronica@gwynethsgift.org'),
+(10, 'neelylewis@hotmail.com'),
+(9, 'kamarahr@vcu.edu'),
+(10, 'kamarahr@vcu.edu'),
+(11, 'kamarahr@vcu.edu'),
+(9, 'annettasheriff03@gmail.com'),
+(19, 'sandrasteelenp@gmail.com'),
+(21, 'lisaedurham@gmail.com'),
+(11, 'tcstabisz@gmail.com'),
+(19, 'matskig@gmail.com'),
+(19, 'bsilk@cox.net'),
+(22, 'amanda@fahass.org'),
+(21, 'angie@cegresults.com'),
+(22, 'kamarahr@vcu.edu'),
+(22, 'natesellsva@gmail.com'),
+(25, 'kathryndurhamkmd1@gmail.com'),
+(27, 'kathryndurhamkmd1@gmail.com'),
+(32, 'kamarahr@vcu.edu'),
+(36, 'digmankathleen@gmail.com'),
+(36, 'k.kilroy26@gmail.com'),
+(36, 'rhoads114@gmail.com'),
+(36, 'sales@evruso.com'),
+(36, 'rmgoodwin03@gmail.com'),
+(36, 'david.ruizrivera1@gmail.com'),
+(36, 'kamarahr@vcu.edu'),
+(54, 'adscaff12@yahoo.com'),
+(44, 'p.morris@live.com'),
+(44, 'todd@storagecollections.com'),
+(44, 'nevershoutkris@icloud.com'),
+(44, 'adscaff12@yahoo.com'),
+(42, 'sales@evruso.com'),
+(45, 'digmankathleen@gmail.com'),
+(45, 'nancy.dongweck@target.com'),
+(45, 'k.kilroy26@gmail.com'),
+(45, 'kjtj02@gmail.com'),
+(45, 'mary@kibbey.com'),
+(44, 'natesellsva@gmail.com'),
+(45, 'david.ruizrivera1@gmail.com'),
+(45, 'rmgoodwin03@gmail.com'),
+(44, 'tcstabisz@gmail.com'),
+(48, 'adscaff12@yahoo.com'),
+(51, 'adscaff12@yahoo.com'),
+(48, 'kmatuczinski@hotmail.com'),
+(50, 'kmatuczinski@hotmail.com'),
+(48, 'matskig@gmail.com'),
+(50, 'matskig@gmail.com'),
+(46, 'kmatuczinski@hotmail.com'),
+(47, 'kmatuczinski@hotmail.com'),
+(53, 'amursurf226@yahoo.com'),
+(54, 'amursurf226@yahoo.com'),
+(51, 'amursurf226@yahoo.com'),
+(48, 'nevershoutkris@icloud.com'),
+(52, 'planetofthekids@yahoo.com'),
+(48, 'lilysanford06@gmail.com'),
+(50, 'rmgoodwin03@gmail.com'),
+(50, 'david.ruizrivera1@gmail.com'),
+(57, 'kamarahr@vcu.edu'),
+(56, 'kamarahr@vcu.edu'),
+(48, 'kamarahr@vcu.edu'),
+(48, 'sales@evruso.com'),
+(52, 'adscaff12@yahoo.com'),
+(49, 'sfrick@gwynethsgift.org'),
+(49, 'veronica@gwynethsgift.org'),
+(49, 'sales@evruso.com'),
+(50, 'radantoniobt10@gmail.com'),
+(52, 'baileyweatherby24@yahoo.com'),
+(50, 'k.kilroy26@gmail.com'),
+(51, 'erod4@comcast.net'),
+(51, 'jmckline2000@yahoo.com'),
+(54, 'adrianahernandez335@yahoo.com'),
+(51, 'adrianahernandez335@yahoo.com'),
+(54, 'carlypleines@msn.com'),
+(51, 'david.ruizrivera1@gmail.com'),
+(51, 'rmgoodwin03@gmail.com'),
+(51, 'radantoniobt10@gmail.com'),
+(51, 'kkilroyfit@gmail.com'),
+(52, 'adrianahernandez335@yahoo.com'),
+(57, 'angie@cegresults.com'),
+(57, 'digmankathleen@gmail.com'),
+(52, 'rmgoodwin03@gmail.com'),
+(52, 'david.ruizrivera1@gmail.com'),
+(57, 'david.ruizrivera1@gmail.com'),
+(57, 'rmgoodwin03@gmail.com'),
+(56, 'reachamog@gmail.com'),
+(57, 'mary@kibbey.com'),
+(57, 'nancy.dongweck@target.com'),
+(54, 'egeorge@linkbank.com'),
+(55, 'egeorge@linkbank.com'),
+(53, 'sistercak@yahoo.com'),
+(54, 'sistercak@yahoo.com'),
+(55, 'lvenable@linkbank.com'),
+(59, '229313@carmax.com'),
+(59, 'kamarahr@vcu.edu'),
+(59, 'angie@cegresults.com'),
+(66, 'gennygymnast03@gmail.com'),
+(66, 'bsisco1@duck.com'),
+(66, 'sdsmith0613@yahoo.com'),
+(66, 'tsamuels2676@gmail.com'),
+(66, 'c_durtche@yahoo.com'),
+(66, 'jasminenduenas@gmail.com'),
+(66, 'vanessashantel2026@gmail.com'),
+(65, 'waldmanlex12@gmail.com'),
+(66, 'ebony89633@gmail.com'),
+(66, 'naftel@cox.net'),
+(66, 'carriejones0923@gmail.com'),
+(66, 'mlanderson0301@gmail.com'),
+(66, 'sisemann521@gmail.com'),
+(66, 'erin.lewis.homes@gmail.com'),
+(66, 'amy.sauro@icloud.com'),
+(66, 'tjax999@gmail.com'),
+(66, 'biddulph.katie@icloud.com'),
+(66, 'guzmanjulio498@icloud.com'),
+(66, 'rafael.hernandez@mwhc.com'),
+(66, 'ameliathib825@gmail.com'),
+(77, 'deloris_clark@carmax.com'),
+(78, 'deloris_clark@carmax.com'),
+(77, '272281@carmax.com'),
+(88, 'sistercak@yahoo.com'),
+(102, 'kmatuczinski@hotmail.com'),
+(94, 'kmatuczinski@hotmail.com'),
+(94, 'matskig@gmail.com'),
+(88, 'lvenable@linkbank.com'),
+(104, 'bsisco1@duck.com'),
+(88, 'ngoode1985@gmail.com'),
+(73, 'vmsroot@gmail.com'),
+(2, 'veronica@gwynethsgift.org'),
+(3, 'veronica@gwynethsgift.org'),
+(4, 'amursurf226@yahoo.com'),
+(4, 'kamarahr@vcu.edu'),
+(4, 'sales@evruso.com'),
+(4, 'marytokar1@gmail.com'),
+(4, 'dre1074@gmail.com'),
+(4, 'neelylewis@hotmail.com'),
+(5, 'amursurf226@yahoo.com'),
+(6, 'amursurf226@yahoo.com'),
+(7, 'amursurf226@yahoo.com'),
+(8, 'amursurf226@yahoo.com'),
+(9, 'amursurf226@yahoo.com'),
+(10, 'amursurf226@yahoo.com'),
+(5, 'sistercak@yahoo.com'),
+(5, 'aimee.kline226@gmail.com'),
+(6, 'angie@cegresults.com'),
+(6, 'kamarahr@vcu.edu'),
+(6, 'kdobyns@gwynethsgift.org'),
+(6, 'erinm@gwynethsgift.org'),
+(15, 'jadehkerey@gmail.com'),
+(7, 'lgould@vapartnersbank.com'),
+(7, 'kdobyns@gwynethsgift.org'),
+(7, 'erinm@gwynethsgift.org'),
+(7, 'kamarahr@vcu.edu'),
+(7, 'sales@evruso.com'),
+(7, 'sistercak@yahoo.com'),
+(7, 'annettasheriff03@gmail.com'),
+(18, 'wangkat18@gmail.com'),
+(7, 'wangkat18@gmail.com'),
+(8, 'annettasheriff03@gmail.com'),
+(8, 'kamarahr@vcu.edu'),
+(8, 'veronica@gwynethsgift.org'),
+(10, 'neelylewis@hotmail.com'),
+(9, 'kamarahr@vcu.edu'),
+(10, 'kamarahr@vcu.edu'),
+(11, 'kamarahr@vcu.edu'),
+(9, 'annettasheriff03@gmail.com'),
+(19, 'sandrasteelenp@gmail.com'),
+(21, 'lisaedurham@gmail.com'),
+(11, 'tcstabisz@gmail.com'),
+(19, 'matskig@gmail.com'),
+(19, 'bsilk@cox.net'),
+(22, 'amanda@fahass.org'),
+(21, 'angie@cegresults.com'),
+(22, 'kamarahr@vcu.edu'),
+(22, 'natesellsva@gmail.com'),
+(25, 'kathryndurhamkmd1@gmail.com'),
+(27, 'kathryndurhamkmd1@gmail.com'),
+(32, 'kamarahr@vcu.edu'),
+(36, 'digmankathleen@gmail.com'),
+(36, 'k.kilroy26@gmail.com'),
+(36, 'rhoads114@gmail.com'),
+(36, 'sales@evruso.com'),
+(36, 'rmgoodwin03@gmail.com'),
+(36, 'david.ruizrivera1@gmail.com'),
+(36, 'kamarahr@vcu.edu'),
+(54, 'adscaff12@yahoo.com'),
+(44, 'p.morris@live.com'),
+(44, 'todd@storagecollections.com'),
+(44, 'nevershoutkris@icloud.com'),
+(44, 'adscaff12@yahoo.com'),
+(42, 'sales@evruso.com'),
+(45, 'digmankathleen@gmail.com'),
+(45, 'nancy.dongweck@target.com'),
+(45, 'k.kilroy26@gmail.com'),
+(45, 'kjtj02@gmail.com'),
+(45, 'mary@kibbey.com'),
+(44, 'natesellsva@gmail.com'),
+(45, 'david.ruizrivera1@gmail.com'),
+(45, 'rmgoodwin03@gmail.com'),
+(44, 'tcstabisz@gmail.com'),
+(48, 'adscaff12@yahoo.com'),
+(51, 'adscaff12@yahoo.com'),
+(48, 'kmatuczinski@hotmail.com'),
+(50, 'kmatuczinski@hotmail.com'),
+(48, 'matskig@gmail.com'),
+(50, 'matskig@gmail.com'),
+(46, 'kmatuczinski@hotmail.com'),
+(47, 'kmatuczinski@hotmail.com'),
+(53, 'amursurf226@yahoo.com'),
+(54, 'amursurf226@yahoo.com'),
+(51, 'amursurf226@yahoo.com'),
+(48, 'nevershoutkris@icloud.com'),
+(52, 'planetofthekids@yahoo.com'),
+(48, 'lilysanford06@gmail.com'),
+(50, 'rmgoodwin03@gmail.com'),
+(50, 'david.ruizrivera1@gmail.com'),
+(57, 'kamarahr@vcu.edu'),
+(56, 'kamarahr@vcu.edu'),
+(48, 'kamarahr@vcu.edu'),
+(48, 'sales@evruso.com'),
+(52, 'adscaff12@yahoo.com'),
+(49, 'sfrick@gwynethsgift.org'),
+(49, 'veronica@gwynethsgift.org'),
+(49, 'sales@evruso.com'),
+(50, 'radantoniobt10@gmail.com'),
+(52, 'baileyweatherby24@yahoo.com'),
+(50, 'k.kilroy26@gmail.com'),
+(51, 'erod4@comcast.net'),
+(51, 'jmckline2000@yahoo.com'),
+(54, 'adrianahernandez335@yahoo.com'),
+(51, 'adrianahernandez335@yahoo.com'),
+(54, 'carlypleines@msn.com'),
+(51, 'david.ruizrivera1@gmail.com'),
+(51, 'rmgoodwin03@gmail.com'),
+(51, 'radantoniobt10@gmail.com'),
+(51, 'kkilroyfit@gmail.com'),
+(52, 'adrianahernandez335@yahoo.com'),
+(57, 'angie@cegresults.com'),
+(57, 'digmankathleen@gmail.com'),
+(52, 'rmgoodwin03@gmail.com'),
+(52, 'david.ruizrivera1@gmail.com'),
+(57, 'david.ruizrivera1@gmail.com'),
+(57, 'rmgoodwin03@gmail.com'),
+(56, 'reachamog@gmail.com'),
+(57, 'mary@kibbey.com'),
+(57, 'nancy.dongweck@target.com'),
+(54, 'egeorge@linkbank.com'),
+(55, 'egeorge@linkbank.com'),
+(53, 'sistercak@yahoo.com'),
+(54, 'sistercak@yahoo.com'),
+(55, 'lvenable@linkbank.com'),
+(59, '229313@carmax.com'),
+(59, 'kamarahr@vcu.edu'),
+(59, 'angie@cegresults.com'),
+(66, 'gennygymnast03@gmail.com'),
+(66, 'bsisco1@duck.com'),
+(66, 'sdsmith0613@yahoo.com'),
+(66, 'tsamuels2676@gmail.com'),
+(66, 'c_durtche@yahoo.com'),
+(66, 'jasminenduenas@gmail.com'),
+(66, 'vanessashantel2026@gmail.com'),
+(65, 'waldmanlex12@gmail.com'),
+(66, 'ebony89633@gmail.com'),
+(66, 'naftel@cox.net'),
+(66, 'carriejones0923@gmail.com'),
+(66, 'mlanderson0301@gmail.com'),
+(66, 'sisemann521@gmail.com'),
+(66, 'erin.lewis.homes@gmail.com'),
+(66, 'amy.sauro@icloud.com'),
+(66, 'tjax999@gmail.com'),
+(66, 'biddulph.katie@icloud.com'),
+(66, 'guzmanjulio498@icloud.com'),
+(66, 'rafael.hernandez@mwhc.com'),
+(66, 'ameliathib825@gmail.com'),
+(77, 'deloris_clark@carmax.com'),
+(78, 'deloris_clark@carmax.com'),
+(77, '272281@carmax.com'),
+(88, 'sistercak@yahoo.com'),
+(102, 'kmatuczinski@hotmail.com'),
+(94, 'kmatuczinski@hotmail.com'),
+(94, 'matskig@gmail.com'),
+(88, 'lvenable@linkbank.com'),
+(104, 'bsisco1@duck.com'),
+(88, 'ngoode1985@gmail.com'),
 (73, 'vmsroot@gmail.com');
 
 -- --------------------------------------------------------
@@ -370,7 +862,6 @@ INSERT INTO `dbeventvolunteers` (`eventID`, `userID`) VALUES
 -- Table structure for table `dbexternaldocuments`
 --
 
-DROP TABLE IF EXISTS `dbexternaldocuments`;
 CREATE TABLE `dbexternaldocuments` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -391,7 +882,6 @@ INSERT INTO `dbexternaldocuments` (`id`, `title`, `url`) VALUES
 -- Table structure for table `dbforums`
 --
 
-DROP TABLE IF EXISTS `dbforums`;
 CREATE TABLE `dbforums` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
@@ -406,7 +896,6 @@ CREATE TABLE `dbforums` (
 -- Table structure for table `dbmessages`
 --
 
-DROP TABLE IF EXISTS `dbmessages`;
 CREATE TABLE `dbmessages` (
   `id` int(11) NOT NULL,
   `senderID` varchar(256) NOT NULL,
@@ -9240,16 +9729,14 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 (8826, 'vmsroot', 'sfrick@gwynethsgift.org', 'Greg Matuczinski signed up for an event!', 'Exciting news!\r\n\r\nGreg Matuczinski signed up for the [Trinity Episcopal Church Training](event: 94) event from 9:30 AM to 11:30 AM on Saturday, March 22, 2025.', '2025-01-12-18:15', 0),
 (8827, 'vmsroot', 'tiffany@gwynethsgift.org', 'Greg Matuczinski signed up for an event!', 'Exciting news!\r\n\r\nGreg Matuczinski signed up for the [Trinity Episcopal Church Training](event: 94) event from 9:30 AM to 11:30 AM on Saturday, March 22, 2025.', '2025-01-12-18:15', 1),
 (8828, 'vmsroot', 'veronica@gwynethsgift.org', 'Greg Matuczinski signed up for an event!', 'Exciting news!\r\n\r\nGreg Matuczinski signed up for the [Trinity Episcopal Church Training](event: 94) event from 9:30 AM to 11:30 AM on Saturday, March 22, 2025.', '2025-01-12-18:15', 0),
-(8829, 'vmsroot', 'vmsroot@gmail.com', 'Greg Matuczinski signed up for an event!', 'Exciting news!\r\n\r\nGreg Matuczinski signed up for the [Trinity Episcopal Church Training](event: 94) event from 9:30 AM to 11:30 AM on Saturday, March 22, 2025.', '2025-01-12-18:15', 1);
+(8830, 'vmsroot', 'erinm@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0);
 INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `time`, `wasRead`) VALUES
-(8830, 'vmsroot', 'erinm@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
 (8831, 'vmsroot', 'kdobyns@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
 (8832, 'vmsroot', 'polack@umw.edu', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
 (8833, 'vmsroot', 'rwarren@mail.umw.edu', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
 (8834, 'vmsroot', 'sfrick@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
 (8835, 'vmsroot', 'tiffany@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 1),
 (8836, 'vmsroot', 'veronica@gwynethsgift.org', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 0),
-(8837, 'vmsroot', 'vmsroot@gmail.com', 'Lakeisha Venable signed up for an event!', 'Exciting news!\r\n\r\nLakeisha Venable signed up for the [Mom Prom 2025 (FXBG Expo Center) - EVENT VOLUNTEERS](event: 88) event from 4:30 PM to 11:30 PM on Saturday, April 12, 2025.', '2025-01-13-08:55', 1),
 (8838, 'vmsroot', '229313@carmax.com', 'A new event was created!', 'Exciting news!\r\n\r\nThe [Livingston Elementary School Training](event: 104) event from 12:15 PM to 3:30 PM on Tuesday, January 14, 2025 was added!\r\nSign up today!', '2025-01-13-10:15', 0),
 (8839, 'vmsroot', '272281@carmax.com', 'A new event was created!', 'Exciting news!\r\n\r\nThe [Livingston Elementary School Training](event: 104) event from 12:15 PM to 3:30 PM on Tuesday, January 14, 2025 was added!\r\nSign up today!', '2025-01-13-10:15', 0),
 (8840, 'vmsroot', 'a.jt.53@hotmail.com', 'A new event was created!', 'Exciting news!\r\n\r\nThe [Livingston Elementary School Training](event: 104) event from 12:15 PM to 3:30 PM on Tuesday, January 14, 2025 was added!\r\nSign up today!', '2025-01-13-10:15', 0),
@@ -9402,8 +9889,7 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 (8990, 'vmsroot', 'tiffany@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8991, 'vmsroot', 'veronica@gwynethsgift.org', 'admin admin signed up for an event!', 'Exciting news!\r\n\r\nadmin admin signed up for the [Fredericksburg Nationals](event: 73) event from 5:30 PM to 9:30 PM on Thursday, April 10, 2025.', '2025-03-12-11:21', 0),
 (8996, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: william knight!', 'william knight has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-16-19:44', 1),
-(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0),
-(8998, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: test2 test2!', 'test2 test2 has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-24-17:52', 0);
+(8997, 'vmsroot@gmail.com', 'fake@fake.com', 'New Board Member Registration: fake boardmember!', 'fake boardmember has registered as a new board member. Please go to their profile and change their role status  from volunteer to boardmember to approve their registration.', '2025-03-18-20:14', 0);
 
 -- --------------------------------------------------------
 
@@ -9411,7 +9897,6 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 -- Table structure for table `dbpersons`
 --
 
-DROP TABLE IF EXISTS `dbpersons`;
 CREATE TABLE `dbpersons` (
   `id` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `start_date` text DEFAULT NULL,
@@ -9498,9 +9983,11 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('angie@cegresults.com', '2023-05-31', 'portland', 'Angie', 'Sullivan', '11106 Parkview Drive', 'Fredericksburg', 'VA', '22408', '5408402007', 'cellphone', '', '', '1971-07-14', 'angie@cegresults.com', 'M', '', '', '', 'Angie Sullivan', '5408425482', 'Spouse', 'anytime', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$oqQqheiHyLHK2BVTrBwpqeSwYCHmN1yWr8Cp8ezMgTQ/M7/9RxEVe', '', '', '', '', '', '', '', '', '17:00', '21:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('annabellewheelis10@gmail.com', '2024-08-01', 'portland', 'Annabelle', 'Wheelis', '75A Boundry Drive', 'Stafford', 'VA', '22556', '5403407177', 'cellphone', '', '', '2008-10-09', 'annabellewheelis10@gmail.com', 'XXL', '', '', '1', 'April Wheelis', '(540) 455-02', 'Mother', '2 PM to 8 PM', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$CId1yvdbwswDwRYXMcmTNenSyx.g9rUJlpR2XQ96GvEyescKX9V4e', '16:00', '23:00', '00:00', '23:59', '00:00', '23:59', '00:00', '23:59', '00:00', '23:59', '00:00', '23:59', '00:00', '23:59', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('annettasheriff03@gmail.com', '2023-06-29', 'portland', 'Annetta', 'Sheriff', '9225 Split Oak Dr', 'Fredericksburg', 'VA', '22407', '5402572924', 'cellphone', '', '', '2003-12-29', 'annettasheriff03@gmail.com', 'L', '', '', '1', 'Wade W.Sheriff', '5406429743', 'Mother', 'Days', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$/TgvbHQ8bGUuxddxUgRiz.YrMb1mo3ZoG6k3CLZ0wMo4x5Ci7c25a', '', '', '', '', '', '', '', '', '', '', '17:00', '21:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('asd@gmail.com', '2025-03-27', 'portland', 'John', 'T', '1211 f', '12312', 'VA', '22192', '1231233333', 'cellphone', '2222222222', '', '2025-03-27', 'asd@gmail.com', 'S', '', '', '1', '', '', 'vmsroot@gmail.com', 'weeec', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$3Q7LBKyfpTpNDJOA/jsZo.Zyc2o5K.GWqR9j3e0m6vQwKceDiZpTG', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'Mr', 'asdfasdf', 'asdfasd', 'VA', '22222', 'asd', 'as'),
 ('baileyweatherby24@yahoo.com', '2024-09-02', 'portland', 'Bailey', 'Weatherby', '303 Walnut Drive', 'Stafford', 'VA', '22405', '5402203699', 'cellphone', '', '', '2002-09-30', 'baileyweatherby24@yahoo.com', 'M', '1', '1', '1', 'Jennifer Weatherby', '(540) 604-15', 'Mother', 'Mornings or Evenings', 'text', '', '', '', '', '', 'Communication Skills, Teamwork, Strong Work ethic, and Time Management', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$UwTpqGKhlQ7wlO04rOxQpuzpdpFLWCBdTasGg.wgmal6ofv8FD0Ry', '08:00', '15:00', '', '', '15:00', '17:00', '', '', '15:00', '23:59', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('behackett@outlook.com', '2024-02-01', 'portland', 'Bethanie', 'Hackett', '1701 College Avenue, UMW Box 1565', 'Fredericksburg', 'VA', '22401', '9072051035', 'cellphone', '', '', '2005-08-01', 'behackett@outlook.com', 'M', '1', '', '', 'Kristine Hackett', '9072444925', 'Mother', 'Afternoons and evenings during weekdays; all day weekends', 'text', '', '', '', '', '', 'Computer science skills - coding in Java, C, Python', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$o61MEso9gdUzGiOPjXnSBO3RsvDE.xqQgOKuLFglM2hiPKRvXUNCe', '10:00', '20:00', '', '', '10:00', '17:00', '', '', '12:00', '17:00', '', '', '10:00', '20:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('biddulph.katie@icloud.com', '2024-11-18', 'portland', 'Katerine', 'Biddulph', '1010 Hillcrest Terr', 'Fredericksburg', 'VA', '22405', '5402733058', 'cellphone', '', '', '2007-07-09', 'biddulph.katie@icloud.com', 'XL', '', '', '1', 'Joanne biddulph', '(732) 735-78', 'Mother', 'Days', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$BwgkvbjdOdLWH3lOs990k.O68IrHjsD22li9WA9/Qx/18Qm/ERoJ2', '', '', '', '', '', '', '10:00', '12:00', '', '', '', '', '10:00', '12:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('brentg@gmail.com', '2025-04-24', 'portland', 'Brent', 'G', '3242 g', 'asdfads', 'VA', '22222', '0000000000', 'cellphone', '', '', '2025-03-14', 'brentg@gmail.com', 'S', '', '', '', 'Joseph Tsibu-Gyan', '7030900000', 'Mom', '', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$YGKzW.BUpBmJxwgek7O6QeTgQF8WagN7OJoZJmmVUYdPMwJhe6QHe', '01:00', '11:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'Male', '', '', '', '', '', '', ''),
 ('brittany.mcbride@carystreetpartners.com', '2023-09-21', 'portland', 'BRITTANY', 'MCBRIDE', '1609 Charles St.', 'Fredericksburg', 'VA', '22401', '8142821067', 'cellphone', '', '', '1996-08-28', 'brittany.mcbride@carystreetpartners.com', 'S', '', '', '', 'Theo Doughty', '7039195138', 'Partner', 'Days', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$Rue9BsXoWBiS9EBkzA6rI.JuRW5wnzKicbNySf9YJz/wLMCP9iLrq', '', '', '', '', '', '', '', '', '15:00', '17:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('bsilk@cox.net', '2023-09-04', 'portland', 'Bob', 'Silkensen', '60 Ivy Creek Ln', 'Fredericksburg', 'VA', '22405', '5402730097', 'cellphone', '', '', '1948-10-14', 'bsilk@cox.net', 'XXL', '1', '', '1', 'Chris Silkensen', '5402735845', 'Wife', 'Evenings', 'email', '', '', '', '', '', 'Good with computers. I play golf. I once worked at Meadows Farm Golf Course.', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$x2uqzHWcvYCKc7GmVaaQm.RWxrbY2h7vOylSTI0xKE5R4l0GO5uIC', '', '', '', '', '', '', '', '', '', '', '06:00', '12:00', '', '', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('bsisco1@duck.com', '2024-11-12', 'portland', 'Brandon', 'Sisco', '1900 Charles street', 'Fredricksburg', 'VA', '22401', '8045727218', 'cellphone', '', '', '1995-09-27', 'bsisco1@duck.com', 'XL', '1', '', '1', 'Tiffany Steel', '6145728196', 'Spouse', 'Days', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$3nveJS8vDSQO7osHYIETXewfX/RFM5P1maYrRWafbTV0fwU3FsRWC', '08:00', '12:00', '', '', '', '', '', '', '', '', '', '', '08:00', '12:00', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9541,6 +10028,7 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('joel@gwynethsgift.org', '2023-05-01', 'portland', 'Joel', 'Griffin', '2217 Princess Anne St', 'Fredericksburg', 'VA', '22401', '5624002637', 'cellphone', '', '', '1974-03-21', 'joel@gwynethsgift.org', 'XL', '1', '1', '1', 'Jennifer Griffin', '5624002637', 'Husband', 'evenings', 'email', '', '', '', '', '', 'Public Speaking', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$p/Joibffjdw/1bpeFGC.kuYoNgXZLVus3q3StTHXQ7njwrOsj5exm', '', '', '', '', '15:00', '22:00', '', '', '', '', '', '', '', '', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('joey@jfiore.com', '2023-07-16', 'portland', 'Joey', 'Fiore', '12 Earley Court', 'Stafford', 'VA', '22554', '5406592276', 'home', '', '', '2005-04-23', 'joey@jfiore.com', 'L', '1', '', '1', 'Jeff Fiore', '7035938595', 'Father', 'Evenings', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$ghNAIjOFbVkA3nICzec/Q.GOa.GUdhokEXXFrervGoBRjXAw1pBWW', '09:00', '17:00', '09:00', '17:00', '', '', '09:00', '17:00', '09:00', '17:00', '09:00', '17:00', '09:00', '17:00', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('johnrthompson836@gmail.com', '2024-02-08', 'portland', 'John', 'Thompson', '11710 Rutherford dr', 'Frederiskburg', 'VA', '22407', '2409419857', 'cellphone', '', '', '1991-09-09', 'johnrthompson836@gmail.com', 'L', '', '', '1', 'Katrina', '(301) 351-16', 'Wife', 'Days', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$4kjhHisp4mJVT1F7SlF9Q.86hA1sOIIjxPGstPrwovx8.HrVavJsm', '', '', '08:00', '19:00', '08:00', '19:00', '08:00', '19:00', '08:00', '19:00', '07:00', '19:00', '', '', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('jtsi@gmail.com', '2025-03-28', 'portland', 'Joseph', 'T', '4137', 'Woodbridge', 'VA', '22000', '7034894000', 'cellphone', '', '', '2025-03-28', 'jtsi@gmail.com', 'S', '', '', '1', 'Joseph Boom', '', 'root@gmail.com', '', 'text', '', '', '', '', '', '', '', 'boardmember', 'Active', '', '', '', '', '$2y$10$lnzzSX048tJPxrl0iYlI6.Dn9m.BzHMsO3S9Tf09UudvVEvnNWxIq', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '122 fake', 'fake', 'VA', '23322', 'as', 'addd'),
 ('juljacquez@gmail.com', '2023-09-01', 'portland', 'Julie', 'Jacquez', '402 Alder Dr', 'Stafford', 'VA', '22554', '5713347977', 'cellphone', '', '', '1975-05-10', 'juljacquez@gmail.com', 'L', '1', '1', '1', 'Richard Jacquez', '5712284980', 'Spouse', 'Daytime', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$MqnQArNMrVpikNGo.lmC1ulI1P2DZmGA5jjiOPMjsqgjVqfYuKdmu', '', '', '', '', '10:00', '14:00', '10:00', '14:00', '10:00', '14:00', '', '', '00:00', '23:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('k.kilroy26@gmail.com', '2024-05-23', 'portland', 'Kaylie', 'Kilroy', '1315 Rappahannock Ave.', 'Fredericksburg', 'VA', '22401', '9045408288', 'cellphone', '', '', '2002-07-10', 'k.kilroy26@gmail.com', 'S', '1', '1', '1', 'David Dye', '(540) 831-96', 'Boyfriend', 'Days', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$WSBIUG79hQiPmbtOiiiAdez3K4FYe4yeMhCLnqw8kZ.UH8OfSOpOe', '', '', '', '', '', '', '', '', '16:00', '23:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('kamarahr@vcu.edu', '2023-05-03', 'portland', 'Haroun', 'Kamara', '15 Scottsdale drive', 'Fredericksburg', 'VA', '22405', '7035087955', 'cellphone', '', '', '1995-06-14', 'kamarahr@vcu.edu', 'M', '1', '', '1', 'Zainab tarawallie', '7035087955', 'Mother', 'Days', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$JB9JuREQLrFSjtF/DZQcMuE.19NZIWSqRDaYQAEpccP3weYuL34GG', '', '', '', '', '', '', '', '', '16:00', '22:00', '', '', '10:00', '18:00', '', 0, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9564,11 +10052,11 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('mlanderson0301@gmail.com', '2024-11-18', 'portland', 'Michelle', 'Anderson', '10611 Heather Greens Cir', 'Spotsylvania', 'VA', '22553', '7039692162', 'cellphone', '', '', '1968-03-01', 'mlanderson0301@gmail.com', 'XXL', '1', '', '1', 'Anthony Anderson', '(703) 862-24', '', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$IwT1WCGi4tLnCIYBFwuoa.eYhkJjQ59NBwvp79ZK8QbHG5kWTUzdO', '', '', '', '', '', '', '', '', '', '', '', '', '10:00', '16:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('mossfamx4@gmail.com', '2024-04-29', 'portland', 'Deborah', 'Moss', '11295 Shamrock Lane', 'King George', 'VA', '22485', '5409039389', 'cellphone', '', '', '1962-12-21', 'mossfamx4@gmail.com', 'L', '1', '1', '1', 'Sherman Moss', '(540) 429-25', 'Husband', '540 903-9389', 'phone', '', '', '', '', '', 'computer, food preparation and organization, activity support', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$SeQPzX4MOQnPUKVd0CVKlugScjc6oPHbyI/Mz2RKgX6PSLpdyhYZe', '', '', '', '', '', '', '', '', '18:00', '22:00', '18:00', '22:00', '06:00', '14:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('naftel@cox.net', '2024-11-30', 'portland', 'Nora', 'Aftel', '1010 Hillcrest Terrace', 'Fredericksburg', 'VA', '22405', '5408094420', 'cellphone', '', '', '1972-07-23', 'naftel@cox.net', 'S', '', '', '', 'Robert Aftel', '(540) 809-44', 'spouse', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Inactive', '', '', '', '', '$2y$10$vrjAskoBIFwzkvFNq0yz7evZslrIvWNs4QHrERfnZ4ephZ3stz5He', '', '', '', '', '', '', '', '', '', '', '', '', '10:00', '13:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('nam.ballard@gmail.com', '2024-10-22', 'portland', 'Amber', 'Ballard', '32 Blair Road', 'Fredericksburg', 'VA', '22405', '5406047803', 'cellphone', '', '', '2007-02-26', 'nam.ballard@gmail.com', 'M', '1', '', '1', 'Tiffaney Ballard', '(540) 845-11', 'Mother', 'Evenings', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$2fl1bPe2QHNDxX3ZEXEP1.sFrWaMlC.DGp2MYxxxhOL45cg7GiMt6', '', '', '15:00', '17:00', '', '', '', '', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('nam.ballard@gmail.com', '2024-10-22', 'portland', 'Amber', 'Ballard', '32 Blair Road', 'Fredericksburg', 'VA', '22405', '5406047803', 'cellphone', '', '', '2007-02-26', 'nam.ballard@gmail.com', 'M', '1', '', '1', 'Tiffaney Ballard', '(540) 845-11', 'Mother', 'Evenings', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$2fl1bPe2QHNDxX3ZEXEP1.sFrWaMlC.DGp2MYxxxhOL45cg7GiMt6', '', '', '15:00', '17:00', '', '', '', '', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`, `address`, `city`, `state`, `zip`, `phone1`, `phone1type`, `phone2`, `phone2type`, `birthday`, `email`, `shirt_size`, `computer`, `camera`, `transportation`, `contact_name`, `contact_num`, `relation`, `contact_time`, `cMethod`, `position`, `credithours`, `howdidyouhear`, `commitment`, `motivation`, `specialties`, `convictions`, `type`, `status`, `availability`, `schedule`, `hours`, `notes`, `password`, `sundays_start`, `sundays_end`, `mondays_start`, `mondays_end`, `tuesdays_start`, `tuesdays_end`, `wednesdays_start`, `wednesdays_end`, `thursdays_start`, `thursdays_end`, `fridays_start`, `fridays_end`, `saturdays_start`, `saturdays_end`, `profile_pic`, `force_password_change`, `gender`, `prefix`, `mailing_address`, `mailing_city`, `mailing_state`, `mailing_zip`, `affiliated_org`, `title_at_affiliated_org`) VALUES
 ('nancy.dongweck@target.com', '2024-06-20', 'portland', 'Nancy', 'Dongweck', '6241 Courthouse Rd.', 'Spotsylvania', 'VA', '22551', '4349413994', 'cellphone', '', '', '1957-03-03', 'nancy.dongweck@target.com', 'L', '', '', '1', '', '', '', 'Evenings', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$3ueLCz7cU62OmvpXAYu/uOiFmK5g38X1mMVzhA/4ODelQXlirwKYC', '', '', '', '', '', '', '', '', '17:00', '22:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('nancylynnrp@gmail.com', '2024-06-09', 'portland', 'Nancy', 'Pattillo', '1027 Portugal Drive', 'Stafford', 'VA', '22554', '9123122748', 'cellphone', '', '', '1983-09-25', 'nancylynnrp@gmail.com', 'S', '1', '', '1', '', '', '', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$kb5uzTWS2i0pXDpmvwu9bOT0M59NGKono7c9LzkFmOBskChrErRMW', '', '', '', '', '', '', '', '', '18:00', '22:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('natesellsva@gmail.com', '2023-09-22', 'portland', 'Nate', 'Ferguson', '201 Heritage Commons Drive', 'Fredericksburg', 'VA', '22405', '5713101921', 'cellphone', '', '', '1979-02-09', 'natesellsva@gmail.com', 'M', '1', '', '1', 'Faranda Ferguson', '5404290703', 'Sister', 'Evening', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$bNixWK08eZzNVZlq2BysYe/p2Cb/ianF8HJZ1mY4zu4Vo7TtCuVam', '00:00', '23:59', '00:00', '23:59', '01:00', '23:59', '12:00', '23:59', '12:00', '23:59', '18:00', '21:00', '11:00', '23:59', '', 1, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`, `address`, `city`, `state`, `zip`, `phone1`, `phone1type`, `phone2`, `phone2type`, `birthday`, `email`, `shirt_size`, `computer`, `camera`, `transportation`, `contact_name`, `contact_num`, `relation`, `contact_time`, `cMethod`, `position`, `credithours`, `howdidyouhear`, `commitment`, `motivation`, `specialties`, `convictions`, `type`, `status`, `availability`, `schedule`, `hours`, `notes`, `password`, `sundays_start`, `sundays_end`, `mondays_start`, `mondays_end`, `tuesdays_start`, `tuesdays_end`, `wednesdays_start`, `wednesdays_end`, `thursdays_start`, `thursdays_end`, `fridays_start`, `fridays_end`, `saturdays_start`, `saturdays_end`, `profile_pic`, `force_password_change`, `gender`, `prefix`, `mailing_address`, `mailing_city`, `mailing_state`, `mailing_zip`, `affiliated_org`, `title_at_affiliated_org`) VALUES
+('natesellsva@gmail.com', '2023-09-22', 'portland', 'Nate', 'Ferguson', '201 Heritage Commons Drive', 'Fredericksburg', 'VA', '22405', '5713101921', 'cellphone', '', '', '1979-02-09', 'natesellsva@gmail.com', 'M', '1', '', '1', 'Faranda Ferguson', '5404290703', 'Sister', 'Evening', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$bNixWK08eZzNVZlq2BysYe/p2Cb/ianF8HJZ1mY4zu4Vo7TtCuVam', '00:00', '23:59', '00:00', '23:59', '01:00', '23:59', '12:00', '23:59', '12:00', '23:59', '18:00', '21:00', '11:00', '23:59', '', 1, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('neelylewis@hotmail.com', '2023-05-16', 'portland', 'Neely', 'Lewis', '11268 Tulip Ln', 'King George', 'VA', '22485', '5407500513', 'cellphone', '', '', '1978-07-01', 'neelylewis@hotmail.com', 'XL', '1', '1', '1', 'Molly Watson', '5407068262', 'Daughter', 'Anytime', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$kH2lCZ1qT.4BYFjt/7FgXOJB8OfewVc4o51BiRitTtZMLMqiRyWBW', '10:00', '16:00', '', '', '', '', '14:00', '19:00', '16:00', '21:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('nevershoutkris@icloud.com', '2024-06-03', 'portland', 'Kristyn', 'Gonzalez', '6803 Silverbrook Dr', 'Spotsylvania Courthouse', 'VA', '22553', '5716660240', 'cellphone', '', '', '1996-08-28', 'nevershoutkris@icloud.com', 'M', '', '', '', 'Kristyn Gonzalez', '', '', 'afternoon', 'text', '', '', '', '', '', '', '', 'volunteer', 'Inactive', '', '', '', '', '$2y$10$p0r7CF61xI8Rbwa9SBhYr.Eh2sLP0kBktW9Iq3oRrtQm/TQcCmjka', '', '', '', '', '', '', '', '', '16:00', '22:00', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('ngoode1985@gmail.com', '2025-04-12', 'portland', 'Nicole', 'Goode', '5 Heron Dr. Apt 104', 'Fredericksburg', 'VA', '22406', '2406821576', 'cellphone', '', '', '1985-10-29', 'ngoode1985@gmail.com', 'XXL', '1', '', '1', 'Eric Kornegay', '(571) 552-73', 'Boyfriend', 'anytime', 'text', '', '', '', '', '', 'I am good with people, I am computer savvy. I am volunteering for the Mom Prom on behalf of LinkBank.', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$nz8MbeDkv8JZ1LuqYLJLluNkblAygkKo2GrEvCALrAEqFB63jum2u', '', '', '', '', '', '', '', '', '', '', '', '', '16:00', '23:59', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9593,6 +10081,7 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 ('sdsmith0613@yahoo.com', '2024-11-30', 'portland', 'Shereica', 'Smith', '505 Howison Avenue', 'Fredericksburg', 'VA', '22401', '5402873234', 'cellphone', '', '', '1973-03-13', 'sdsmith0613@yahoo.com', 'XXL', '1', '1', '1', 'Arthur Smith', '(540) 818-63', 'Spouse', 'Mornings', 'text', '', '', '', '', '', 'Notary', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$iO9XWPRuaBg5.7n1jksRkOIMP92wUCcQuXpZfTy95aRq1BPyFBPK.', '', '', '', '', '14:00', '15:00', '', '', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('sfrick@gwynethsgift.org', '2024-07-11', 'portland', 'Shannon', 'Frick', '13000 Platoon Drive', 'Spotsylvania', 'VA', '22551', '7039801996', 'cellphone', '', '', '1984-02-27', 'sfrick@gwynethsgift.org', 'L', '1', '1', '1', 'Alexander Thomson', '(716) 930-10', 'Partner', 'Anytime', 'text', '', '', '', '', '', 'ALS and BLS instruction, and sheer awesomeness.', '', 'superadmin', 'Active', '', '', '', '', '$2y$10$hnkpCdCzDdH3D1Xa8OzjqOdnH1gRRH60dFhUfPkN3k384qWRpdVUy', '04:00', '23:59', '04:00', '23:59', '04:00', '23:59', '04:00', '23:59', '04:00', '23:59', '04:00', '23:59', '04:00', '23:59', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('shaeg2342@gmail.com', '2025-04-12', 'portland', 'Shae', 'Germuska', '1900 Charles Street', 'Fredericksburg', 'VA', '22401', '6146237842', 'cellphone', '', '', '1996-02-23', 'shaeg2342@gmail.com', 'L', '1', '', '1', 'Shani Germuska', '(614) 832-38', '', '', 'text', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$NaMWb7z.jp6Ox4RBJ.q2dOgZ9ZB6pLL23Z7x2yNhKYQSdaaxkuCjG', '', '', '', '', '13:00', '17:00', '', '', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('shawng@gmail.com', '2025-03-31', 'portland', 'Sean', 'McGavin', '23432 fake', '232', 'VA', '23322', '0909999999', 'cellphone', '', '', '2025-03-25', 'shawng@gmail.com', 'S', '', '', '', 'Joseph', '2382887777', 'Mom', 'Evenings', 'phone', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$n4jDNL.ErbfSbi437QVywexsXgYCET5sMLP6SAAO6hmXlXHkzmqT2', '07:00', '16:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'Male', '', '', '', '', '', '', ''),
 ('sheila.nazari2@gmail.com', '2023-08-31', 'portland', 'Sheila', 'Nazari', '4540 Westhall Dr NW', 'Washington', 'WA', '20007', '4159875130', 'cellphone', '', '', '1970-09-12', 'sheila.nazari2@gmail.com', 'M', '1', '', '1', 'Soheil', '4159393141', 'Spouse', 'Day/Evening', 'text', '', '', '', '', '', 'Administrative\r\nManagement \r\nAll skills related to motherhood \r\nA little Farsi', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$3JqLSfwnL8aiGpsWV0wEMuYdE/V76DyOKnpho6oXCgsCy9AZ3byzq', '14:00', '17:00', '18:00', '20:00', '', '', '', '', '', '', '12:00', '18:00', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('sisemann521@gmail.com', '2024-11-18', 'portland', 'Maria', 'Eisenmann', '8 hawthorne court', 'stafford', 'VA', '22554', '5408414484', 'cellphone', '', '', '1970-08-08', 'eisenmann521@gmail.com', 'M', '', '', '', 'Veronica Salinas Gutierrez', '5406930465', 'Gwyneth&#039;s Gift Director', 'daytime', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$A/y3QuNnKXAss9ALUFINUeKRqZVhmEwS0E6OQxNqrppWqfKxBelyG', '06:00', '22:00', '', '', '', '', '', '', '', '', '', '', '03:00', '22:00', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('sistercak@yahoo.com', '2023-05-09', 'portland', 'Carolyn', 'Johnson', '15170 Holleyside Drive', 'Dumfries', 'VA', '22025', '5407356529', 'cellphone', '', '', '1993-07-22', 'sistercak@yahoo.com', 'M', '', '', '1', 'Andrew Johnson', '7034088724', 'Husband', 'Evening, days', 'email', '', '', '', '', '', '', '', 'volunteer', 'Active', '', '', '', '', '$2y$10$BjX6bqDkuW6bzAhUtYaKh..0Z9Sbtd8lijLUOEhiqlnYzBZs9WvAG', '12:00', '23:00', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'Female', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -9689,7 +10178,7 @@ ALTER TABLE `dbeventmedia`
 -- AUTO_INCREMENT for table `dbevents`
 --
 ALTER TABLE `dbevents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `dbexternaldocuments`
@@ -9707,7 +10196,7 @@ ALTER TABLE `dbforums`
 -- AUTO_INCREMENT for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8999;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8998;
 
 --
 -- Constraints for dumped tables
@@ -9731,474 +10220,6 @@ ALTER TABLE `dbeventvolunteers`
 --
 ALTER TABLE `dbforums`
   ADD CONSTRAINT `dbforums_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `dbpersons` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
---
--- Database: `phpmyadmin`
---
-CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `phpmyadmin`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__bookmark`
---
-
-DROP TABLE IF EXISTS `pma__bookmark`;
-CREATE TABLE `pma__bookmark` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `dbase` varchar(255) NOT NULL DEFAULT '',
-  `user` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `query` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__central_columns`
---
-
-DROP TABLE IF EXISTS `pma__central_columns`;
-CREATE TABLE `pma__central_columns` (
-  `db_name` varchar(64) NOT NULL,
-  `col_name` varchar(64) NOT NULL,
-  `col_type` varchar(64) NOT NULL,
-  `col_length` text DEFAULT NULL,
-  `col_collation` varchar(64) NOT NULL,
-  `col_isNull` tinyint(1) NOT NULL,
-  `col_extra` varchar(255) DEFAULT '',
-  `col_default` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__column_info`
---
-
-DROP TABLE IF EXISTS `pma__column_info`;
-CREATE TABLE `pma__column_info` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `column_name` varchar(64) NOT NULL DEFAULT '',
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `transformation` varchar(255) NOT NULL DEFAULT '',
-  `transformation_options` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__designer_settings`
---
-
-DROP TABLE IF EXISTS `pma__designer_settings`;
-CREATE TABLE `pma__designer_settings` (
-  `username` varchar(64) NOT NULL,
-  `settings_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__export_templates`
---
-
-DROP TABLE IF EXISTS `pma__export_templates`;
-CREATE TABLE `pma__export_templates` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `export_type` varchar(10) NOT NULL,
-  `template_name` varchar(64) NOT NULL,
-  `template_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__favorite`
---
-
-DROP TABLE IF EXISTS `pma__favorite`;
-CREATE TABLE `pma__favorite` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__history`
---
-
-DROP TABLE IF EXISTS `pma__history`;
-CREATE TABLE `pma__history` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db` varchar(64) NOT NULL DEFAULT '',
-  `table` varchar(64) NOT NULL DEFAULT '',
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sqlquery` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__navigationhiding`
---
-
-DROP TABLE IF EXISTS `pma__navigationhiding`;
-CREATE TABLE `pma__navigationhiding` (
-  `username` varchar(64) NOT NULL,
-  `item_name` varchar(64) NOT NULL,
-  `item_type` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__pdf_pages`
---
-
-DROP TABLE IF EXISTS `pma__pdf_pages`;
-CREATE TABLE `pma__pdf_pages` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `page_nr` int(10) UNSIGNED NOT NULL,
-  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__recent`
---
-
-DROP TABLE IF EXISTS `pma__recent`;
-CREATE TABLE `pma__recent` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
-
---
--- Dumping data for table `pma__recent`
---
-
-INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"gwynethdb\",\"table\":\"dbeventmedia\"},{\"db\":\"gwynethdb\",\"table\":\"dbevents\"}]');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__relation`
---
-
-DROP TABLE IF EXISTS `pma__relation`;
-CREATE TABLE `pma__relation` (
-  `master_db` varchar(64) NOT NULL DEFAULT '',
-  `master_table` varchar(64) NOT NULL DEFAULT '',
-  `master_field` varchar(64) NOT NULL DEFAULT '',
-  `foreign_db` varchar(64) NOT NULL DEFAULT '',
-  `foreign_table` varchar(64) NOT NULL DEFAULT '',
-  `foreign_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__savedsearches`
---
-
-DROP TABLE IF EXISTS `pma__savedsearches`;
-CREATE TABLE `pma__savedsearches` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `search_name` varchar(64) NOT NULL DEFAULT '',
-  `search_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_coords`
---
-
-DROP TABLE IF EXISTS `pma__table_coords`;
-CREATE TABLE `pma__table_coords` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
-  `x` float UNSIGNED NOT NULL DEFAULT 0,
-  `y` float UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_info`
---
-
-DROP TABLE IF EXISTS `pma__table_info`;
-CREATE TABLE `pma__table_info` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `display_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__table_uiprefs`
---
-
-DROP TABLE IF EXISTS `pma__table_uiprefs`;
-CREATE TABLE `pma__table_uiprefs` (
-  `username` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `prefs` text NOT NULL,
-  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__tracking`
---
-
-DROP TABLE IF EXISTS `pma__tracking`;
-CREATE TABLE `pma__tracking` (
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  `schema_snapshot` text NOT NULL,
-  `schema_sql` text DEFAULT NULL,
-  `data_sql` longtext DEFAULT NULL,
-  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
-  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__userconfig`
---
-
-DROP TABLE IF EXISTS `pma__userconfig`;
-CREATE TABLE `pma__userconfig` (
-  `username` varchar(64) NOT NULL,
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `config_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
-
---
--- Dumping data for table `pma__userconfig`
---
-
-INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2025-03-24 21:29:26', '{\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":389}');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__usergroups`
---
-
-DROP TABLE IF EXISTS `pma__usergroups`;
-CREATE TABLE `pma__usergroups` (
-  `usergroup` varchar(64) NOT NULL,
-  `tab` varchar(64) NOT NULL,
-  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pma__users`
---
-
-DROP TABLE IF EXISTS `pma__users`;
-CREATE TABLE `pma__users` (
-  `username` varchar(64) NOT NULL,
-  `usergroup` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pma__central_columns`
---
-ALTER TABLE `pma__central_columns`
-  ADD PRIMARY KEY (`db_name`,`col_name`);
-
---
--- Indexes for table `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
-
---
--- Indexes for table `pma__designer_settings`
---
-ALTER TABLE `pma__designer_settings`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
-
---
--- Indexes for table `pma__favorite`
---
-ALTER TABLE `pma__favorite`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__history`
---
-ALTER TABLE `pma__history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
-
---
--- Indexes for table `pma__navigationhiding`
---
-ALTER TABLE `pma__navigationhiding`
-  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
-
---
--- Indexes for table `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  ADD PRIMARY KEY (`page_nr`),
-  ADD KEY `db_name` (`db_name`);
-
---
--- Indexes for table `pma__recent`
---
-ALTER TABLE `pma__recent`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__relation`
---
-ALTER TABLE `pma__relation`
-  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
-  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
-
---
--- Indexes for table `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
-
---
--- Indexes for table `pma__table_coords`
---
-ALTER TABLE `pma__table_coords`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
-
---
--- Indexes for table `pma__table_info`
---
-ALTER TABLE `pma__table_info`
-  ADD PRIMARY KEY (`db_name`,`table_name`);
-
---
--- Indexes for table `pma__table_uiprefs`
---
-ALTER TABLE `pma__table_uiprefs`
-  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
-
---
--- Indexes for table `pma__tracking`
---
-ALTER TABLE `pma__tracking`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
-
---
--- Indexes for table `pma__userconfig`
---
-ALTER TABLE `pma__userconfig`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `pma__usergroups`
---
-ALTER TABLE `pma__usergroups`
-  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
-
---
--- Indexes for table `pma__users`
---
-ALTER TABLE `pma__users`
-  ADD PRIMARY KEY (`username`,`usergroup`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__history`
---
-ALTER TABLE `pma__history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- Database: `test`
---
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
