@@ -452,107 +452,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tbody>
             </table>
         </div>
-        <!-- Consolidated Event Volunteers Section -->
         <h2 class="centered">Event Volunteers</h2>
+
+        <!-- TODO: will figure out another way to center
+                 later -->
         <div class="standout">
-            <?php 
+            <ul class="centered">
+                <?php
                 $event_persons = getvolunteers_byevent($id);
                 $capacity = intval($event_info['capacity']);
                 $num_persons = count($event_persons);
-                $remaining_slots = $capacity - $num_persons;
                 $user_id = $_SESSION['_id'];
+                $remaining_slots = $capacity - count($event_persons);
                 $already_assigned = false;
-            ?>
+                if ($remaining_slots) {
+                    echo '<li class="centered">' . $remaining_slots . ' / ' . $capacity . ' Slots Remaining</li>';
+                } else {
+                    echo '<li class="centered">This event is fully booked!</li>';
+                }
 
-            <?php if ($event_in_past): ?>
-                <!-- Past Event: Display a checkbox form for confirming hours -->
-                <form method="POST" action="confirmHours.php" id="confirmHoursForm">
-                    <ul class="centered">
-                        <li class="centered">
-                            <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
-                            <label for="select_all"><strong>Select All</strong></label>
-                        </li>
-                        <?php foreach ($event_persons as $person): ?>
-                            <li class="centered">
-                                <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
-                                <label for="vol_<?php echo $person->get_id(); ?>">
-                                    <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
-                                </label>
-                            </li>
-                            <?php if ($person->get_id() == $user_id) { $already_assigned = true; } ?>
-                        <?php endforeach; ?>
-                        <?php for ($x = 0; $x < $remaining_slots; $x++): ?>
-                            <li class="centered empty-slot">-Empty Slot-</li>
-                        <?php endfor; ?>
-                    </ul>
-                    <input type="hidden" name="event_id" value="<?php echo $id; ?>">
-                    <input type="submit" name="confirm_hours_submit" value="Confirm Hours">
-                </form>
-                <script>
-                    function toggleSelectAll(source) {
-                        var checkboxes = document.querySelectorAll('#confirmHoursForm input[type="checkbox"][name="volunteers[]"]');
-                        for (var i = 0; i < checkboxes.length; i++) {
-                            checkboxes[i].checked = source.checked;
-                        }
+                for ($x = 0; $x < $num_persons; $x += 1) {
+                    $person = $event_persons[$x];
+                    if ($person->get_id() == $user_id) {
+                        $already_assigned = true;
                     }
-                </script>
-            <?php else: ?>
-                <!-- Future/Current Event: Display the standard volunteer list -->
-                <ul class="centered">
-                    <?php 
-                        if ($remaining_slots) {
-                            echo '<li class="centered">' . $remaining_slots . ' / ' . $capacity . ' Slots Remaining</li>';
-                        } else {
-                            echo '<li class="centered">This event is fully booked!</li>';
-                        }
-                        foreach ($event_persons as $person) {
-                            if ($person->get_id() == $user_id) {
-                                $already_assigned = true;
-                            }
-                            if ($access_level > 1) {
-                                echo '<li class="centered remove-person">'.
-                                    '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
-                                    '<form class="remove-person" method="GET">' .
-                                    '<input type="hidden" name="request_type" value="remove" />' .
-                                    '<input type="hidden" name="id" value="'.$id.'">' .
-                                    '<input type="hidden" name="selected_removal_id" value="'.$person->get_id().'" />' .
-                                    '<input class="stripped" type="submit" value="Remove" />' .
-                                    '</form></li>';
-                            } else {
-                                echo '<li class="centered">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</li>';
-                            }
-                        }
-                        for ($x = 0; $x < $remaining_slots; $x++) {
-                            echo '<li class="centered empty-slot">-Empty Slot-</li>';
-                        }
-                    ?>
-                </ul>
-                <?php 
-                    if ($remaining_slots > 0 && $user_id != 'vmsroot') {
-                        if (!$already_assigned) {
-                            if ($active) {
-                                echo '<form method="GET">' .
-                                    '<input type="hidden" name="request_type" value="add self">' .
-                                    '<input type="hidden" name="id" value="'.$id.'">' .
-                                    '<input type="submit" value="Sign Up">' .
-                                    '</form>';
-                            } else {
-                                echo '<div class="centered">As an inactive volunteer, you are ineligible to sign up for events.</div>';
-                            }
-                        } else {
-                            echo '<div class="centered">You are signed up for this event!</div>';
-                        }
-                    } else if ($already_assigned) {
-                        echo '<div class="centered">You are signed up for this event!</div>';
+                    // allow admins/super admins to remove assigned volunteers
+                    if ($access_level > 1) {
+                        echo '<li class="centered remove-person">' .
+                            '<span>' .
+                            $person->get_first_name() .
+                            ' ' .
+                            $person->get_last_name() .
+                            '</span>' .
+                            '<form class="remove-person" method="GET">' .
+                            '<input type="hidden" name="request_type" value="remove" />' .
+                            '<input type="hidden" name="id" value="' . $id . '">' .
+                            '<input type="hidden" name="selected_removal_id" value=' .
+                            $person->get_id() . ' />' .
+                            '<input class="stripped" type="submit" value="Remove" />' .
+                            '</form></li>';
+                    } else {
+                        echo '
+                                <li class="centered">' .
+                            $person->get_first_name()
+                            . ' ' .
+                            $person->get_last_name() .
+                            '</li>
+                            ';
                     }
-                    
-                    if ($access_level >= 2 && $num_persons > 0) {
-                        echo '<br/><a href="roster.php?id='.$id.'" class="button">View Event Roster</a>';
-                    }
+                }
+                for ($x = 0; $x < $remaining_slots; $x++) {
+                    echo '<li class="centered empty-slot">-Empty Slot-</li>';
+                }
                 ?>
-            <?php endif; ?>
+            </ul>
+            <?php
+            if ($event_in_past) {
+                    echo '<input type="submit" value="Confirm Hours">';
+                }
+            
+            if ($remaining_slots > 0 && $user_id != 'vmsroot' && !$event_in_past) {
+                if (!$already_assigned) {
+                    if ($active) {
+                        echo '
+                        <form method="GET">
+                            <input type="hidden" name="request_type" value="add self">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <input type="submit" value="Sign Up">
+                        </form>
+                        ';
+                    } else {
+                        echo '<div class="centered">As an inactive volunteer, you are ineligible to sign up for events.</div>';
+                    }
+                } else {
+                    // show "unassigned self" button
+                    echo '<div class="centered">You are signed up for this event!</div>';
+                }
+            } else if ($already_assigned) {
+                if ($event_in_past) {
+                    echo '<div class="centered">You attended this event!</div>';
+                } else {
+                    echo '<div class="centered">You are signed up for this event!</div>';
+                }
+            }
+            if ($access_level >= 2 && $num_persons > 0) {
+                echo '<br/><a href="roster.php?id=' . $id . '" class="button">View Event Roster</a>';
+            }
+            ?>
         </div>
-
         <?php
         if ($remaining_slots > 0) {
             if ($access_level >= 2) {
