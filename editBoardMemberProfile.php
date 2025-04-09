@@ -224,7 +224,7 @@
         $econtactName, $econtactPhone, $econtactRelation
         );
         if ($result) {
-            if ($editingSelf) {
+            if ($editing_self) {
                 header('Location: viewProfile.php?editSuccess');
             } else {
                 header('Location: viewProfile.php?editSuccess&id='. $id);
