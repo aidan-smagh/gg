@@ -454,6 +454,49 @@
                     }
                 ?>
             </ul>
+
+            <?php if ($event_in_past): ?>
+            <!-- Begin: Checkbox Form for Confirming Hours -->
+            <form method="POST" action="confirmHours.php" id="confirmHoursForm">
+                <ul class="centered">
+                    <!-- "Select All" Checkbox -->
+                    <li class="centered">
+                        <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
+                        <label for="select_all"><strong>Select All</strong></label>
+                    </li>
+                    <!-- Loop through each volunteer and print a checkbox with their name -->
+                    <?php foreach ($event_persons as $person): ?>
+                        <li class="centered">
+                            <input type="checkbox" name="volunteers[]" 
+                                id="vol_<?php echo $person->get_id(); ?>" 
+                                value="<?php echo $person->get_id(); ?>">
+                            <label for="vol_<?php echo $person->get_id(); ?>">
+                                <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
+                            </label>
+                        </li>
+                    <?php endforeach; ?>
+                    <!-- Optionally, display empty slots -->
+                    <?php for ($x = 0; $x < $remaining_slots; $x++): ?>
+                        <li class="centered empty-slot">-Empty Slot-</li>
+                    <?php endfor; ?>
+                </ul>
+                <!-- Hidden field for event id -->
+                <input type="hidden" name="event_id" value="<?php echo $id; ?>">
+                <!-- Submit button for confirming hours -->
+                <input type="submit" name="confirm_hours_submit" value="Confirm Hours">
+            </form>
+            <!-- JavaScript for the "Select All" functionality -->
+            <script>
+                function toggleSelectAll(source) {
+                    var checkboxes = document.querySelectorAll('#confirmHoursForm input[type="checkbox"][name="volunteers[]"]');
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].checked = source.checked;
+                    }
+                }
+            </script>
+            <!-- End: Checkbox Form for Confirming Hours -->
+        <?php endif; ?>
+
         <?php 
             if ($remaining_slots > 0 && $user_id != 'vmsroot' && !$event_in_past) {
                 if (!$already_assigned) {
