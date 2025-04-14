@@ -242,24 +242,18 @@
             if (!$result) {
                 echo '<p>That e-mail address is already in use.</p>';
             } else {
-                /* Send a message to the superadmin to notify them of the new registration 
-                THIS MUST BE CHANGED, IT IS SENDING TO A TEST PROFILE FOR TESTING.
-                THE RECIPIENTID SHOULD BE:
-                    veronica@gwynethsgift.org 
-                */
                 $senderId = 'vmsroot@gmail.com';
-                $recipientId = 'fake@fake.com';
                 $title = "New Board Member Registration: " . $first . ' ' . $last . "!";
                 $message = $first . " " . $last . " has registered as a new board member. " . 
                             "Please go to their profile and change their role status "
-                            . " from volunteer to boardmember to approve their registration.";
-                send_message($senderId, $recipientId, $title, $message);
+                            . " from volunteer to boardmember to approve their registration." . 
+                            "User ID: " . $email . "\n";
+                message_all_users_of_types($senderId, ['"superadmin"'], $title, $message);
                 if ($loggedIn) {
                     echo '<script>document.location = "index.php?registerSuccess=board";</script>';
                 } else {
                     echo '<script>document.location = "login.php?registerSuccess=board";</script>';
                 }
-                //insert logic to forward registration verification to administrator
             }
         } else {
             require_once('boardMemberRegistrationForm.php'); 
