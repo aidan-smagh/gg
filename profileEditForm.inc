@@ -175,13 +175,13 @@
         <fieldset>
             <legend>Emergency Contact</legend>
             <p>Please provide us with someone to contact on your behalf in case of an emergency.</p>
-            <label for="econtact-name" required><em>* </em>Contact Name</label>
+            <label for="econtact-name" ><em> </em>Contact Name</label>
             <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" placeholder="Enter emergency contact name">
 
-            <label for="econtact-phone"><em>* </em>Contact Phone Number</label>
+            <label for="econtact-phone"><em> </em>Contact Phone Number</label>
             <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
 
-            <label for="econtact-relation"><em>* </em>Contact Relation to You</label>
+            <label for="econtact-relation"><em> </em>Contact Relation to You</label>
             <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
         </fieldset>
         <fieldset>
