@@ -3,40 +3,32 @@
 session_cache_expire(30);
 session_start();
 require_once('database/dbExternalDocuments.php');
-//require_once('database/dbPersons.php');
+require_once('database/dbPersons.php');
 
-//if (isset($_SESSION['_id'])) {
-//    $person = retrieve_person($_SESSION['_id']);
-//}
-//else {
-//    header('Location: login.php');
-//    die();
-//}
-//$isBoardMember = false;
-//$isSuperAdmin = false;
-//$userType = $person->get_type()[0];
-//if ($userType == "boardmember") {
-//    $isBoardMember = true;
-//}
-//if ($userType == "superadmin") {
-//    $isSuperAdmin = true;
-//}
-
-
-// Ensure user is logged in. If not, redirect to login page
-if (!isset($_SESSION['access_level'])) {
+// collect id if logged in, redirect to home page if not
+if (isset($_SESSION['_id'])) {
+    $person = retrieve_person($_SESSION['_id']);
+}
+else {
     header('Location: login.php');
     die();
 }
-// Ensure use has appropriate access level. If not, redirect to index page
-// 0 = not logged in, 1 = standard user, 2 = admin and boardmember, 3 super admin
-//if (!$isBoardMember && !$isSuperAdmin) {
-//    header('Location: index.php');
-//    die();
-//}
-/* Only superadmin can add, delete, and edit external docs  */
-$accessLevel = $_SESSION['access_level'];
-$isSuperAdmin = $accessLevel >= 3;
+
+$isBoardMember = false;
+$isSuperAdmin = false;
+$userType = $person->get_type()[0];
+if ($userType == "boardmember") {
+    $isBoardMember = true;
+}
+if ($userType == "superadmin") {
+    $isSuperAdmin = true;
+}
+
+// only superadmin and board members can access this page
+if (!$isBoardMember && !$isSuperAdmin) {
+    header('Location: index.php');
+    die();
+}
 
 /* Get all external docs stored in the database (function call to dbExternalDocuments.php) */
 $documents = get_all_external_documents();
