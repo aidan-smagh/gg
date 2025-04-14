@@ -50,8 +50,7 @@
             $required = array(
                 'first-name', 'last-name', 'birthdate',
                 'address', 'city', 'state', 'zip', 
-                'email', 'phone', 'econtactPhone', 'econtactName',
-                'start-date', 'password',
+                'email', 'phone', 'start-date', 'password',
             );
             $errors = false;
             if (!wereRequiredFieldsSubmitted($args, $required)) {
@@ -111,19 +110,33 @@
                 echo 'bad contact method';
             }
 
-
-
-            $econtactName = $args['econtact-name'];
-            $econtactPhone = validateAndFilterPhoneNumber($args['econtact-phone']);
-            if (!$econtactPhone) {
-                $errors = true;
-                echo 'bad econtact phone';
+            /* Emergency Contact Information Section Data */
+            // Collect econtact name if provided, otherwise set it to the empty string
+            if (isset($args['econtact-name']) && !empty($args['econtact-name'])) {
+                $econtactName = $args['econtact-name'];
             }
-
-            //$econtactPhone = $args['econtact-phone'];
-    
-            $econtactRelation = $args['econtact-relation'];
-
+            else {
+                $econtactName = '';
+            }
+            // Collect and validate econtact phone if provided, otherwise set it to the empty string
+            if (isset($args['econtact-phone']) && !empty($args['econtact-phone'])) {
+                $econtactPhone = validateAndFilterPhoneNumber($args['econtact-phone']);
+                if (!$econtactPhone) {
+                    $errors = true;
+                    echo 'bad econtact phone';
+                }
+            }
+            else {
+                $econtactPhone = '';
+            }
+            // Collect econtact relation if provided, otherwise set it to the empty string
+            if (isset($args['econtact-relation']) && !empty($args['econtact-relation'])) {
+                $econtactRelation = $args['econtact-relation'];
+            }
+            else {
+                $econtactRelation = '';
+            }
+            
             $startDate = validateDate($args['start-date']);
             if (!$startDate) {
                 $errors = true;
