@@ -57,8 +57,7 @@
         $required = array(
             'first-name', 'last-name', 'birthdate',
             'address', 'city', 'state', 'zip', 
-            'email', 'phone', 'phone-type', 'contact-when', 'contact-method',
-            'shirt-size'
+            'email', 'phone'
         );
         $errors = false;
         if (!wereRequiredFieldsSubmitted($args, $required)) {

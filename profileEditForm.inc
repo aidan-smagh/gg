@@ -92,8 +92,8 @@
             <label for="last-name"><em>* </em>Last Name</label>
             <input type="text" id="last-name" name="last-name" value="<?php echo hsc($person->get_last_name()); ?>" required placeholder="Enter your last name">
 
-            <label for="gender"><em>* </em>Gender</label>
-            <select id="gender" name="gender" required>
+            <label for="gender"><em> </em>Gender</label>
+            <select id="gender" name="gender">
                 <?php
                     $genders = ['Male', 'Female', 'Other'];
                     $currentGender = $person->get_gender();
@@ -153,36 +153,36 @@
             <label for="phone"><em>* </em>Phone Number</label>
             <input type="tel" id="phone" name="phone" value="<?php echo formatPhoneNumber($person->get_phone1()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" required placeholder="Ex. (555) 555-5555">
 
-            <label><em>* </em>Phone Type</label>
+            <label><em> </em>Phone Type</label>
             <div class="radio-group">
                 <?php $type = $person->get_phone1type(); ?>
-                <input type="radio" id="phone-type-cellphone" name="phone-type" value="cellphone" <?php if ($type == 'cellphone') echo 'checked'; ?> required><label for="phone-type-cellphone">Cell</label>
-                <input type="radio" id="phone-type-home" name="phone-type" value="home" <?php if ($type == 'home') echo 'checked'; ?> required><label for="phone-type-home">Home</label>
-                <input type="radio" id="phone-type-work" name="phone-type" value="work" <?php if ($type == 'work') echo 'checked'; ?> required><label for="phone-type-work">Work</label>
+                <input type="radio" id="phone-type-cellphone" name="phone-type" value="cellphone" <?php if ($type == 'cellphone') echo 'checked'; ?> <label for="phone-type-cellphone">Cell</label>
+                <input type="radio" id="phone-type-home" name="phone-type" value="home" <?php if ($type == 'home') echo 'checked'; ?> <label for="phone-type-home">Home</label>
+                <input type="radio" id="phone-type-work" name="phone-type" value="work" <?php if ($type == 'work') echo 'checked'; ?> <label for="phone-type-work">Work</label>
             </div>
 
-            <label for="contact-when" required><em>* </em>Best Time to Reach You</label>
-            <input type="text" id="contact-when" name="contact-when" value="<?php echo hsc($person->get_contact_time()); ?>" required placeholder="Ex. Evenings, Days">
+            <label for="contact-when" required><em> </em>Best Time to Reach You</label>
+            <input type="text" id="contact-when" name="contact-when" value="<?php echo hsc($person->get_contact_time()); ?>" placeholder="Ex. Evenings, Days">
 
-            <label><em>* </em>Preferred Contact Method</label>
+            <label><em> </em>Preferred Contact Method</label>
             <div class="radio-group">
                 <?php $method = $person->get_cMethod(); ?>
-                <input type="radio" id="method-phone" name="contact-method" value="phone" <?php if ($method == 'phone') echo 'checked'; ?> required><label for="method-phone">Phone call</label>
-                <input type="radio" id="method-text" name="contact-method" value="text" <?php if ($method == 'text') echo 'checked'; ?> required><label for="method-text">Text</label>
-                <input type="radio" id="method-email" name="contact-method" value="email" <?php if ($method == 'email') echo 'checked'; ?> required><label for="method-email">E-mail</label>
+                <input type="radio" id="method-phone" name="contact-method" value="phone" <?php if ($method == 'phone') echo 'checked'; ?> <label for="method-phone">Phone call</label>
+                <input type="radio" id="method-text" name="contact-method" value="text" <?php if ($method == 'text') echo 'checked'; ?> <label for="method-text">Text</label>
+                <input type="radio" id="method-email" name="contact-method" value="email" <?php if ($method == 'email') echo 'checked'; ?> <label for="method-email">E-mail</label>
             </div>
         </fieldset>
         <fieldset>
             <legend>Emergency Contact</legend>
             <p>Please provide us with someone to contact on your behalf in case of an emergency.</p>
             <label for="econtact-name" required><em>* </em>Contact Name</label>
-            <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" required placeholder="Enter emergency contact name">
+            <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" placeholder="Enter emergency contact name">
 
             <label for="econtact-phone"><em>* </em>Contact Phone Number</label>
-            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" required placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
+            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
 
-            <label for="econtact-name"><em>* </em>Contact Relation to You</label>
-            <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" required placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
+            <label for="econtact-relation"><em>* </em>Contact Relation to You</label>
+            <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
         </fieldset>
         <fieldset>
             <legend>Volunteer Information</legend>
