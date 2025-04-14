@@ -22,9 +22,13 @@
     $notRoot = $person->get_id() != 'vmsroot';
     //see if person is board member (for redirection to proper form for editing profile)
     $isBoardMember = false;
+    $isSuperAdmin = false;
     $userType = $person->get_type()[0];
     if ($userType == "boardmember") {
         $isBoardMember = true;
+    }
+    if ($userType == "superadmin") {
+        $isSuperAdmin = true;
     }
 
 ?>
@@ -128,7 +132,8 @@
                         <span>View events</span>
                     </div>
                 <?php endif ?>
-                <?php if ($_SESSION['access_level'] >= 2): ?>
+
+                <?php if ($isSuperAdmin || $isBoardMember): ?>
                     <div class="dashboard-item" data-link="externalDocuments.php">
                         <img src="images/external-docs.svg">
                         <span style="text-align: center;">External Documents</span>
