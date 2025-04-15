@@ -122,8 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     if (isset($_POST['submitTime'])) {
-        insert_checkintime($id);
-        header('Location: event.php?id=' . $args['id'] . '&checkIn');
+        $hi = insert_checkintime($id);
+        $status = $hi ? 'success' : 'fail';
+        header('Location: event.php?id=' . $args['id'] . '&checkIn=' . $status);
         die();
     }
 } else {
@@ -249,6 +250,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($_GET['editSuccess'])): ?>
             <div class="happy-toast">Event details updated successfully!</div>
         <?php endif ?>
+        <?php if (isset($_GET['checkIn'])) {
+            if ($_GET['checkIn'] === 'success') {
+                echo '<div class="happy-toast">You\'ve checked into the meeting!</div>';
+            } elseif ($_GET['checkIn'] === 'fail') {
+                echo '<div class="error-toast">You\'ve already checked in to this meeting.</div>';
+            }
+        } ?>
         <?php
 
         require_once('include/output.php');
@@ -265,13 +273,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $event_duration = floatPrecision($event_duration, 2);
 
         $currentDate = new DateTime();
-        $justDate = $currentDate->format('Y-m-d');  
-        $datePassed = false;  
+        $justDate = $currentDate->format('Y-m-d');
+        $datePassed = false;
 
         if ($justDate > $event_info['date']) {
             $datePassed = true;
         }
-        
+
         //var_dump($justDate);
         //var_dump($event_info['date']);
 
@@ -432,7 +440,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </tr>
                             ';
                     }
-
+                    /*
                     if ($access_level >= 2 && $event_info['eventType'] == 'board_meeting') {
                         echo '
                     <form method = "post">
@@ -446,7 +454,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </form>
                     ';
                     }
-
+*/
 
                     ?>
                 </tbody>
@@ -455,13 +463,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Consolidated Event Volunteers Section -->
         <h2 class="centered">Event Volunteers</h2>
         <div class="standout">
-            <?php 
-                $event_persons = getvolunteers_byevent($id);
-                $capacity = intval($event_info['capacity']);
-                $num_persons = count($event_persons);
-                $remaining_slots = $capacity - $num_persons;
-                $user_id = $_SESSION['_id'];
-                $already_assigned = false;
+            <?php
+            $event_persons = getvolunteers_byevent($id);
+            $capacity = intval($event_info['capacity']);
+            $num_persons = count($event_persons);
+            $remaining_slots = $capacity - $num_persons;
+            $user_id = $_SESSION['_id'];
+            $already_assigned = false;
             ?>
 
             <?php if ($event_in_past): ?>
@@ -479,7 +487,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
                                 </label>
                             </li>
-                            <?php if ($person->get_id() == $user_id) { $already_assigned = true; } ?>
+                            <?php if ($person->get_id() == $user_id) {
+                                $already_assigned = true;
+                            } ?>
                         <?php endforeach; ?>
                         <?php for ($x = 0; $x < $remaining_slots; $x++): ?>
                             <li class="centered empty-slot">-Empty Slot-</li>
@@ -499,56 +509,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php else: ?>
                 <!-- Future/Current Event: Display the standard volunteer list -->
                 <ul class="centered">
-                    <?php 
-                        if ($remaining_slots) {
-                            echo '<li class="centered">' . $remaining_slots . ' / ' . $capacity . ' Slots Remaining</li>';
+                    <?php
+                    if ($remaining_slots) {
+                        echo '<li class="centered">' . $remaining_slots . ' / ' . $capacity . ' Slots Remaining</li>';
+                    } else {
+                        echo '<li class="centered">This event is fully booked!</li>';
+                    }
+                    foreach ($event_persons as $person) {
+                        if ($person->get_id() == $user_id) {
+                            $already_assigned = true;
+                        }
+                        if ($access_level > 1) {
+                            echo '<li class="centered remove-person">' .
+                                '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
+                                '<form class="remove-person" method="GET">' .
+                                '<input type="hidden" name="request_type" value="remove" />' .
+                                '<input type="hidden" name="id" value="' . $id . '">' .
+                                '<input type="hidden" name="selected_removal_id" value="' . $person->get_id() . '" />' .
+                                '<input class="stripped" type="submit" value="Remove" />' .
+                                '</form></li>';
                         } else {
-                            echo '<li class="centered">This event is fully booked!</li>';
+                            echo '<li class="centered">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</li>';
                         }
-                        foreach ($event_persons as $person) {
-                            if ($person->get_id() == $user_id) {
-                                $already_assigned = true;
-                            }
-                            if ($access_level > 1) {
-                                echo '<li class="centered remove-person">'.
-                                    '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
-                                    '<form class="remove-person" method="GET">' .
-                                    '<input type="hidden" name="request_type" value="remove" />' .
-                                    '<input type="hidden" name="id" value="'.$id.'">' .
-                                    '<input type="hidden" name="selected_removal_id" value="'.$person->get_id().'" />' .
-                                    '<input class="stripped" type="submit" value="Remove" />' .
-                                    '</form></li>';
-                            } else {
-                                echo '<li class="centered">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</li>';
-                            }
-                        }
-                        for ($x = 0; $x < $remaining_slots; $x++) {
-                            echo '<li class="centered empty-slot">-Empty Slot-</li>';
-                        }
+                    }
+                    for ($x = 0; $x < $remaining_slots; $x++) {
+                        echo '<li class="centered empty-slot">-Empty Slot-</li>';
+                    }
                     ?>
                 </ul>
-                <?php 
-                    if ($remaining_slots > 0 && $user_id != 'vmsroot') {
-                        if (!$already_assigned) {
-                            if ($active) {
-                                echo '<form method="GET">' .
-                                    '<input type="hidden" name="request_type" value="add self">' .
-                                    '<input type="hidden" name="id" value="'.$id.'">' .
-                                    '<input type="submit" value="Sign Up">' .
-                                    '</form>';
-                            } else {
-                                echo '<div class="centered">As an inactive volunteer, you are ineligible to sign up for events.</div>';
-                            }
+                <?php
+                if ($remaining_slots > 0 && $user_id != 'vmsroot') {
+                    if (!$already_assigned) {
+                        if ($active) {
+                            echo '<form method="GET">' .
+                                '<input type="hidden" name="request_type" value="add self">' .
+                                '<input type="hidden" name="id" value="' . $id . '">' .
+                                '<input type="submit" value="Sign Up">' .
+                                '</form>';
                         } else {
-                            echo '<div class="centered">You are signed up for this event!</div>';
+                            echo '<div class="centered">As an inactive volunteer, you are ineligible to sign up for events.</div>';
                         }
-                    } else if ($already_assigned) {
+                    } else {
                         echo '<div class="centered">You are signed up for this event!</div>';
+                        if ($access_level >= 2 && $event_info['eventType'] == 'board_meeting') {
+                            echo '
+                        <form method = "post">
+                            <tr>
+                                <td colspan="2">
+                                <input type="hidden" name="id" value="' . $id . '">
+                                    <button type="submit" value = "submitTime" name="submitTime"> Check In </button>
+                                </td>
+                            </tr>
+                            
+                        </form>
+                        ';
+                        }
                     }
-                    
-                    if ($access_level >= 2 && $num_persons > 0) {
-                        echo '<br/><a href="roster.php?id='.$id.'" class="button">View Event Roster</a>';
+                } else if ($already_assigned) {
+                    echo '<div class="centered">You are signed up for this event!</div>';
+                    if ($access_level >= 2 && $event_info['eventType'] == 'board_meeting') {
+                        echo '
+                    <form method = "post">
+                        <tr>
+                            <td colspan="2">
+                            <input type="hidden" name="id" value="' . $id . '">
+                                <button type="submit" value = "submitTime" name="submitTime"> Check In </button>
+                            </td>
+                        </tr>
+                        
+                    </form>
+                    ';
                     }
+                }
+
+                if ($access_level >= 2 && $num_persons > 0) {
+                    echo '<br/><a href="roster.php?id=' . $id . '" class="button">View Event Roster</a>';
+                }
                 ?>
             <?php endif; ?>
         </div>
