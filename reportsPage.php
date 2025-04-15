@@ -489,7 +489,14 @@ function getBetweenDates($startDate, $endDate)
         <a href="index.php">
             <button class="theB">Home Page</button>
         </a>
-        <a href="reportsPage.php">
+        <?php
+        $exportLink = '"reportsPage.php?' . $_SERVER['QUERY_STRING'];
+        if (!isset($_GET['download'])) {
+            $exportLink .=  '&download';
+        }
+        $exportLink .= '"';
+        ?>
+        <a href=<?php echo $exportLink ?>>
             <button class="theB">Export to CSV</button>
         </a>
     </div>
