@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <!-- Message display block -->
     <?php if (isset($_GET['hoursUpdated'])): ?>
-        <div class="notification">
+        <div class="happy-toast">
             Hours updated
         </div>
     <?php endif; ?>
