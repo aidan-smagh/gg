@@ -322,30 +322,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </fieldset>
     <?php endif ?>
-<fieldset>
-    <legend>Miscellaneous</legend>
-    <label>Skills</label>
-    <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
-    <label>Training</label>
-    <?php 
-        $training = get_trainings_for($id);
-        
-    ?>
-    <p><?php foreach($training as $trainings) {
-        echo $trainings . "<br>";
-    } ?></p>
-
-</fieldset>
-<?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>    
+<?php if (!$isBoardMember): ?>
     <fieldset>
-        <legend>Notes</legend>
-        <label>Notes</label>
-        <p>
-            <?php echo $user->get_notes()?>
-        </p>
-    </fieldset>
-<?php endif ?>
+        <legend>Miscellaneous</legend>
+        <label>Skills</label>
+        <p><?php echo str_replace("\r\n", '<br>', $user->get_specialties()) ?></p>
+        <label>Training</label>
+        <?php 
+            $training = get_trainings_for($id);
+            
+        ?>
+        <p><?php foreach($training as $trainings) {
+            echo $trainings . "<br>";
+        } ?></p>
 
+    </fieldset>
+    <?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>    
+        <fieldset>
+            <legend>Notes</legend>
+            <label>Notes</label>
+            <p>
+                <?php echo $user->get_notes()?>
+            </p>
+        </fieldset>
+    <?php endif ?>
+<?php endif ?>
 <a class="button" href="editVolunteerNotes.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Notes About A Volunteer</a>
 <a class="button" href="addTraining.php<?php if ($id != $userID) echo '?id=' . $id ?>">Add Completed Training</a>
     
