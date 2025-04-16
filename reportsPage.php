@@ -107,7 +107,7 @@ if (isset($_GET['download'])) {
     }
 
     if ($eventNameWildcard != null) {
-        $query .= "AND name LIKE ? OR abbrevName LIKE ? ";
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
         $paramTypes .= "ss";
         $params[] = $eventNameWildcard;
         $params[] = $eventNameWildcard;
@@ -516,7 +516,7 @@ if (isset($_GET['download'])) {
         }
 
         if ($eventNameWildcard != null) {
-            $query .= "AND name LIKE ? OR abbrevName LIKE ? ";
+            $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
             $paramTypes .= "ss";
             $params[] = $eventNameWildcard;
             $params[] = $eventNameWildcard;
