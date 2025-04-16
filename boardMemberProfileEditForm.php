@@ -227,9 +227,15 @@
                 <input type="radio" id="phone-type-work" name="phone-type" value="work" <?php if ($type == 'work') echo 'checked'; ?> ><label for="phone-type-work">Work</label>
             </div>
 
+            <?php $phone2number = '';
+            if ($person->get_phone2()) 
+                $phone2number = formatPhoneNumber($person->get_phone2())
+            ?>
             <label for="phone2"><em> </em>Secondary Phone Number</label>
+            <input type="tel" id="phone2" name="phone2" value="<?php echo $phone2number; ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Ex. (555) 555-5555">
+            <?php /*
             <input type="tel" id="phone2" name="phone2" value="<?php echo formatPhoneNumber($person->get_phone2()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Ex. (555) 555-5555">
-
+            */ ?>
             <label><em> </em>Secondary Phone Type</label>
             <div class="radio-group">
                 <?php $type = $person->get_phone2type(); ?>
@@ -255,10 +261,16 @@
             <p>Please provide us with someone to contact on your behalf in case of an emergency.</p>
             <label for="econtact-name" required><em> </em>Contact Name</label>
             <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" placeholder="Enter emergency contact name">
-
+            
+            <?php $econtactNum = '';
+            if ($person->get_contact_num()) 
+                $econtactNum = formatPhoneNumber($person->get_contact_num());
+            ?>
             <label for="econtact-phone"><em> </em>Contact Phone Number</label>
+            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo $econtactNum; ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
+            <?php /*
             <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
-
+            */ ?>
             <label for="econtact-relation"><em> </em>Contact Relation to You</label>
             <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
         </fieldset>
