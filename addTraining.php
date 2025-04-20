@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirm"])) {
 }
 
 $trainings = get_all_trainings();
+$trainingsCompleted = get_trainings_for($id);
 ?>
 <!DOCTYPE html>
 <html>
@@ -102,6 +103,20 @@ $trainings = get_all_trainings();
                 <br></br>
                 <input type="submit" name="confirm" value="Confirm Changes">
             </form>
+            <br></br>
+            <h2>This Volunteer's Completed Trainings</h2>
+            <fieldset>
+            <ul>
+                <?php
+                foreach($trainingsCompleted as $training) {
+                    echo "<li>$training</li>";
+                }
+                ?>
+            </ul>
+            
+                
+                
+            </fieldset>
         </main>
 </body>
 </html>
