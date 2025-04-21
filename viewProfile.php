@@ -51,6 +51,12 @@ $userType = $user->get_type()[0];
 if ($userType == 'boardmember') {
     $isBoardMember = true;
 }
+if ($userType == 'admin') {
+    $isAdmin = true;
+}
+if ($userType == 'superadmin') {
+    $isAdmin = true;
+}
 
 $viewingOwnProfile = $id == $userID;
 
@@ -322,7 +328,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </fieldset>
     <?php endif ?>
-<?php if (!$isBoardMember): ?>
+    <?php if ($isAdmin || $isBoardMember): ?>
+
     <fieldset>
         <legend>Miscellaneous</legend>
         <label>Skills</label>
@@ -337,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } ?></p>
 
     </fieldset>
-    <?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>    
+    <?php if ($isAdmin || $isBoardMember): ?>   
         <fieldset>
             <legend>Notes</legend>
             <label>Notes</label>
@@ -347,9 +354,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </fieldset>
     <?php endif ?>
 <?php endif ?>
+<?php if (($accessLevel == 2 && $user->get_access_level() == 1) || $accessLevel >= 3): ?>
 <a class="button" href="editVolunteerNotes.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Notes About A Volunteer</a>
 <a class="button" href="addTraining.php<?php if ($id != $userID) echo '?id=' . $id ?>">Add Completed Training</a>
-    
+    <?php endif ?>
 <?php if (!$isBoardMember): ?>
     <a class="button" href="editProfile.php<?php if ($id != $userID) echo '?id=' . $id ?>">Edit Profile</a>
 <?php else: ?>
