@@ -20,6 +20,17 @@
         $person = retrieve_person($_SESSION['_id']);
     }
     $notRoot = $person->get_id() != 'vmsroot';
+    //see if person is board member (for redirection to proper form for editing profile)
+    $isBoardMember = false;
+    $isSuperAdmin = false;
+    $userType = $person->get_type()[0];
+    if ($userType == "boardmember") {
+        $isBoardMember = true;
+    }
+    if ($userType == "superadmin") {
+        $isSuperAdmin = true;
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,10 +101,18 @@
                         <img src="images/view-profile.svg">
                         <span>View Profile</span>
                     </div>
-                    <div class="dashboard-item" data-link="editProfile.php">
-                        <img src="images/manage-account.svg">
-                        <span>Edit Profile</span>
-                    </div>
+
+                    <?php if ($isBoardMember): ?>
+                        <div class="dashboard-item" data-link="editBoardMemberProfile.php">
+                            <img src="images/manage-account.svg">
+                            <span>Edit Profile</span>
+                        </div>
+                    <?php else: ?>
+                        <div class="dashboard-item" data-link="editProfile.php">
+                            <img src="images/manage-account.svg">
+                            <span>Edit Profile</span>
+                        </div>
+                    <?php endif ?>
                 <?php endif ?>
                 <?php if ($notRoot) : ?>
                     <div class="dashboard-item" data-link="volunteerReport.php">
@@ -113,7 +132,8 @@
                         <span>View events</span>
                     </div>
                 <?php endif ?>
-                <?php if ($_SESSION['access_level'] >= 2): ?>
+
+                <?php if ($isSuperAdmin || $isBoardMember): ?>
                     <div class="dashboard-item" data-link="externalDocuments.php">
                         <img src="images/external-docs.svg">
                         <span style="text-align: center;">External Documents</span>

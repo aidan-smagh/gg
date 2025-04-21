@@ -140,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $eventID = $args["id"];
 
+
         // Check if Get request from user is from an organization member
         // (volunteer, admin/super admin)
         if ($request_type == 'add self' && $access_level >= 1) {
@@ -236,6 +237,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endif ?>
     <?php require_once('header.php') ?>
+    
+    <!-- Message display block -->
+    <?php if (isset($_GET['hoursUpdated'])): ?>
+        <div class="happy-toast">
+            Hours updated
+        </div>
+    <?php endif; ?>
+
     <h1>View <?php echo $eventDescriptor ?></h1>
     <main class="event-info">
         <?php if (isset($_GET['createSuccess'])): ?>
@@ -474,11 +483,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if ($event_in_past): ?>
                 <!-- Past Event: Display a checkbox form for confirming hours -->
-                <form method="POST" action="confirmHours.php" id="confirmHoursForm">
-                    <ul class="centered">
+                <form method="POST" action="confirmhours.php" id="confirmHoursForm">
+                <ul class="centered">
+                    <li class="centered">
+                        <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
+                        <label for="select_all"><strong>Select All</strong></label>
+                    </li>
+                    <?php foreach ($event_persons as $person): ?>
                         <li class="centered">
-                            <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
-                            <label for="select_all"><strong>Select All</strong></label>
+                            <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
+                            <label for="vol_<?php echo $person->get_id(); ?>">
+                                <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
+                            </label>
                         </li>
                         <?php foreach ($event_persons as $person): ?>
                             <li class="centered">
@@ -505,7 +521,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             checkboxes[i].checked = source.checked;
                         }
                     }
-                </script>
+                }
+            </script>
+
             <?php else: ?>
                 <!-- Future/Current Event: Display the standard volunteer list -->
                 <ul class="centered">

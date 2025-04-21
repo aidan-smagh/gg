@@ -96,7 +96,7 @@
             <label for="prefix"><em> </em>Prefix</label>
             <input type="text" id="prefix" name="prefix" value="<?php echo hsc($person->get_prefix()); ?>" placeholder="Ex. Mr., Ms., Mrs., Dr.">
 
-            <label for="gender"><em>* </em>Gender</label>
+            <label for="gender"><em> </em>Gender</label>
             <select id="gender" name="gender" required>
                 <?php
                     $genders = ['Male', 'Female', 'Other'];
@@ -203,10 +203,10 @@
             <p>The following information relates to an outside organization you may be affiliated with.</p>
             
             <label for="affiliation"><em> </em>Organization Affiliated With</label>
-            <input type="text" id="affiliated-org" name="affiliated-org" value="<?php echo hsc ($person->get_affiliated_org()); ?>" required placeholder="Enter the organization name">
+            <input type="text" id="affiliated-org" name="affiliated-org" value="<?php echo hsc ($person->get_affiliated_org()); ?>" placeholder="Enter the organization name">
         
             <label for="affiliationTitle"><em> </em>Title at Affiliated Organization</label>
-            <input type="text" id="affiliated-title" name="affiliated-title" value="<?php echo hsc($person->get_title_at_affiliated_org()); ?>" required placeholder="Enter your title at your affiliated organization">       
+            <input type="text" id="affiliated-title" name="affiliated-title" value="<?php echo hsc($person->get_title_at_affiliated_org()); ?>" placeholder="Enter your title at your affiliated organization">       
         </fieldset>
 
         <fieldset>
@@ -219,48 +219,60 @@
             <label for="phone"><em>* </em>Primary Phone Number</label>
             <input type="tel" id="phone" name="phone" value="<?php echo formatPhoneNumber($person->get_phone1()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" required placeholder="Ex. (555) 555-5555">
 
-            <label><em>* </em>Primary Phone Type</label>
+            <label><em> </em>Primary Phone Type</label>
             <div class="radio-group">
                 <?php $type = $person->get_phone1type(); ?>
-                <input type="radio" id="phone-type-cellphone" name="phone-type" value="cellphone" <?php if ($type == 'cellphone') echo 'checked'; ?> required><label for="phone-type-cellphone">Cell</label>
-                <input type="radio" id="phone-type-home" name="phone-type" value="home" <?php if ($type == 'home') echo 'checked'; ?> required><label for="phone-type-home">Home</label>
-                <input type="radio" id="phone-type-work" name="phone-type" value="work" <?php if ($type == 'work') echo 'checked'; ?> required><label for="phone-type-work">Work</label>
+                <input type="radio" id="phone-type-cellphone" name="phone-type" value="cellphone" <?php if ($type == 'cellphone') echo 'checked'; ?> ><label for="phone-type-cellphone">Cell</label>
+                <input type="radio" id="phone-type-home" name="phone-type" value="home" <?php if ($type == 'home') echo 'checked'; ?> ><label for="phone-type-home">Home</label>
+                <input type="radio" id="phone-type-work" name="phone-type" value="work" <?php if ($type == 'work') echo 'checked'; ?> ><label for="phone-type-work">Work</label>
             </div>
 
+            <?php $phone2number = '';
+            if ($person->get_phone2()) 
+                $phone2number = formatPhoneNumber($person->get_phone2())
+            ?>
             <label for="phone2"><em> </em>Secondary Phone Number</label>
+            <input type="tel" id="phone2" name="phone2" value="<?php echo $phone2number; ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Ex. (555) 555-5555">
+            <?php /*
             <input type="tel" id="phone2" name="phone2" value="<?php echo formatPhoneNumber($person->get_phone2()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Ex. (555) 555-5555">
-
-            <label><em>* </em>Secondary Phone Type</label>
+            */ ?>
+            <label><em> </em>Secondary Phone Type</label>
             <div class="radio-group">
                 <?php $type = $person->get_phone2type(); ?>
-                <input type="radio" id="phone2-type-cellphone" name="phone2-type" value="cellphone2" <?php if ($type == 'cellphone2') echo 'checked'; ?> required><label for="phone-type-cellphone">Cell</label>
-                <input type="radio" id="phone2-type-home" name="phone2-type" value="home2" <?php if ($type == 'home2') echo 'checked'; ?> required><label for="phone-type-home">Home</label>
-                <input type="radio" id="phone2-type-work" name="phone2-type" value="work2" <?php if ($type == 'work2') echo 'checked'; ?> required><label for="phone-type-work">Work</label>
+                <input type="radio" id="phone2-type-cellphone" name="phone2-type" value="cellphone2" <?php if ($type == 'cellphone2') echo 'checked'; ?> ><label for="phone-type-cellphone">Cell</label>
+                <input type="radio" id="phone2-type-home" name="phone2-type" value="home2" <?php if ($type == 'home2') echo 'checked'; ?> ><label for="phone-type-home">Home</label>
+                <input type="radio" id="phone2-type-work" name="phone2-type" value="work2" <?php if ($type == 'work2') echo 'checked'; ?> ><label for="phone-type-work">Work</label>
             </div>
 
-            <label for="contact-when" required><em>* </em>Best Time to Reach You</label>
-            <input type="text" id="contact-when" name="contact-when" value="<?php echo hsc($person->get_contact_time()); ?>" required placeholder="Ex. Evenings, Days">
+            <label for="contact-when" required><em> </em>Best Time to Reach You</label>
+            <input type="text" id="contact-when" name="contact-when" value="<?php echo hsc($person->get_contact_time()); ?>" placeholder="Ex. Evenings, Days">
 
-            <label><em>* </em>Preferred Contact Method</label>
+            <label><em> </em>Preferred Contact Method</label>
             <div class="radio-group">
                 <?php $method = $person->get_cMethod(); ?>
-                <input type="radio" id="method-phone" name="contact-method" value="phone" <?php if ($method == 'phone') echo 'checked'; ?> required><label for="method-phone">Phone call</label>
-                <input type="radio" id="method-text" name="contact-method" value="text" <?php if ($method == 'text') echo 'checked'; ?> required><label for="method-text">Text</label>
-                <input type="radio" id="method-email" name="contact-method" value="email" <?php if ($method == 'email') echo 'checked'; ?> required><label for="method-email">E-mail</label>
+                <input type="radio" id="method-phone" name="contact-method" value="phone" <?php if ($method == 'phone') echo 'checked'; ?> ><label for="method-phone">Phone call</label>
+                <input type="radio" id="method-text" name="contact-method" value="text" <?php if ($method == 'text') echo 'checked'; ?> ><label for="method-text">Text</label>
+                <input type="radio" id="method-email" name="contact-method" value="email" <?php if ($method == 'email') echo 'checked'; ?> ><label for="method-email">E-mail</label>
             </div>
         </fieldset>
 
         <fieldset>
             <legend>Emergency Contact</legend>
             <p>Please provide us with someone to contact on your behalf in case of an emergency.</p>
-            <label for="econtact-name" required><em>* </em>Contact Name</label>
-            <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" required placeholder="Enter emergency contact name">
-
-            <label for="econtact-phone"><em>* </em>Contact Phone Number</label>
-            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" required placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
-
-            <label for="econtact-name"><em>* </em>Contact Relation to You</label>
-            <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" required placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
+            <label for="econtact-name" required><em> </em>Contact Name</label>
+            <input type="text" id="econtact-name" name="econtact-name" value="<?php echo hsc($person->get_contact_name()); ?>" placeholder="Enter emergency contact name">
+            
+            <?php $econtactNum = '';
+            if ($person->get_contact_num()) 
+                $econtactNum = formatPhoneNumber($person->get_contact_num());
+            ?>
+            <label for="econtact-phone"><em> </em>Contact Phone Number</label>
+            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo $econtactNum; ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
+            <?php /*
+            <input type="tel" id="econtact-phone" name="econtact-phone" value="<?php echo formatPhoneNumber($person->get_contact_num()); ?>" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" placeholder="Enter emergency contact phone number. Ex. (555) 555-5555">
+            */ ?>
+            <label for="econtact-relation"><em> </em>Contact Relation to You</label>
+            <input type="text" id="econtact-relation" name="econtact-relation" value="<?php echo hsc($person->get_relation()); ?>" placeholder="Ex. Spouse, Mother, Father, Sister, Brother, Friend">
         </fieldset>
         
         <input type="hidden" name="id" value="<?php echo $id; ?>">

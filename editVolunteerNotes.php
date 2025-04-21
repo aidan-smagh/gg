@@ -88,7 +88,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirm"])) {
             <form method="post">
                 <fieldset>
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
-                    <input type="text" id="notes" name="notes" value="<?php echo hsc($person->get_notes()); ?>">
+                    <?php $notes = $person->get_notes();
+                    if (is_null($notes)) {
+                        $notes = '';
+                    }
+                    ?>
+                    <input type="text" id="notes" name="notes" value="<?php echo hsc($notes); ?>">
                 </fieldset>
                 <br></br>
                 <input type="submit" name="confirm" value="Confirm Changes">

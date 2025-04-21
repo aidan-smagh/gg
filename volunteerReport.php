@@ -122,7 +122,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Self-report form -->
             <?php if ($viewingSelf): ?>
-            <div class="self-report-form">
+            <!--
+                <div class="self-report-form">
                 <h2>Self-report Your Volunteer Hours</h2>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <label for="date">Date:</label>
@@ -137,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit">Submit Hours</button>
                 </form>
             </div>
+            -->
             <?php endif; ?>
     </main>
 </body>

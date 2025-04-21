@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2025 at 06:57 PM
+-- Generation Time: Apr 15, 2025 at 06:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -28,7 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `checkintime`
 --
 
-DROP TABLE IF EXISTS `checkintime`;
 CREATE TABLE `checkintime` (
   `UserId` varchar(100) NOT NULL,
   `EventId` int(11) NOT NULL,
@@ -51,7 +49,6 @@ INSERT INTO `checkintime` (`UserId`, `EventId`, `first_name`, `last_name`, `chec
 -- Table structure for table `dbeventmedia`
 --
 
-DROP TABLE IF EXISTS `dbeventmedia`;
 CREATE TABLE `dbeventmedia` (
   `id` int(11) NOT NULL,
   `eventID` int(11) NOT NULL,
@@ -127,7 +124,6 @@ INSERT INTO `dbeventmedia` (`id`, `eventID`, `url`, `type`, `format`, `descripti
 -- Table structure for table `dbevents`
 --
 
-DROP TABLE IF EXISTS `dbevents`;
 CREATE TABLE `dbevents` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
@@ -254,7 +250,6 @@ INSERT INTO `dbevents` (`id`, `name`, `abbrevName`, `eventType`, `date`, `startT
 -- Table structure for table `dbeventvolunteers`
 --
 
-DROP TABLE IF EXISTS `dbeventvolunteers`;
 CREATE TABLE `dbeventvolunteers` (
   `eventID` int(11) NOT NULL,
   `userID` varchar(256) NOT NULL
@@ -428,7 +423,6 @@ INSERT INTO `dbeventvolunteers` (`eventID`, `userID`) VALUES
 -- Table structure for table `dbexternaldocuments`
 --
 
-DROP TABLE IF EXISTS `dbexternaldocuments`;
 CREATE TABLE `dbexternaldocuments` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -449,7 +443,6 @@ INSERT INTO `dbexternaldocuments` (`id`, `title`, `url`) VALUES
 -- Table structure for table `dbforums`
 --
 
-DROP TABLE IF EXISTS `dbforums`;
 CREATE TABLE `dbforums` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
@@ -464,7 +457,6 @@ CREATE TABLE `dbforums` (
 -- Table structure for table `dbmessages`
 --
 
-DROP TABLE IF EXISTS `dbmessages`;
 CREATE TABLE `dbmessages` (
   `id` int(11) NOT NULL,
   `senderID` varchar(256) NOT NULL,
@@ -9461,7 +9453,6 @@ INSERT INTO `dbmessages` (`id`, `senderID`, `recipientID`, `title`, `body`, `tim
 -- Table structure for table `dbpersons`
 --
 
-DROP TABLE IF EXISTS `dbpersons`;
 CREATE TABLE `dbpersons` (
   `id` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `start_date` text DEFAULT NULL,
@@ -9682,7 +9673,6 @@ INSERT INTO `dbpersons` (`id`, `start_date`, `venue`, `first_name`, `last_name`,
 -- Table structure for table `dbpersonstrainings`
 --
 
-DROP TABLE IF EXISTS `dbpersonstrainings`;
 CREATE TABLE `dbpersonstrainings` (
   `id` text NOT NULL,
   `training_name` text NOT NULL
@@ -9710,7 +9700,6 @@ INSERT INTO `dbpersonstrainings` (`id`, `training_name`) VALUES
 -- Table structure for table `dbtrainings`
 --
 
-DROP TABLE IF EXISTS `dbtrainings`;
 CREATE TABLE `dbtrainings` (
   `Name` text NOT NULL,
   `Description` text NOT NULL
@@ -9753,6 +9742,12 @@ ALTER TABLE `dbexternaldocuments`
   ADD UNIQUE KEY `title` (`title`);
 
 --
+-- Indexes for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -9781,6 +9776,12 @@ ALTER TABLE `dbexternaldocuments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `dbforums`
+--
+ALTER TABLE `dbforums`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `dbmessages`
 --
 ALTER TABLE `dbmessages`
@@ -9796,7 +9797,6 @@ ALTER TABLE `dbmessages`
 ALTER TABLE `dbeventvolunteers`
   ADD CONSTRAINT `FKeventID` FOREIGN KEY (`eventID`) REFERENCES `dbevents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FKpersonID` FOREIGN KEY (`userID`) REFERENCES `dbpersons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

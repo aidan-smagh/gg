@@ -57,8 +57,7 @@
         $required = array(
             'first-name', 'last-name', 'birthdate',
             'address', 'city', 'state', 'zip', 
-            'email', 'phone', 'phone-type', 'contact-when', 'contact-method',
-            'shirt-size'
+            'email', 'phone'
         );
         $errors = false;
         if (!wereRequiredFieldsSubmitted($args, $required)) {
@@ -225,7 +224,7 @@
             $sundaysStart, $sundaysEnd, $mondaysStart, $mondaysEnd,
             $tuesdaysStart, $tuesdaysEnd, $wednesdaysStart, $wednesdaysEnd,
             $thursdaysStart, $thursdaysEnd, $fridaysStart, $fridaysEnd,
-            $saturdaysStart, $saturdaysEnd, $gender, $notes
+            $saturdaysStart, $saturdaysEnd, $gender
         );
         if ($result) {
             if ($editingSelf) {
