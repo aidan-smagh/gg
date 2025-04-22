@@ -48,23 +48,28 @@ $trainings = get_all_trainings();
     <h1>Roster Creation</h1>
         <main class="signup-form">
             <h2>Roster Criteria</h2>
-            <form method="post">
-
-            <fieldset>
-                <!-- training selection -->
-                <label for="training">Training</label><br>
-                <select name="training" id="training">
-                    <option value="">Select Training</option>
-                    <?php foreach ($trainings as $training): ?>{
-                        <option value="<?php echo htmlspecialchars($training['name']); ?>">
-                            <?php echo htmlspecialchars($training['name']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </fieldset>
             
-            <br></br>
-            <input type="submit" name="training" value="training">
+            <form method="post">
+            <fieldset>
+                
+                <!-- training selection -->
+                <legend>Select Training</legend>
+                <?php foreach ($trainings as $training): ?>
+                <div>
+                    <input type="checkbox" name="trainings[]" id="<?php echo htmlspecialchars($training['name']); ?>"
+                        value="<?php echo htmlspecialchars($training['name']); ?>">
+                    <label for="<?php echo htmlspecialchars($training['name']); ?>">
+                        <?php echo htmlspecialchars($training['name']); ?>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+
+            
+            
+            </fieldset>
+
+            <br>
+            <input type="submit" name="create_roster" value="Create Roster">
             </form>
         </main>
 </body>
