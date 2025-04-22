@@ -153,6 +153,12 @@
                     <img src="images/logout.svg">
                     <span>Log out</span>
                 </div>
+                <?php if ($isSuperAdmin || $isBoardMember): ?>
+                    <div class="dashboard-item" data-link="rosters.php">
+                        <img src="images/external-docs.svg">
+                        <span style="text-align: center;">Rosters</span>
+                    </div>
+                <?php endif ?>
             </div>
         </main>
     </body>
