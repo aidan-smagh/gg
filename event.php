@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endif ?>
     <?php require_once('header.php') ?>
-    
+
     <!-- Message display block -->
     <?php if (isset($_GET['hoursUpdated'])): ?>
         <div class="happy-toast">
@@ -484,17 +484,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($event_in_past): ?>
                 <!-- Past Event: Display a checkbox form for confirming hours -->
                 <form method="POST" action="confirmhours.php" id="confirmHoursForm">
-                <ul class="centered">
-                    <li class="centered">
-                        <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
-                        <label for="select_all"><strong>Select All</strong></label>
-                    </li>
-                    <?php foreach ($event_persons as $person): ?>
+                    <ul class="centered">
                         <li class="centered">
-                            <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
-                            <label for="vol_<?php echo $person->get_id(); ?>">
-                                <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
-                            </label>
+                            <input type="checkbox" id="select_all" onclick="toggleSelectAll(this)">
+                            <label for="select_all"><strong>Select All</strong></label>
                         </li>
                         <?php foreach ($event_persons as $person): ?>
                             <li class="centered">
@@ -503,6 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
                                 </label>
                             </li>
+
                             <?php if ($person->get_id() == $user_id) {
                                 $already_assigned = true;
                             } ?>
@@ -521,8 +515,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             checkboxes[i].checked = source.checked;
                         }
                     }
-                }
-            </script>
+                </script>
 
             <?php else: ?>
                 <!-- Future/Current Event: Display the standard volunteer list -->
