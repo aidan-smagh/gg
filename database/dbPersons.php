@@ -1351,3 +1351,49 @@ function find_user_names($name) {
         mysqli_close($connection);
         return $row['first_name'] . ' ' . $row['last_name'];
     }
+function get_persons_with_specific_training($trainingNames) {
+    // return empty array if $trainingNames is empty
+    if (empty($trainingNames)) {
+        return [];
+    }
+    $con = connect();
+    // count number of training names provided
+    $numTrainings = count($trainingNames);
+    // create a string of ? placeholders for the query, separated by commas
+    $placeholders = implode(',', array_fill(0, $numTrainings, '?'));
+    // prepare query statement searching for all persons who have completed all provided trainings
+    $query = "SELECT id FROM dbpersonstrainings WHERE training_name IN ($placeholders)
+            GROUP BY id
+            HAVING COUNT(DISTINCT training_name) = ?";
+    $stmt = $con->prepare($query);
+    if (!$stmt) {
+        die("Prepare statement failed: " . $con->error);
+    }
+    // each training name is a string, the number of trainings provided is an int.
+    // create a string of types (s) plus one int (i) for param binding
+    $paramTypes = "";
+    for ($i = 0; $i < $numTrainings; $i++) {
+        $paramTypes .= 's';
+    }
+    $paramTypes .= 'i';
+
+    //combine training names + count into an array
+    $paramValues = array_merge($trainingNames, [$numTrainings]);
+    // bind the parameters to the prepared statement
+    $stmt->bind_param($paramTypes, ...$paramValues);
+
+    // execute the query and store the result
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    //store all collected user ids into an array
+    $personIds = [];
+    while ($row = $result->fetch_assoc()) {
+        $personIds[] = $row['id'];
+    }
+
+    // close and return
+    $stmt->close();
+    $con->close();
+    return $personIds;
+}

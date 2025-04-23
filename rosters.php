@@ -29,7 +29,35 @@ if (!$isBoardMember && !$isSuperAdmin) {
     header('Location: index.php');
     die();
 }
+// all trainings in the database
 $trainings = get_all_trainings();
+// array to store roster as it is built
+$roster = [];
+
+// process training form submission
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['trainings'])) {
+    $chosenTrainings = $_POST['trainings'];
+    $userIds = get_persons_with_specific_training($chosenTrainings);
+    foreach ($userIds as $userId) {
+        $person = retrieve_person($userId);
+        if ($person) {
+            $roster[] = $person;
+        }
+    }
+    // create csv file
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="roster.csv"');
+    $output = fopen('php://output', 'w');
+    // write title to the file
+    $title = 'Personnel who have completed ' . implode(', ', $chosenTrainings);
+    fwrite($output, $title . "\n\n");
+    // add each person's email to the file
+    foreach ($roster as $person) {
+        fputcsv($output, [$person->get_email()]);
+    }
+    fclose($output);
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,9 +80,9 @@ $trainings = get_all_trainings();
             <form method="post">
             <fieldset>
                 
-                <!-- training selection -->
-                <legend>Select Training</legend>
-                <?php foreach ($trainings as $training): ?>
+            <!-- training selection -->
+            <legend>Select Training</legend>
+            <?php foreach ($trainings as $training): ?>
                 <div>
                     <input type="checkbox" name="trainings[]" id="<?php echo htmlspecialchars($training['name']); ?>"
                         value="<?php echo htmlspecialchars($training['name']); ?>">
