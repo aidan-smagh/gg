@@ -145,6 +145,12 @@
                         <span>Volunteer Hours</span>
                     </div>
                 <?php endif ?>
+                <?php if ($isSuperAdmin || $isBoardMember): ?>
+                    <div class="dashboard-item" data-link="createPersonnelRosters.php">
+                        <img src="images/external-docs.svg">
+                        <span style="text-align: center;">Create Personnel Rosters</span>
+                    </div>
+                <?php endif ?>
                 <div class="dashboard-item" data-link="changePassword.php">
                     <img src="images/change-password.svg">
                     <span>Change Password</span>
