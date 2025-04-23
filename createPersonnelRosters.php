@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['trainings'])) {
     fwrite($output, $title . "\n\n");
     // add each person's email to the file
     foreach ($roster as $person) {
-        fputcsv($output, [$person->get_email()]);
+        fwrite($output, $person->get_email() . ',' . "\n");
     }
     fclose($output);
     exit;
