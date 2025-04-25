@@ -57,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lookup_certificate']))
     // Pronoun
     $gender = strtolower($volunteer->get_gender());
     if ($gender === "female") {
-        $pronoun = "She";
+        $pronoun = "she";
     } elseif ($gender === "male") {
-        $pronoun = "He";
+        $pronoun = "he";
     } else {
-        $pronoun = "They";
+        $pronoun = "they";
     }
 ?>
 <!DOCTYPE html>
