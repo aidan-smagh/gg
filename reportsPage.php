@@ -354,6 +354,10 @@ if (isset($_GET['download'])) {
                         echo "Total Volunteer Hours";
                     } elseif ($type == "indiv_vol_hours") {
                         echo "Individual Volunteer Hours";
+                    } elseif ($type == "meeting_hours") {
+                        echo "Board Meeting Attendance";
+                    } elseif ($type == "event_attendance") {
+                        echo "Volunteer Event Attendance";
                     }
                     ?>
                 </span>
