@@ -430,7 +430,11 @@ function get_attendance($volunteer_id, $dateFrom, $dateTo, $eventNameWildcard) {
     $result = $stmt->get_result();
     $stmt->close();
 
-    $presences = mysqli_fetch_assoc($result)['presences'];
+    $presences = 0;
+    $row = mysqli_fetch_assoc($result);
+    if ($row != NULL) {
+        $presences = $row['presences'];
+    }
 
     $query = "SELECT COUNT(*) as absences
             FROM dbEventVolunteers JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
@@ -466,7 +470,11 @@ function get_attendance($volunteer_id, $dateFrom, $dateTo, $eventNameWildcard) {
     $result = $stmt->get_result();
     $stmt->close();
 
-    $absences = mysqli_fetch_assoc($result)['absences'];
+    $absences = 0;
+    $row = mysqli_fetch_assoc($result);
+    if ($row != NULL) {
+        $absences = $row['absences'];
+    }
 
     return [$presences, $absences];
 }
