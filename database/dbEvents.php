@@ -394,4 +394,80 @@ function mark_present($eventID, $volunteerID) {
     return $result;
 }
 
+function get_attendance($volunteer_id, $dateFrom, $dateTo, $eventNameWildcard) {
+    $con = connect();
+    $query = "SELECT COUNT(*) as presences
+            FROM dbEventVolunteers JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
+            WHERE eventType = 'volunteer_event' AND noShow = 0 ";
+    $paramTypes = "";
+    $params = array();
+
+    $query .= 'AND userID = ? ';
+    $paramTypes .= 's';
+    $params[] = $volunteer_id;
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY userID";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    $presences = mysqli_fetch_assoc($result)['presences'];
+
+    $query = "SELECT COUNT(*) as absences
+            FROM dbEventVolunteers JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
+            WHERE eventType = 'volunteer_event' AND noShow = 1 ";
+    $paramTypes = "";
+    $params = array();
+
+    $query .= 'AND userID = ? ';
+    $paramTypes .= 's';
+    $params[] = $volunteer_id;
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY userID";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    $absences = mysqli_fetch_assoc($result)['absences'];
+
+    return [$presences, $absences];
+}
 ?>
