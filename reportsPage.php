@@ -481,6 +481,13 @@ if (isset($_GET['download'])) {
                 <th>Event Date</th>
             ";
             $columns += 3;
+        } else if ($type == 'event_attendance') {
+            echo "
+                <th>Email</th>
+                <th>Presences</th>
+                <th>Absences</th>
+            ";
+            $columns += 3;
         }
         echo "
                 <th>Volunteer Hours</th>
@@ -491,10 +498,11 @@ if (isset($_GET['download'])) {
 
         // query construction nightmare. trust me, it's way better than what used to be here.
         $con = connect();
+        
         $query = "SELECT *, SUM(HOUR(TIMEDIFF(dbEvents.endTime, dbEvents.startTime))) as Dur
             FROM dbPersons JOIN dbEventVolunteers ON dbPersons.id = dbEventVolunteers.userID
             JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
-            WHERE eventType = 'volunteer_event' ";
+            WHERE eventType = 'volunteer_event' AND noShow = 0 ";
         $paramTypes = "";
         $params = array();
 
@@ -558,6 +566,7 @@ if (isset($_GET['download'])) {
                 $nameRange = range($lastFrom, $lastTo);
             }
 
+            include_once('database/dbEvents.php');
             while ($row = mysqli_fetch_assoc($result)) {
                 if ($nameRange != null && !in_array($row["last_name"][0], $nameRange)) {
                     continue;
@@ -585,6 +594,16 @@ if (isset($_GET['download'])) {
                         <td>" . $row['name'] . "</td>
                         <td>" . $row['location'] . "</td>
                         <td>" . $row['date'] . "</td>
+                    ";
+                } else if ($type == 'event_attendance') {
+                    $mail = $row['email'];
+                    $attendance = get_attendance($mail, $dateFrom, $dateTo, $eventNameWildcard);
+                    $presences = $attendance[0];
+                    $absences = $attendance[1];
+                    echo "
+                        <td><a href='mailto:$mail'>" . $row['email'] . "</a></td>
+                        <td>" . $presences . "</td>
+                        <td>" . $absences . "</td>
                     ";
                 }
                 echo "
