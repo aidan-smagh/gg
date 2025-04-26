@@ -376,4 +376,22 @@ function delete_event($id) {
     return $result;
 }
 
+function mark_absent($eventID, $volunteerID) {
+    $con=connect();
+    $query = $con->prepare('UPDATE dbPersons SET noShow = 1 WHERE eventID = ? AND userID = ?');
+    $query->bind_param("is", $eventID, $volunteerID);
+    $result = $query->execute();
+    $con->close();
+    return $result;
+}
+
+function mark_present($eventID, $volunteerID) {
+    $con=connect();
+    $query = $con->prepare('UPDATE dbPersons SET noShow = 0 WHERE eventID = ? AND userID = ?');
+    $query->bind_param("is", $eventID, $volunteerID);
+    $result = $query->execute();
+    $con->close();
+    return $result;
+}
+
 ?>
