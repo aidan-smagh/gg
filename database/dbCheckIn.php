@@ -10,7 +10,7 @@ function insert_checkintime($id)
 {
     $con = connect();
     $eventId = $id;
-    $date = date('m/d/Y h:i:s a');
+    $date = date('H:i');
     $user = retrieve_person($_SESSION['_id']);
     $personid = $user->get_email();
     $first_name = $user->get_first_name();
