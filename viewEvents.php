@@ -16,6 +16,7 @@ $events = getUpcomingEvents();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php require_once('universal.inc') ?>
     <link rel="stylesheet" href="css/messages.css">
@@ -38,6 +39,7 @@ $events = getUpcomingEvents();
         }
     </style>
 </head>
+
 <body>
     <?php require_once('header.php') ?>
     <h1>Upcoming Events</h1>
@@ -46,8 +48,8 @@ $events = getUpcomingEvents();
         <?php if (count($events) > 0): ?>
             <?php foreach ($events as $event): ?>
                 <?php
-                    $formattedDate = date("l, F j", strtotime($event['date']));
-                    $eventUrl = 'event.php?id=' . urlencode($event['id']);
+                $formattedDate = date("l, F j", strtotime($event['date']));
+                $eventUrl = 'event.php?id=' . urlencode($event['id']);
                 ?>
                 <a href="<?php echo $eventUrl; ?>" class="event-link">
                     <div class="message-body">
@@ -55,7 +57,7 @@ $events = getUpcomingEvents();
                             <strong><?php echo htmlspecialchars($event['name']); ?></strong>
                             <span><?php echo $formattedDate; ?></span>
                         </div>
-                        <div><?php echo($event['startTime']);?> - <?php echo($event['endTime']);?></div>
+                        <div><?php echo ($event['startTime']); ?> - <?php echo ($event['endTime']); ?></div>
                         <div><em>Location: <?php echo htmlspecialchars($event['location']); ?></em></div>
                     </div>
                 </a>
@@ -65,4 +67,5 @@ $events = getUpcomingEvents();
         <?php endif; ?>
     </main>
 </body>
+
 </html>
