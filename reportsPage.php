@@ -155,6 +155,10 @@ if (isset($_GET['download'])) {
             $columnNames[] = 'Event';
             $columnNames[] = 'Event Location';
             $columnNames[] = 'Event Date';
+        } else if ($type == 'event_attendance') {
+            $columnNames[] = 'Email';
+            $columnNames[] = 'Presences';
+            $columnNames[] = 'Absences';
         }
     $columnNames[] = 'Volunteer Hours';
 
@@ -186,6 +190,11 @@ if (isset($_GET['download'])) {
             $line[] = $row['name'];
             $line[] = $row['location'];
             $line[] = $row['date'];
+        } else if ($type == 'event_attendance') {
+            $line[] = $row['email'];
+            $attendance = get_attendance($row['email'], $dateFrom, $dateTo, $eventNameWildcard);
+            $line[] = $attendance[0];
+            $line[] = $attendance[1];
         }
         $line[] = $row['Dur'];
 
