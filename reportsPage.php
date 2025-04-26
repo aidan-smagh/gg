@@ -133,13 +133,18 @@ if (isset($_GET['download'])) {
             break;
     }
 
-    $stmt = $con->prepare($query);
-    if ($paramTypes != "") {
-        $stmt->bind_param($paramTypes, ...$params);
+    if ($type == 'meeting_hours') {
+        include_once('database/dbCheckIn.php');
+        $result = get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard);
+    } else {
+        $stmt = $con->prepare($query);
+        if ($paramTypes != "") {
+            $stmt->bind_param($paramTypes, ...$params);
+        }
+        $success = $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
     }
-    $success = $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
 
     // header row creation
     $columnNames = [];
@@ -147,7 +152,7 @@ if (isset($_GET['download'])) {
             $columnNames[] = 'First Name';
             $columnNames[] = 'Last Name';
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             $columnNames[] = 'Phone Number';
             $columnNames[] = 'Email Address';
             $columnNames[] = 'Skills';
@@ -160,7 +165,7 @@ if (isset($_GET['download'])) {
             $columnNames[] = 'Presences';
             $columnNames[] = 'Absences';
         }
-    $columnNames[] = 'Volunteer Hours';
+    $columnNames[] = 'Hours';
 
     $nameRange = null;
     if ($lastFrom != null && $lastTo != null && $type != "indiv_vol_hours") {
@@ -180,7 +185,7 @@ if (isset($_GET['download'])) {
             $line[] = $row['first_name'];
             $line[] = $row['last_name'];
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             $phone = $row['phone1'];
             $mail = $row['email'];
             $line[] = formatPhoneNumber($row['phone1']);
@@ -476,7 +481,7 @@ if (isset($_GET['download'])) {
             ";
             $columns += 2;
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             echo "
                 <th>Phone Number</th>
                 <th>Email Address</th>
@@ -499,7 +504,7 @@ if (isset($_GET['download'])) {
             $columns += 3;
         }
         echo "
-                <th>Volunteer Hours</th>
+                <th>Hours</th>
             </tr>
             <tbody>
         ";
@@ -559,13 +564,18 @@ if (isset($_GET['download'])) {
                 break;
         }
 
-        $stmt = $con->prepare($query);
-        if ($paramTypes != "") {
-            $stmt->bind_param($paramTypes, ...$params);
-        }
-        $success = $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
+        if ($type == 'meeting_hours') {
+            include_once('database/dbCheckIn.php');
+            $result = get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard);
+        } else {
+            $stmt = $con->prepare($query);
+            if ($paramTypes != "") {
+                $stmt->bind_param($paramTypes, ...$params);
+            }
+            $success = $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+        }    
 
         try {
             $sum = 0;
@@ -590,7 +600,7 @@ if (isset($_GET['download'])) {
                         <td>" . $row['last_name'] . "</td>
                     ";
                 }
-                if ($type == "general_volunteer_report") {
+                if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
                     $phone = $row['phone1'];
                     $mail = $row['email'];
                     echo "
