@@ -152,6 +152,7 @@
                         <option value = "indiv_vol_hours">Individual Volunteer Hours</option>
                         <option value = "top_perform">Top Performers</option>
                         <option value = "meeting_hours">Meeting Attendance Hours</option>
+                        <option value = "event_attendance">Volunteer Event Attendance</option>
                     </select>
                 </div>
                 <br>
