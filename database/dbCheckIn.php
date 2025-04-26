@@ -25,3 +25,46 @@ function insert_checkintime($id)
     mysqli_close($con);
     return $query;
 }
+
+function get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard) {
+    $con = connect();
+    $query = "SELECT *, SUM(IF(dbEvents.endTime > checkintime.checkin_time, HOUR(TIMEDIFF(dbEvents.endTime, checkintime.checkin_time)), 0)) as Dur
+        FROM dbPersons JOIN checkintime ON dbPersons.id = checkintime.Userid
+        JOIN dbEvents ON checkintime.EventId = dbEvents.id
+        WHERE eventType = 'board_meeting' ";
+    $paramTypes = "";
+    $params = array();
+    
+    if ($stats != "All") {
+        $query .= "AND dbPersons.status = ? ";
+        $paramTypes .= "s";
+        $params[] = $stats;
+    }
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY dbPersons.first_name,dbPersons.last_name ";
+    $query .= "ORDER BY dbPersons.last_name, dbPersons.first_name";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    return $result;
+}
