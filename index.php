@@ -142,7 +142,7 @@
                 <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
                         <img src="images/volunteer-hours.svg">
-                        <span>Volunteer Hours</span>
+                        <span>Volunteer Hours Certificate</span>
                     </div>
                 <?php endif ?>
                 <?php if ($isSuperAdmin || $isBoardMember): ?>
