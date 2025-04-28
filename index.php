@@ -141,7 +141,7 @@
                 <?php endif ?>
                 <?php if ($isSuperAdmin || $isBoardMember): ?>
                     <div class="dashboard-item" data-link="addNewTraining.php">
-                        <img src="images/external-docs.svg">
+                        <img src="images/person-raised-hand.svg">
                         <span style="text-align: center;">Add Training</span>
                     </div>
                 <?php endif ?>
@@ -153,7 +153,7 @@
                 <?php endif ?>
                 <?php if ($isSuperAdmin || $isBoardMember): ?>
                     <div class="dashboard-item" data-link="createPersonnelRosters.php">
-                        <img src="images/external-docs.svg">
+                        <img src="images/person-lines-fill.svg">
                         <span style="text-align: center;">Create Personnel Rosters</span>
                     </div>
                 <?php endif ?>
