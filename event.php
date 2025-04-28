@@ -568,7 +568,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <tr>
                                 <td colspan="2">
                                 <input type="hidden" name="id" value="' . $id . '">
-                                    <button type="submit" value = "submitTime" name="submitTime"> Check In </button>
+                                    <button type="submit" value = "submitTime" name="submitTime" style="margin-top: 10px;"> Check In </button>
                                 </td>
                             </tr>
                             
@@ -584,7 +584,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <tr>
                             <td colspan="2">
                             <input type="hidden" name="id" value="' . $id . '">
-                                <button type="submit" value = "submitTime" name="submitTime"> Check In </button>
+                                <button type="submit" value = "submitTime" name="submitTime"style="margin-top: 10px;"> Check In </button>
                             </td>
                         </tr>
                         
