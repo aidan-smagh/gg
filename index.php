@@ -139,6 +139,12 @@
                         <span style="text-align: center;">External Documents</span>
                     </div>
                 <?php endif ?>
+                <?php if ($isSuperAdmin || $isBoardMember): ?>
+                    <div class="dashboard-item" data-link="addNewTraining.php">
+                        <img src="images/external-docs.svg">
+                        <span style="text-align: center;">Add Training</span>
+                    </div>
+                <?php endif ?>
                 <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
                         <img src="images/volunteer-hours.svg">
