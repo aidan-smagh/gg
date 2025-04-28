@@ -314,8 +314,10 @@ function reset_password($id, $newPass) {
 
 function update_hours($id, $new_hours) {
     $con=connect();
-    $query = 'UPDATE dbPersons SET hours = "' . $new_hours . '" WHERE id = "' . $id . '"';
-    $result = mysqli_query($con,$query);
+    $query = $con->prepare('UPDATE dbPersons SET hours = ? WHERE id = ?');
+    $query->bind_param("is", $new_hours, $id);
+    $result = $query->execute();
+    $query->close();
     mysqli_close($con);
     return $result;
 }

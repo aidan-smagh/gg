@@ -11,8 +11,7 @@ function insert_checkintime($id)
 {
     $con = connect();
     $eventId = $id;
-    date_default_timezone_set('America/New_York');
-    $date = date('m/d/Y h:i:s a');
+    $date = date('H:i');
     $user = retrieve_person($_SESSION['_id']);
     $personid = $user->get_email();
     $first_name = $user->get_first_name();
@@ -42,4 +41,47 @@ function insert_checkintime($id)
     mysqli_stmt_execute($statement);
     mysqli_close($con);
     return mysqli_stmt_affected_rows($statement) > 0;
+}
+
+function get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard) {
+    $con = connect();
+    $query = "SELECT *, SUM(IF(dbEvents.endTime > checkintime.checkin_time, HOUR(TIMEDIFF(dbEvents.endTime, checkintime.checkin_time)), 0)) as Dur
+        FROM dbPersons JOIN checkintime ON dbPersons.id = checkintime.Userid
+        JOIN dbEvents ON checkintime.EventId = dbEvents.id
+        WHERE eventType = 'board_meeting' ";
+    $paramTypes = "";
+    $params = array();
+    
+    if ($stats != "All") {
+        $query .= "AND dbPersons.status = ? ";
+        $paramTypes .= "s";
+        $params[] = $stats;
+    }
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY dbPersons.first_name,dbPersons.last_name ";
+    $query .= "ORDER BY dbPersons.last_name, dbPersons.first_name";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    return $result;
 }

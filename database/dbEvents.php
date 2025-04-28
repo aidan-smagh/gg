@@ -376,4 +376,106 @@ function delete_event($id) {
     return $result;
 }
 
+function mark_absent($eventID, $volunteerID) {
+    $con=connect();
+    $query = $con->prepare('UPDATE dbPersons SET noShow = 1 WHERE eventID = ? AND userID = ?');
+    $query->bind_param("is", $eventID, $volunteerID);
+    $result = $query->execute();
+    $con->close();
+    return $result;
+}
+
+function mark_present($eventID, $volunteerID) {
+    $con=connect();
+    $query = $con->prepare('UPDATE dbPersons SET noShow = 0 WHERE eventID = ? AND userID = ?');
+    $query->bind_param("is", $eventID, $volunteerID);
+    $result = $query->execute();
+    $con->close();
+    return $result;
+}
+
+function get_attendance($volunteer_id, $dateFrom, $dateTo, $eventNameWildcard) {
+    $con = connect();
+    $query = "SELECT COUNT(*) as presences
+            FROM dbEventVolunteers JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
+            WHERE eventType = 'volunteer_event' AND noShow = 0 ";
+    $paramTypes = "";
+    $params = array();
+
+    $query .= 'AND userID = ? ';
+    $paramTypes .= 's';
+    $params[] = $volunteer_id;
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY userID";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    $presences = 0;
+    $row = mysqli_fetch_assoc($result);
+    if ($row != NULL) {
+        $presences = $row['presences'];
+    }
+
+    $query = "SELECT COUNT(*) as absences
+            FROM dbEventVolunteers JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
+            WHERE eventType = 'volunteer_event' AND noShow = 1 ";
+    $paramTypes = "";
+    $params = array();
+
+    $query .= 'AND userID = ? ';
+    $paramTypes .= 's';
+    $params[] = $volunteer_id;
+
+    if ($dateFrom != NULL && $dateTo != NULL) {
+        $query .= "AND date >= ? AND date<= ? ";
+        $paramTypes .= "ss";
+        $params[] = $dateFrom;
+        $params[] = $dateTo;
+    }
+
+    if ($eventNameWildcard != null) {
+        $query .= "AND (name LIKE ? OR abbrevName LIKE ?) ";
+        $paramTypes .= "ss";
+        $params[] = $eventNameWildcard;
+        $params[] = $eventNameWildcard;
+    }
+
+    $query .= "GROUP BY userID";
+
+    $stmt = $con->prepare($query);
+    if ($paramTypes != "") {
+        $stmt->bind_param($paramTypes, ...$params);
+    }
+    $success = $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    $absences = 0;
+    $row = mysqli_fetch_assoc($result);
+    if ($row != NULL) {
+        $absences = $row['absences'];
+    }
+
+    return [$presences, $absences];
+}
 ?>

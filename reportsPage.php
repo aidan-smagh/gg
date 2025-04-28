@@ -133,13 +133,18 @@ if (isset($_GET['download'])) {
             break;
     }
 
-    $stmt = $con->prepare($query);
-    if ($paramTypes != "") {
-        $stmt->bind_param($paramTypes, ...$params);
+    if ($type == 'meeting_hours') {
+        include_once('database/dbCheckIn.php');
+        $result = get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard);
+    } else {
+        $stmt = $con->prepare($query);
+        if ($paramTypes != "") {
+            $stmt->bind_param($paramTypes, ...$params);
+        }
+        $success = $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
     }
-    $success = $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
 
     // header row creation
     $columnNames = [];
@@ -147,7 +152,7 @@ if (isset($_GET['download'])) {
             $columnNames[] = 'First Name';
             $columnNames[] = 'Last Name';
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             $columnNames[] = 'Phone Number';
             $columnNames[] = 'Email Address';
             $columnNames[] = 'Skills';
@@ -155,8 +160,12 @@ if (isset($_GET['download'])) {
             $columnNames[] = 'Event';
             $columnNames[] = 'Event Location';
             $columnNames[] = 'Event Date';
+        } else if ($type == 'event_attendance') {
+            $columnNames[] = 'Email';
+            $columnNames[] = 'Presences';
+            $columnNames[] = 'Absences';
         }
-    $columnNames[] = 'Volunteer Hours';
+    $columnNames[] = 'Hours';
 
     $nameRange = null;
     if ($lastFrom != null && $lastTo != null && $type != "indiv_vol_hours") {
@@ -176,7 +185,7 @@ if (isset($_GET['download'])) {
             $line[] = $row['first_name'];
             $line[] = $row['last_name'];
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             $phone = $row['phone1'];
             $mail = $row['email'];
             $line[] = formatPhoneNumber($row['phone1']);
@@ -186,6 +195,11 @@ if (isset($_GET['download'])) {
             $line[] = $row['name'];
             $line[] = $row['location'];
             $line[] = $row['date'];
+        } else if ($type == 'event_attendance') {
+            $line[] = $row['email'];
+            $attendance = get_attendance($row['email'], $dateFrom, $dateTo, $eventNameWildcard);
+            $line[] = $attendance[0];
+            $line[] = $attendance[1];
         }
         $line[] = $row['Dur'];
 
@@ -340,6 +354,10 @@ if (isset($_GET['download'])) {
                         echo "Total Volunteer Hours";
                     } elseif ($type == "indiv_vol_hours") {
                         echo "Individual Volunteer Hours";
+                    } elseif ($type == "meeting_hours") {
+                        echo "Board Meeting Attendance";
+                    } elseif ($type == "event_attendance") {
+                        echo "Volunteer Event Attendance";
                     }
                     ?>
                 </span>
@@ -467,7 +485,7 @@ if (isset($_GET['download'])) {
             ";
             $columns += 2;
         }
-        if ($type == "general_volunteer_report") {
+        if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
             echo "
                 <th>Phone Number</th>
                 <th>Email Address</th>
@@ -481,9 +499,16 @@ if (isset($_GET['download'])) {
                 <th>Event Date</th>
             ";
             $columns += 3;
+        } else if ($type == 'event_attendance') {
+            echo "
+                <th>Email</th>
+                <th>Presences</th>
+                <th>Absences</th>
+            ";
+            $columns += 3;
         }
         echo "
-                <th>Volunteer Hours</th>
+                <th>Hours</th>
             </tr>
             <tbody>
         ";
@@ -491,10 +516,11 @@ if (isset($_GET['download'])) {
 
         // query construction nightmare. trust me, it's way better than what used to be here.
         $con = connect();
+        
         $query = "SELECT *, SUM(HOUR(TIMEDIFF(dbEvents.endTime, dbEvents.startTime))) as Dur
             FROM dbPersons JOIN dbEventVolunteers ON dbPersons.id = dbEventVolunteers.userID
             JOIN dbEvents ON dbEventVolunteers.eventID = dbEvents.id
-            WHERE eventType = 'volunteer_event' ";
+            WHERE eventType = 'volunteer_event' AND noShow = 0 ";
         $paramTypes = "";
         $params = array();
 
@@ -542,13 +568,18 @@ if (isset($_GET['download'])) {
                 break;
         }
 
-        $stmt = $con->prepare($query);
-        if ($paramTypes != "") {
-            $stmt->bind_param($paramTypes, ...$params);
-        }
-        $success = $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
+        if ($type == 'meeting_hours') {
+            include_once('database/dbCheckIn.php');
+            $result = get_board_meeting_attendance($stats, $dateFrom, $dateTo, $eventNameWildcard);
+        } else {
+            $stmt = $con->prepare($query);
+            if ($paramTypes != "") {
+                $stmt->bind_param($paramTypes, ...$params);
+            }
+            $success = $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+        }    
 
         try {
             $sum = 0;
@@ -558,6 +589,7 @@ if (isset($_GET['download'])) {
                 $nameRange = range($lastFrom, $lastTo);
             }
 
+            include_once('database/dbEvents.php');
             while ($row = mysqli_fetch_assoc($result)) {
                 if ($nameRange != null && !in_array($row["last_name"][0], $nameRange)) {
                     continue;
@@ -572,7 +604,7 @@ if (isset($_GET['download'])) {
                         <td>" . $row['last_name'] . "</td>
                     ";
                 }
-                if ($type == "general_volunteer_report") {
+                if ($type == "general_volunteer_report" || $type == 'meeting_hours') {
                     $phone = $row['phone1'];
                     $mail = $row['email'];
                     echo "
@@ -585,6 +617,16 @@ if (isset($_GET['download'])) {
                         <td>" . $row['name'] . "</td>
                         <td>" . $row['location'] . "</td>
                         <td>" . $row['date'] . "</td>
+                    ";
+                } else if ($type == 'event_attendance') {
+                    $mail = $row['email'];
+                    $attendance = get_attendance($mail, $dateFrom, $dateTo, $eventNameWildcard);
+                    $presences = $attendance[0];
+                    $absences = $attendance[1];
+                    echo "
+                        <td><a href='mailto:$mail'>" . $row['email'] . "</a></td>
+                        <td>" . $presences . "</td>
+                        <td>" . $absences . "</td>
                     ";
                 }
                 echo "
