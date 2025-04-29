@@ -126,7 +126,7 @@
                         <span>Forums</span>
                     </div>
                 <?php endif ?>
-                <?php if ($_SESSION['access_level'] >= 0): ?>
+                <?php if ($_SESSION['access_level'] >= 2): ?>
                     <div class="dashboard-item" data-link="viewEvents.php">
                         <img src="images/card-checklist.svg">
                         <span>View events</span>
