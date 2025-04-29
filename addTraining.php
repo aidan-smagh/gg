@@ -84,12 +84,10 @@ $trainingsCompleted = get_trainings_for($id);
         <main class="signup-form">
             <h2>Add Training</h2>
             
-            <fieldset>
-                <legend>Training</legend>
+            <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;">
+                <h2>Training</h2>
                 <!--<label for="notes">Notes</label> -->
-            </fieldset>
             <form method="post">
-                <fieldset>
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
                         
                         <select name="trainings" id="trainings">
@@ -99,13 +97,13 @@ $trainingsCompleted = get_trainings_for($id);
                         } 
                         ?>
                         </select>
-                </fieldset>
                 <br></br>
                 <input type="submit" name="confirm" value="Confirm Changes">
             </form>
+            </div>
             <br></br>
             <h2>This Volunteer's Completed Trainings</h2>
-            <fieldset>
+            <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;">
             <ul>
                 <?php
                 foreach($trainingsCompleted as $training) {
@@ -116,7 +114,7 @@ $trainingsCompleted = get_trainings_for($id);
             
                 
                 
-            </fieldset>
+            </div>
         </main>
 </body>
 </html>
