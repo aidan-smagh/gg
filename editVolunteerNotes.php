@@ -81,12 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirm"])) {
         <main class="signup-form">
             <h2>Edit Volunteer Notes</h2>
             
-            <fieldset>
-                <legend>Notes</legend>
+            <div style="border: 4px solid black; padding: 1rem; margin-bottom: 5rem; border-radius: 3px;">
+                <h2>Notes</h2>
                 <!--<label for="notes">Notes</label> -->
-            </fieldset>
+            
             <form method="post">
-                <fieldset>
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
                     <?php $notes = $person->get_notes();
                     if (is_null($notes)) {
@@ -94,10 +93,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["confirm"])) {
                     }
                     ?>
                     <input type="text" id="notes" name="notes" value="<?php echo hsc($notes); ?>">
-                </fieldset>
                 <br></br>
                 <input type="submit" name="confirm" value="Confirm Changes">
             </form>
+            </div>
             <!--<a class="button" href="viewProfile.php">Confirm Changes</a> -->
         </main>
 </body>
