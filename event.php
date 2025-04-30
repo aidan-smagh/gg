@@ -479,6 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $remaining_slots = $capacity - $num_persons;
             $user_id = $_SESSION['_id'];
             $already_assigned = false;
+
             ?>
 
             <?php if ($event_in_past): ?>
@@ -493,7 +494,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li class="centered">
                                 <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
                                 <label for="vol_<?php echo $person->get_id(); ?>">
-                                    <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
+                                    echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); 
                                 </label>
                             </li>
 
@@ -530,15 +531,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($person->get_id() == $user_id) {
                             $already_assigned = true;
                         }
+
+                        $hasNotes = false;
+                        if ($person->get_notes() != null && $person->get_notes() != '') {
+                            $hasNotes = true;
+                        }
+
                         if ($access_level > 1) {
-                            echo '<li class="centered remove-person">' .
-                                '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
+                            if (!$hasNotes) {
+                                echo '<li class="centered remove-person">' .
+                                    '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
+                                    '<form class="remove-person" method="GET">' .
+                                    '<input type="hidden" name="request_type" value="remove" />' .
+                                    '<input type="hidden" name="id" value="' . $id . '">' .
+                                    '<input type="hidden" name="selected_removal_id" value="' . $person->get_id() . '" />' .
+                                    '<input class="stripped" type="submit" value="Remove" />' .
+                                    '</form></li>';
+                            } else {
+                                echo '<li class="centered remove-person">' .
+                                '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . " NOTES" . '</span>' .
                                 '<form class="remove-person" method="GET">' .
                                 '<input type="hidden" name="request_type" value="remove" />' .
                                 '<input type="hidden" name="id" value="' . $id . '">' .
                                 '<input type="hidden" name="selected_removal_id" value="' . $person->get_id() . '" />' .
                                 '<input class="stripped" type="submit" value="Remove" />' .
                                 '</form></li>';
+                            }
                         } else {
                             echo '<li class="centered">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</li>';
                         }
