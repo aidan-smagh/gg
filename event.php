@@ -479,6 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $remaining_slots = $capacity - $num_persons;
             $user_id = $_SESSION['_id'];
             $already_assigned = false;
+
             ?>
 
             <?php if ($event_in_past): ?>
@@ -493,7 +494,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li class="centered">
                                 <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
                                 <label for="vol_<?php echo $person->get_id(); ?>">
-                                    <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); ?>
+                                    <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name());?>
                                 </label>
                             </li>
 
@@ -530,17 +531,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($person->get_id() == $user_id) {
                             $already_assigned = true;
                         }
+
+                        $hasNotes = false;
+                        if ($person->get_notes() != null && $person->get_notes() != '') {
+                            $hasNotes = true;
+                        }
+                        $fullName = htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name());
+                        $volunteerId = htmlspecialchars($person->get_id());
+                        // admin wants a tag to show if a person has personal profile notes. 
+                        // If the person has notes, concatenate "NOTES " after fullName. Otherwise, concatenate ''.
                         if ($access_level > 1) {
                             echo '<li class="centered remove-person">' .
-                                '<span>' . $person->get_first_name() . ' ' . $person->get_last_name() . '</span>' .
-                                '<form class="remove-person" method="GET">' .
+                            // Display the name as a clickable link, redirecting to view profile page
+                            '<form class="remove-person" method="GET" action="viewProfile.php">' .
+                            '<input type="hidden" name="id" value="' . $volunteerId . '">' .
+                            '<input class="stripped" type="submit" value="' . $fullName . ($hasNotes ? ' NOTES' : '') . '" />' .
+                            '</form>' .
+
+                            // display "Remove" as a clickable form to remove the volunteer from the event
+                            '<form class="remove-person" method="GET">' .
                                 '<input type="hidden" name="request_type" value="remove" />' .
                                 '<input type="hidden" name="id" value="' . $id . '">' .
                                 '<input type="hidden" name="selected_removal_id" value="' . $person->get_id() . '" />' .
                                 '<input class="stripped" type="submit" value="Remove" />' .
                                 '</form></li>';
                         } else {
-                            echo '<li class="centered">' . $person->get_first_name() . ' ' . $person->get_last_name() . '</li>';
+                            echo '<li class="centered">' . $fullName . '</li>';
                         }
                     }
                     for ($x = 0; $x < $remaining_slots; $x++) {
