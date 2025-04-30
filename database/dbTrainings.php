@@ -81,19 +81,20 @@ function get_trainings_for($id) {
 }
 function add_training_to_db($name, $desc) {
     $con = connect();
-    $query = 'INSERT INTO dbtrainings (name, description) VALUES (?, ?)';
+    // was INSERT INTO dbtrainings
+    $query = 'INSERT INTO dbTrainings (name, description) VALUES (?, ?)';
     $stmt = mysqli_prepare($con, $query);
     mysqli_stmt_bind_param($stmt, "ss", $name, $desc);
     $result = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     mysqli_close($con);
-    return $result;
+    return "success";
 }
 
 function delete_training($name) {
     $con = connect();
     /* prepare the deletion statement */
-    $stmt = $con->prepare("DELETE FROM dbtrainings WHERE name = ?");
+    $stmt = $con->prepare("DELETE FROM dbTrainings WHERE name = ?");
     $stmt->bind_param("s", $name);
 
     /* Attempt to execute the deletion, storing the bool result in $success */

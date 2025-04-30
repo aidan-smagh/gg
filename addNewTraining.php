@@ -2,6 +2,9 @@
 
 session_cache_expire(30);
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once('database/dbTrainings.php');
 require_once('database/dbPersons.php');
 
@@ -46,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
         if (!empty($name) && !empty($description)) {
             $insertResult = add_training_to_db($name, $description);
             if ($insertResult === "duplicateName") {
-                header("location: addNewTraining.php?trainingAdded=duplicate");
+                header("Location: addNewTraining.php?trainingAdded=duplicate");
                 exit;
             }
             else if ($insertResult === "error") {
@@ -133,8 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
                         <?php foreach ($trainings as $training): ?>
                             <tr class="message">
                                 <td><?php echo htmlspecialchars($training['name']); ?></td>
-                                
-                                <td><<?php echo htmlspecialchars($training['description']); ?></td>
+                                <td>
                                     <?php 
                                         /* Need to ensure that the description isn't too long to display.
                                         If it is, display the first 50 characters, followed by "..." */
@@ -174,14 +176,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["form_type"])) {//&& $_
                 Add New Training
             </h2>
 
-            <form method="POST" action="addNewTraining.php">
+            <form method="POST">
                 <input type="hidden" name="form_type" value="add_training">
 
                 <label for="name">New Training Name:</label>
                 <input type="text" id="name" name="name" required>
 
                 <label for="description">New Training Description :</label>
-                <input type="description" id="description" name="description" required style="width: 100%; margin-bottom: 2rem;">
+                <!-- input type was description before -->
+                <input type="text" id="description" name="description" required style="width: 100%; margin-bottom: 2rem;">
 
                 <button type="submit">Submit New Training</button>
             </form>
