@@ -494,7 +494,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <li class="centered">
                                 <input type="checkbox" name="volunteers[]" id="vol_<?php echo $person->get_id(); ?>" value="<?php echo $person->get_id(); ?>">
                                 <label for="vol_<?php echo $person->get_id(); ?>">
-                                    echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name()); 
+                                    <?php echo htmlspecialchars($person->get_first_name() . ' ' . $person->get_last_name());?>
                                 </label>
                             </li>
 
