@@ -31,6 +31,13 @@ There is also a root admin account with username 'vmsroot'. The default password
 Below is an in-depth list of features that were implemented within the system
 * User registration and log in
 * Dashboard
+  * Add Trainings
+  * Print volunteer hours certificate
+  * View all upcoming events
+  * View external documents
+  * Create personnel rosters
+  * Forums
+  * 
 * User Management
   * Change own password
   * View volunteer hours (print-friendly)
@@ -39,6 +46,10 @@ Below is an in-depth list of features that were implemented within the system
   * Modify user role (AKA access level) (SuperAdmin only)
   * Reset password (Admin/SuperAdmin only)
   * User search (Admin/SuperAdmin only)
+  * View volunteer notes
+  * View trainings completed by volunteer
+  * Create board member profiles
+  * Volunteer hours confirmation in event.php
 * Events and Event Management
   * Calendar with event listings
   * Calendar day view with event listings
@@ -52,15 +63,21 @@ Below is an in-depth list of features that were implemented within the system
   * Modify event details (Admin/SuperAdmin only)
   * Create new event listing (Admin/SuperAdmin only)
   * Delete event (Admin/SuperAdmin only)
+  * Created board meeting events
+  * Check in functionality for events and board meetings
+  * Search by event name feature
 * Reports (Admin/SuperAdmin only) (print-friendly)
   * General Volunteer Report
   * Total Volunteer Hours
   * Individual Volunteer Hours
   * Top Performers
+  * Volunteer event attendance
+  * Meeting attendance hours
 * Notification system, with notifications generated when
   * A user signs up for an event (sent to all staff members)
   * A user is assigned to an event by a staff member (sent to that volunteer)
   * A new event is created by a staff member (sent to all users)
+
 
 ### Video Tour of Features
 A video demo of the system's features is available as an unlisted YouTube video. Please contact Dr. Polack for access to the video.
