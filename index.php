@@ -145,12 +145,10 @@
                         <span style="text-align: center;">Add Training</span>
                     </div>
                 <?php endif ?>
-                <?php if ($_SESSION['access_level'] >= 2): ?>
-                    <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
-                        <img src="images/volunteer-hours.svg">
-                        <span style="text-align: center;">Volunteer Hours Certificate</span>
-                    </div>
-                <?php endif ?>
+                <div class="dashboard-item" data-link="volunteerHoursConfirmation.php">
+                    <img src="images/volunteer-hours.svg">
+                    <span style="text-align: center;">Volunteer Hours Certificate</span>
+                </div>
                 <?php if ($isSuperAdmin || $isBoardMember): ?>
                     <div class="dashboard-item" data-link="createPersonnelRosters.php">
                         <img src="images/person-lines-fill.svg">
